@@ -52,7 +52,12 @@ private extension CreateBracketFormFeatureView {
             } else {
                 ForEach(store.selectedParticipants) { participant in
                     ParticipantButton(participant: participant) {
+                        Button("Remove from bracket") {
+                            store.send(.removedParticipant(participant))
+                        }
+                        Button("Update country") {
 
+                        }
                     }
                 }
             }
@@ -80,7 +85,9 @@ private extension CreateBracketFormFeatureView {
         Section {
             ForEach(store.unselectedRecentParticipants) { participant in
                 ParticipantButton(participant: participant) {
-                    store.send(.tappedRecentParticipant(participant))
+                    Button("Add to bracket") {
+                        store.send(.addedRecentParticipant(participant))
+                    }
                 }
             }
         } header: {

@@ -33,7 +33,8 @@ import PickCountryFeatureKit
         case binding(BindingAction<CreateBracketFormFeature.State>)
         case submittedAddParticipant
         case pickCountry(PresentationAction<PickCountryFeature.Action>)
-        case tappedRecentParticipant(Participant)
+        case addedRecentParticipant(Participant)
+        case removedParticipant(Participant)
     }
 
     public init() { }
@@ -56,8 +57,11 @@ import PickCountryFeatureKit
                 state.recentParticipants.insert(newParticipant, at: 0)
                 state.selectedParticipants.insert(newParticipant, at: 0)
                 return .none
-            case let .tappedRecentParticipant(participant):
+            case let .addedRecentParticipant(participant):
                 state.selectedParticipants.insert(participant, at: 0)
+                return .none
+            case let .removedParticipant(participant):
+                state.selectedParticipants.remove(participant)
                 return .none
             case .binding,
                     .pickCountry:

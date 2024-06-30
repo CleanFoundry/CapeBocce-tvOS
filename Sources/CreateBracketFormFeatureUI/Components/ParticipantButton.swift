@@ -2,23 +2,21 @@ import BracketModel
 import CountryKit
 import SwiftUI
 
-struct ParticipantButton: View {
+struct ParticipantButton<Content: View>: View {
 
     private let participant: Participant
-    private let action: () -> Void
+    private let menuContent: () -> Content
 
     init(
         participant: Participant,
-        action: @escaping () -> Void
+        @ViewBuilder menuContent: @escaping () -> Content
     ) {
         self.participant = participant
-        self.action = action
+        self.menuContent = menuContent
     }
 
     var body: some View {
-        Button(
-            action: action
-        ) {
+        Menu(content: menuContent) {
             HStack(alignment: .center, spacing: 12) {
                 participant.country.bundleAsset
                     .resizable()
@@ -30,7 +28,9 @@ struct ParticipantButton: View {
                         .font(.title)
                     Text(participant.country.name)
                 }
+                Spacer()
             }
         }
+        .listRowBackground(Color.clear)
     }
 }
