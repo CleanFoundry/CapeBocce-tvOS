@@ -14,7 +14,7 @@ public struct RootFeatureView: View {
         NavigationStack {
             VStack {
                 Button("Create Bracket") {
-
+                    store.send(.tappedCreateBracket)
                 }
                 Button("View All Brackets") {
 

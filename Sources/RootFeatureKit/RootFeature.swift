@@ -3,11 +3,11 @@ import ComposableArchitecture
 
 @Reducer public struct RootFeature {
 
-    public struct State {
+    @ObservableState public struct State {
 
         @Shared(.fileStorage(.bracketsStorageURL)) var brackets: IdentifiedArrayOf<Bracket> = []
 
-        public var createBracket: CreateBracketFeature.State?
+        @Presents public var createBracket: CreateBracketFeature.State?
 
         public init() {
 
@@ -15,6 +15,31 @@ import ComposableArchitecture
 
     }
 
+    public enum Action {
+
+        case tappedCreateBracket
+        case createBracket(PresentationAction<CreateBracketFeature.Action>)
+
+    }
+
     public init() { }
+
+    public var body: some ReducerOf<Self> {
+        Reduce { state, action in
+            switch action {
+            case .tappedCreateBracket:
+                state.createBracket = .init()
+                return .none
+            case .createBracket:
+                return .none
+            }
+        }
+        EmptyReducer()
+            .ifLet(
+                \.$createBracket,
+                 action: \.createBracket,
+                 destination: CreateBracketFeature.init
+            )
+    }
 
 }
