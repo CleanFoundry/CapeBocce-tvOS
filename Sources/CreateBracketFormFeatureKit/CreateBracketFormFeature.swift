@@ -38,6 +38,7 @@ import PickCountryFeatureKit
         case removedParticipant(Participant)
         case tappedUpdateCountry(Participant)
         case tappedDeleteParticipant(Participant)
+        case tappedAddAllRecentParticipants
     }
 
     public init() { }
@@ -102,6 +103,11 @@ import PickCountryFeatureKit
             case let .tappedDeleteParticipant(participant):
                 state.selectedParticipants.remove(participant)
                 state.recentParticipants.remove(participant)
+                return .none
+            case .tappedAddAllRecentParticipants:
+                state.selectedParticipants.append(
+                    contentsOf: state.unselectedRecentParticipants
+                )
                 return .none
             case .binding,
                     .pickCountry:

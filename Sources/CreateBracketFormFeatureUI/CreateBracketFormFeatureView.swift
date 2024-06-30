@@ -45,7 +45,7 @@ private extension CreateBracketFormFeatureView {
     }
 
     var participantsSection: some View {
-        Section("Participants") {
+        Section("Participants (\(store.selectedParticipants.count))") {
             if store.selectedParticipants.isEmpty {
                 ContentUnavailableView(
                     "No participants yet",
@@ -99,6 +99,14 @@ private extension CreateBracketFormFeatureView {
                     }
                 }
             }
+            Button(
+                "Add All Recent Participants",
+                systemImage: "person.3"
+            ) {
+                store.send(.tappedAddAllRecentParticipants)
+            }
+            .buttonStyle(.borderedProminent)
+            .withoutTVOSFormStyling()
         } header: {
             Text("Add Recent Participant")
         }
