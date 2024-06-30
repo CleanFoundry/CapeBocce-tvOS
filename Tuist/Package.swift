@@ -15,8 +15,10 @@ import PackageDescription
 let package = Package(
     name: "CapeBocce",
     dependencies: [
-        // Add your own dependencies here:
-        // .package(url: "https://github.com/Alamofire/Alamofire", from: "5.0.0"),
-        // You can read more about dependencies here: https://docs.tuist.io/documentation/tuist/dependencies
+        // MARK: - PointFree
+        .package(url: "https://github.com/pointfreeco/swift-composable-architecture", from: .init(1, 11, 2)),
+        .package(url: "https://github.com/pointfreeco/swift-dependencies.git", from: .init(1, 3, 1)),
+        .package(url: "https://github.com/pointfreeco/swift-snapshot-testing", from: .init(1, 16, 1)),
+        .package(url: "https://github.com/pointfreeco/swift-tagged", from: .init(0, 10, 0)),
     ]
 )
