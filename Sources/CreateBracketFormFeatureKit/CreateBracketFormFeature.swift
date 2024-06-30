@@ -5,8 +5,10 @@ import ComposableArchitecture
 
     @ObservableState public struct State {
 
-        public var name: String
+        public var bracketName: String
         public var selectedParticipants: IdentifiedArrayOf<Participant> = []
+
+        public var addNewParticipantName: String = "Participant Name"
 
         @Shared(.fileStorage(.recentParticipantsStorageURL))
         public var recentParticipants: IdentifiedArrayOf<Participant> = [
@@ -17,9 +19,9 @@ import ComposableArchitecture
         ]
 
         public init(
-            name: String
+            bracketName: String
         ) {
-            self.name = name
+            self.bracketName = bracketName
         }
 
     }

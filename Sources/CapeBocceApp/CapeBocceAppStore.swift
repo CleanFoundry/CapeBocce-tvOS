@@ -5,7 +5,7 @@ struct CapeBocceAppStore {
 
     let store = Store(
         initialState: .init(
-            createBracketForm: .init(name: "Test Name")
+            createBracketForm: .init(bracketName: "Test Name")
         ),
         reducer: {
             RootFeature()

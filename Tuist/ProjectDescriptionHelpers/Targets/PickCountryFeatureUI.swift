@@ -2,15 +2,15 @@ import CFTuist
 import ProjectDescription
 
 public extension CFTarget.Name {
-    static let createBracketFormFeatureKit: Self = "CreateBracketFormFeatureKit"
+    static let pickCountryFeatureUI: Self = "PickCountryFeatureUI"
 }
 
 public extension CFTarget {
 
-    static let createBracketFormFeatureKit = CFTarget.default.capeBocce.framework(
-        name: .createBracketFormFeatureKit,
+    static let pickCountryFeatureUI = CFTarget.default.capeBocce.framework(
+        name: .pickCountryFeatureUI,
         internalDependencies: [
-            .bracketModel,
+            .countryKit,
             .pickCountryFeatureKit,
         ],
         externalDependencies: [

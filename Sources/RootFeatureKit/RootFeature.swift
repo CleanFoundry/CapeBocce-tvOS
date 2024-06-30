@@ -36,7 +36,7 @@ import Foundation
             switch action {
             case .tappedCreateBracket:
                 state.createBracketForm = .init(
-                    name: defaultBracketName.create()
+                    bracketName: defaultBracketName.create()
                 )
                 return .none
             case .createBracketForm:
