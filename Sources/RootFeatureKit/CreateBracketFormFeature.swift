@@ -1,3 +1,4 @@
+import BracketModel
 import ComposableArchitecture
 
 @Reducer public struct CreateBracketFormFeature {
@@ -5,6 +6,9 @@ import ComposableArchitecture
     @ObservableState public struct State {
 
         public var name: String
+
+        @Shared(.fileStorage(.recentParticipantsStorageURL))
+        public var recentParticipants: IdentifiedArrayOf<Participant> = []
 
         public init(
             name: String

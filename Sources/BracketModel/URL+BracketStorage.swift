@@ -6,4 +6,8 @@ public extension URL {
         .cachesDirectory
         .appending(path: "brackets.json")
 
+    static let recentParticipantsStorageURL = Self
+        .cachesDirectory
+        .appending(path: "recent_participants.json")
+
 }

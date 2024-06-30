@@ -4,7 +4,9 @@ import RootFeatureKit
 struct CapeBocceAppStore {
 
     let store = Store(
-        initialState: .init(),
+        initialState: .init(
+            createBracketForm: .init(name: "Test Name")
+        ),
         reducer: {
             RootFeature()
                 ._printChanges()

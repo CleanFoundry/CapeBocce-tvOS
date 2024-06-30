@@ -6,12 +6,15 @@ import Foundation
 
     @ObservableState public struct State {
 
-        @Shared(.fileStorage(.bracketsStorageURL)) var brackets: IdentifiedArrayOf<Bracket> = []
+        @Shared(.fileStorage(.bracketsStorageURL)) 
+        var brackets: IdentifiedArrayOf<Bracket> = []
 
         @Presents public var createBracketForm: CreateBracketFormFeature.State?
 
-        public init() {
-
+        public init(
+            createBracketForm: CreateBracketFormFeature.State? = nil
+        ) {
+            self.createBracketForm = createBracketForm
         }
 
     }

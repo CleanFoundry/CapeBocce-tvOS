@@ -12,9 +12,26 @@ public struct CreateBracketFormFeatureView: View {
 
     public var body: some View {
         Form {
-            Section("Bracket Name") {
-                TextField("Bracket Name", text: $store.name)
+            bracketNameSection
+            participantsSection
+        }
+    }
+
+}
+
+private extension CreateBracketFormFeatureView {
+
+    var bracketNameSection: some View {
+        Section("Bracket Name") {
+            TextField("Bracket Name", text: $store.name)
+        }
+    }
+    var participantsSection: some View {
+        Section("Participants") {
+            ForEach(store.recentParticipants) { participant in
+                Text(participant.name)
             }
         }
     }
+
 }
