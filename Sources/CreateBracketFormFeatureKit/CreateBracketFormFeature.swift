@@ -33,6 +33,7 @@ import PickCountryFeatureKit
         case binding(BindingAction<CreateBracketFormFeature.State>)
         case submittedAddParticipant
         case pickCountry(PresentationAction<PickCountryFeature.Action>)
+        case tappedRecentParticipant(Participant)
     }
 
     public init() { }
@@ -46,7 +47,20 @@ import PickCountryFeatureKit
                     title: "Choose Country for \(state.sanitizedAddParticipantName)"
                 )
                 return .none
-            case .binding, .pickCountry:
+            case let .pickCountry(.presented(.selected(selectedCountry))):
+                state.addNewParticipantPickCountry = nil
+                let newParticipant = Participant(
+                    name: state.sanitizedAddParticipantName,
+                    countryID: selectedCountry.id
+                )
+                state.recentParticipants.insert(newParticipant, at: 0)
+                state.selectedParticipants.insert(newParticipant, at: 0)
+                return .none
+            case let .tappedRecentParticipant(participant):
+                state.selectedParticipants.insert(participant, at: 0)
+                return .none
+            case .binding,
+                    .pickCountry:
                 return .none
             }
         }

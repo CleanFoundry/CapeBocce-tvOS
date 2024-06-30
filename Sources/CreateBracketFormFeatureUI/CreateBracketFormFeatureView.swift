@@ -80,7 +80,7 @@ private extension CreateBracketFormFeatureView {
         Section {
             ForEach(store.unselectedRecentParticipants) { participant in
                 ParticipantButton(participant: participant) {
-
+                    store.send(.tappedRecentParticipant(participant))
                 }
             }
         } header: {

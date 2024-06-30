@@ -16,7 +16,7 @@ public struct PickCountryFeatureView: View {
             List {
                 ForEach(store.availableCountries) { country in
                     Button {
-
+                        store.send(.selected(country))
                     } label: {
                         HStack(alignment: .center, spacing: 12) {
                             country.bundleAsset

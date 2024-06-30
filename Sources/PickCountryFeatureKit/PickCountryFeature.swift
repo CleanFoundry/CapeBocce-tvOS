@@ -25,6 +25,7 @@ import CountryKit
     }
 
     public enum Action: BindableAction {
+        case selected(Country)
         case binding(BindingAction<PickCountryFeature.State>)
     }
 
