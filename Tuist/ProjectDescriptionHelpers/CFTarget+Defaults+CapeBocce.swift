@@ -14,7 +14,8 @@ public extension CFTarget.Default.CapeBocce {
 
     func app(
         name: CFTarget.Name,
-        internalDependencies: [CFTarget.Name]
+        internalDependencies: [CFTarget.Name],
+        externalDependencies: [CFExternalTargetName]
     ) -> CFTarget {
         .default.app(
             name: name,
@@ -23,7 +24,7 @@ public extension CFTarget.Default.CapeBocce {
                 "UILaunchStoryboardName": "LaunchScreen.storyboard",
             ]),
             internalDependencies: internalDependencies,
-            externalDependencies: [],
+            externalDependencies: externalDependencies,
             deploymentTarget: .tvOSDefault(),
             settings: [
                 "DEVELOPMENT_TEAM": "QHJFG75NY8",

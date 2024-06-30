@@ -9,7 +9,9 @@ public extension CFTarget {
 
     static let rootFeatureKit = CFTarget.default.capeBocce.framework(
         name: .rootFeatureKit,
-        internalDependencies: [],
+        internalDependencies: [
+            .bracketModel,
+        ],
         externalDependencies: [
             .composableArchitecture,
         ]

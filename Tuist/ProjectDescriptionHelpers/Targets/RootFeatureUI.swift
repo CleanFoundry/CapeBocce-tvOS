@@ -12,7 +12,9 @@ public extension CFTarget {
         internalDependencies: [
             .rootFeatureKit,
         ],
-        externalDependencies: []
+        externalDependencies: [
+            .composableArchitecture,
+        ]
     )
 
 }
