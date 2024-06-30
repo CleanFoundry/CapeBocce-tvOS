@@ -18,4 +18,10 @@ public extension CFTarget {
         ]
     )
 
+    static let rootFeatureKitTests = CFTarget.default.capeBocce.frameworkUnitTests(
+        testing: .rootFeatureKit,
+        internalDependencies: [],
+        externalDependencies: []
+    )
+
 }

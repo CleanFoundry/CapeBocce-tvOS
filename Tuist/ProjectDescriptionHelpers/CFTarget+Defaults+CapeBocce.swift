@@ -49,5 +49,17 @@ public extension CFTarget.Default.CapeBocce {
         )
     }
 
+    func frameworkUnitTests(
+        testing target: CFTarget,
+        internalDependencies: [CFTarget.Name],
+        externalDependencies: [CFExternalTargetName]
+    ) -> CFTarget {
+        .default.frameworkUnitTest(
+            testing: target,
+            internalDependencies: internalDependencies,
+            externalDependencies: externalDependencies,
+            deploymentTarget: .tvOSDefault()
+        )
+    }
 
 }

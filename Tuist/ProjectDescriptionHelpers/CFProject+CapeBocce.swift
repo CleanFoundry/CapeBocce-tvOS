@@ -9,10 +9,13 @@ public extension CFProject {
             .bracketModel,
             .capeBocceApp,
             .countryKit,
+            .countryKitTests,
             .createBracketFormFeatureKit,
             .createBracketFormFeatureUI,
             .rootFeatureKit,
+            .rootFeatureKitTests,
             .rootFeatureUI,
+            .rootFeatureUITests,
         ],
         additionalFiles: []
     )
