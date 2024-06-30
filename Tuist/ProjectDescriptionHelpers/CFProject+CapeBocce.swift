@@ -12,6 +12,7 @@ public extension CFProject {
             .countryKitTests,
             .createBracketFormFeatureKit,
             .createBracketFormFeatureUI,
+            .genericAPIClient,
             .pickCountryFeatureKit,
             .pickCountryFeatureUI,
             .rootFeatureKit,

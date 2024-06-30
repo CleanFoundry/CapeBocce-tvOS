@@ -19,4 +19,3 @@ public struct Participant: Codable, Equatable, Identifiable {
     }
 
 }
-
