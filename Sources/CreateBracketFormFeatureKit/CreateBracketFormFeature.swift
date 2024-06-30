@@ -15,12 +15,7 @@ import PickCountryFeatureKit
         @Presents public var pickCountry: PickCountryFeature.State?
 
         @Shared(.fileStorage(.recentParticipantsStorageURL))
-        public var recentParticipants: IdentifiedArrayOf<Participant> = [
-            Participant(name: "Connor", countryID: "US"),
-            Participant(name: "Drake", countryID: "AE"),
-            Participant(name: "Kelly", countryID: "DE"),
-            Participant(name: "Liam", countryID: "CN"),
-        ]
+        public var recentParticipants: IdentifiedArrayOf<Participant> = []
 
         public init(
             bracketName: String
