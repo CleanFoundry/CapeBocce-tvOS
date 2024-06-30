@@ -12,7 +12,9 @@ public struct CreateBracketFormFeatureView: View {
 
     public var body: some View {
         Form {
-            Text("Hi")
+            Section("Bracket Name") {
+                TextField("Bracket Name", text: $store.name)
+            }
         }
     }
 }

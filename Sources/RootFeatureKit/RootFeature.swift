@@ -1,5 +1,6 @@
 import BracketModel
 import ComposableArchitecture
+import Foundation
 
 @Reducer public struct RootFeature {
 
@@ -22,13 +23,19 @@ import ComposableArchitecture
 
     }
 
+    @Dependency(\.date) var date
+
     public init() { }
 
     public var body: some ReducerOf<Self> {
         Reduce { state, action in
             switch action {
             case .tappedCreateBracket:
-                state.createBracketForm = .init()
+                let formatter = DateFormatter()
+                formatter.dateStyle = .short
+                formatter.timeStyle = .none
+                let defaultName = formatter.string(from: date())
+                state.createBracketForm = .init(name: defaultName)
                 return .none
             case .createBracketForm:
                 return .none
