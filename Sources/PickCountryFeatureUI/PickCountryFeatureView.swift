@@ -32,9 +32,9 @@ public struct PickCountryFeatureView: View {
                     }
                 }
             }
-            .searchable(text: $store.searchText)
             .navigationTitle(store.title)
         }
+        .searchable(text: $store.searchText)
     }
 
 }

@@ -13,21 +13,24 @@ public struct CreateBracketFormFeatureView: View {
     }
 
     public var body: some View {
-        Form {
-            bracketNameSection
-            participantsSection
-            addNewParticipantSection
-            if !store.unselectedRecentParticipants.isEmpty {
-                addRecentParticipantsSection
+        NavigationStack {
+            Form {
+                bracketNameSection
+                participantsSection
+                addNewParticipantSection
+                if !store.unselectedRecentParticipants.isEmpty {
+                    addRecentParticipantsSection
+                }
             }
-        }
-        .sheet(
-            item: $store.scope(
-                state: \.addNewParticipantPickCountry,
-                action: \.pickCountry
-            )
-        ) { store in
-            PickCountryFeatureView(store: store)
+            .navigationTitle("Create Bracket")
+            .sheet(
+                item: $store.scope(
+                    state: \.pickCountry,
+                    action: \.pickCountry
+                )
+            ) { store in
+                PickCountryFeatureView(store: store)
+            }
         }
     }
 
@@ -52,11 +55,11 @@ private extension CreateBracketFormFeatureView {
             } else {
                 ForEach(store.selectedParticipants) { participant in
                     ParticipantButton(participant: participant) {
-                        Button("Remove from bracket") {
-                            store.send(.removedParticipant(participant))
+                        Button("Update country", systemImage: "globe.europe.africa") {
+                            store.send(.tappedUpdateCountry(participant))
                         }
-                        Button("Update country") {
-
+                        Button("Remove from bracket", systemImage: "minus.circle") {
+                            store.send(.removedParticipant(participant))
                         }
                     }
                 }
@@ -85,8 +88,14 @@ private extension CreateBracketFormFeatureView {
         Section {
             ForEach(store.unselectedRecentParticipants) { participant in
                 ParticipantButton(participant: participant) {
-                    Button("Add to bracket") {
+                    Button("Add to bracket", systemImage: "plus.circle") {
                         store.send(.addedRecentParticipant(participant))
+                    }
+                    Button("Update country & add to bracket", systemImage: "globe.americas") {
+                        store.send(.tappedUpdateCountry(participant))
+                    }
+                    Button("Delete participant", systemImage: "trash", role: .destructive) {
+                        store.send(.tappedDeleteParticipant(participant))
                     }
                 }
             }

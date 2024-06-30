@@ -1,3 +1,4 @@
+import BracketModel
 import ComposableArchitecture
 import CountryKit
 
@@ -6,6 +7,7 @@ import CountryKit
     @ObservableState public struct State {
 
         public let title: String
+        public let existingParticipant: Participant?
         public var searchText: String = ""
 
         public var availableCountries: [Country] {
@@ -17,9 +19,11 @@ import CountryKit
         }
 
         public init(
-            title: String
+            title: String,
+            existingParticipant: Participant? = nil
         ) {
             self.title = title
+            self.existingParticipant = existingParticipant
         }
 
     }
