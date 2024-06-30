@@ -32,15 +32,11 @@ private extension CreateBracketFormFeatureView {
     var participantsSection: some View {
         Section("Participants") {
             if store.selectedParticipants.isEmpty {
-                HStack {
-                    Spacer()
-                    ContentUnavailableView(
-                        "No participants yet",
-                        systemImage: "person.3"
-                    )
-                    Spacer()
-                }
-                .listRowBackground(Color.clear)
+                ContentUnavailableView(
+                    "No participants yet",
+                    systemImage: "person.3"
+                )
+                .withoutTVOSFormStyling()
             } else {
                 ForEach(store.selectedParticipants) { participant in
                     Button(participant.name) {
@@ -54,6 +50,7 @@ private extension CreateBracketFormFeatureView {
             ) {
             }
             .buttonStyle(.borderedProminent)
+            .withoutTVOSFormStyling()
         }
     }
 

@@ -6,10 +6,7 @@ import ComposableArchitecture
     @ObservableState public struct State {
 
         public var name: String
-        public var selectedParticipants: IdentifiedArrayOf<Participant> = [
-            Participant(name: "Connor"),
-            Participant(name: "Kelly"),
-        ]
+        public var selectedParticipants: IdentifiedArrayOf<Participant> = []
 
         @Shared(.fileStorage(.recentParticipantsStorageURL))
         public var recentParticipants: IdentifiedArrayOf<Participant> = [
