@@ -1,7 +1,14 @@
+import ComposableArchitecture
+import RootFeatureKit
 import SwiftUI
 
 public struct RootFeatureView: View {
-    public init() {}
+
+    @Bindable var store: StoreOf<RootFeature>
+
+    public init(store: StoreOf<RootFeature>) {
+        self.store = store
+    }
 
     public var body: some View {
         NavigationStack {

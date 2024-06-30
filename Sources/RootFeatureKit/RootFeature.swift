@@ -1,5 +1,7 @@
 import ComposableArchitecture
 
-@Reducer struct RootFeature {
+@Reducer public struct RootFeature {
+
+    public init() { }
 
 }
