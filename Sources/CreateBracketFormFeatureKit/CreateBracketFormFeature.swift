@@ -31,7 +31,7 @@ import PickCountryFeatureKit
 
     public enum Action: BindableAction {
         case binding(BindingAction<CreateBracketFormFeature.State>)
-        case tappedAddParticipant
+        case submittedAddParticipant
         case pickCountry(PresentationAction<PickCountryFeature.Action>)
     }
 
@@ -41,7 +41,7 @@ import PickCountryFeatureKit
         BindingReducer()
         Reduce { state, action in
             switch action {
-            case .tappedAddParticipant:
+            case .submittedAddParticipant:
                 state.addNewParticipantPickCountry = .init(
                     title: "Choose Country for \(state.sanitizedAddParticipantName)"
                 )

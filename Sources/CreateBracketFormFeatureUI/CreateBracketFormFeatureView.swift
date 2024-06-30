@@ -64,14 +64,17 @@ private extension CreateBracketFormFeatureView {
     var addNewParticipantSection: some View {
         Section("Add New Participant") {
             TextField("Participant Name", text: $store.addNewParticipantName)
+                .onSubmit {
+                    store.send(.submittedAddParticipant)
+                }
             Button(
                 "Add New Participant",
                 systemImage: "person.badge.plus"
             ) {
-                store.send(.tappedAddParticipant)
+                store.send(.submittedAddParticipant)
             }
             .buttonStyle(.borderedProminent)
-//            .withoutTVOSFormStyling()
+            .withoutTVOSFormStyling()
         }
     }
 
