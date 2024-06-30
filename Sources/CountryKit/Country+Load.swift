@@ -4,21 +4,30 @@ import UIKit
 
 public extension Country {
 
+    private static var loaded: [Country]?
+
     static func load() -> [Country] {
-        return Locale.Region.isoRegions.compactMap { region -> Country? in
-            let identifier = region.identifier
+        if let loaded {
+            return loaded
+        } else {
+            let loaded = Locale.Region.isoRegions
+                .compactMap { region -> Country? in
+                    let identifier = region.identifier
 
-            guard
-                bundleImageExists(for: identifier),
-                localeNameExists(for: identifier) else {
-                return nil
-            }
+                    guard
+                        bundleImageExists(for: identifier),
+                        localeNameExists(for: identifier) else {
+                        return nil
+                    }
 
-            return Country(
-                identifier: identifier
-            )
+                    return Country(
+                        identifier: identifier
+                    )
+                }
+                .sorted(using: KeyPathComparator(\.name))
+            self.loaded = loaded
+            return loaded
         }
-        .sorted(using: KeyPathComparator(\.name))
     }
 
 }

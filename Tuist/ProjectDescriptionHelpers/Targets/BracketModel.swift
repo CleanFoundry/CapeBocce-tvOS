@@ -9,7 +9,9 @@ public extension CFTarget {
 
     static let bracketModel = CFTarget.default.capeBocce.framework(
         name: .bracketModel,
-        internalDependencies: [],
+        internalDependencies: [
+            .countryKit,
+        ],
         externalDependencies: []
     )
 

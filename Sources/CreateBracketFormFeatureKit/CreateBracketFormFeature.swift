@@ -10,10 +10,10 @@ import ComposableArchitecture
 
         @Shared(.fileStorage(.recentParticipantsStorageURL))
         public var recentParticipants: IdentifiedArrayOf<Participant> = [
-            Participant(name: "Connor"),
-            Participant(name: "Drake"),
-            Participant(name: "Kelly"),
-            Participant(name: "Liam"),
+            Participant(name: "Connor", countryID: "US"),
+            Participant(name: "Drake", countryID: "AE"),
+            Participant(name: "Kelly", countryID: "DE"),
+            Participant(name: "Liam", countryID: "CN"),
         ]
 
         public init(

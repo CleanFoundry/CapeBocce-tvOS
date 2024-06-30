@@ -1,3 +1,4 @@
+import CountryKit
 import Foundation
 
 public struct Participant: Codable, Equatable, Identifiable {
@@ -6,8 +7,15 @@ public struct Participant: Codable, Equatable, Identifiable {
 
     public var name: String
 
-    public init(name: String) {
+    public var countryID: String
+    public var country: Country { .init(identifier: countryID) }
+
+    public init(
+        name: String,
+        countryID: String
+    ) {
         self.name = name
+        self.countryID = countryID
     }
 
 }

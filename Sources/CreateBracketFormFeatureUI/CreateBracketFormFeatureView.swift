@@ -40,7 +40,10 @@ private extension CreateBracketFormFeatureView {
                 .withoutTVOSFormStyling()
             } else {
                 ForEach(store.selectedParticipants) { participant in
-                    Button(participant.name) {
+                    Button(
+                        participant.name,
+                        systemImage: participant.country.bundleAssetName
+                    ) {
 
                     }
                 }
@@ -58,7 +61,18 @@ private extension CreateBracketFormFeatureView {
     var addRecentParticipantsSection: some View {
         Section {
             ForEach(store.unselectedRecentParticipants) { participant in
-                Button(participant.name) {
+                Button {
+
+                } label: {
+                    Label {
+                        Text(participant.name)
+                            .font(.headline)
+                    } icon: {
+                        participant.country.bundleAsset
+                            .resizable()
+                            .frame(width: 300, height: 150, alignment: .trailing)
+                            .padding()
+                    }
 
                 }
             }

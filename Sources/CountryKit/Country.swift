@@ -5,14 +5,26 @@ public struct Country {
 
     public let identifier: String
 
-    public var bundleAsset: Image {
+    public init(identifier: String) {
+        self.identifier = identifier
+    }
+
+}
+
+public extension Country {
+
+    var bundleAssetName: String {
+        identifier.lowercased()
+    }
+
+    var bundleAsset: Image {
         Image(
-            identifier.lowercased(),
+            bundleAssetName,
             bundle: .module
         )
     }
 
-    public var name: String {
+    var name: String {
         Locale.current.localizedString(forRegionCode: identifier)!
     }
 
