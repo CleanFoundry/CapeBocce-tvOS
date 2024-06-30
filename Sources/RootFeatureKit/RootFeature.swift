@@ -23,7 +23,7 @@ import Foundation
 
     }
 
-    @Dependency(\.date) var date
+    @Dependency(\.defaultBracketName) var defaultBracketName
 
     public init() { }
 
@@ -31,11 +31,9 @@ import Foundation
         Reduce { state, action in
             switch action {
             case .tappedCreateBracket:
-                let formatter = DateFormatter()
-                formatter.dateStyle = .short
-                formatter.timeStyle = .none
-                let defaultName = formatter.string(from: date())
-                state.createBracketForm = .init(name: defaultName)
+                state.createBracketForm = .init(
+                    name: defaultBracketName.create()
+                )
                 return .none
             case .createBracketForm:
                 return .none
