@@ -1,15 +1,19 @@
+import Foundation
 import SwiftUI
 
 public struct Country {
 
-    public let name: String
-    public let localeIdentifier: String
+    public let identifier: String
 
     public var bundleAsset: Image {
         Image(
-            localeIdentifier,
+            identifier.lowercased(),
             bundle: .module
         )
+    }
+
+    public var name: String {
+        Locale.current.localizedString(forRegionCode: identifier)!
     }
 
 }

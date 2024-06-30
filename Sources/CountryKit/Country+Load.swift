@@ -5,24 +5,17 @@ import UIKit
 public extension Country {
 
     static func load() -> [Country] {
-        let ids = Locale.Region.isoRegions
+        return Locale.Region.isoRegions.compactMap { region -> Country? in
+            let identifier = region.identifier
 
-        return ids.compactMap { id -> Country? in
-            let sanitizedIdentifier = id.identifier.lowercased()
-
-            guard bundleImageExists(for: sanitizedIdentifier) else {
-                return nil
-            }
-
-            guard let name = Locale.current.localizedString(
-                forRegionCode: id.identifier
-            ) else {
+            guard
+                bundleImageExists(for: identifier),
+                localeNameExists(for: identifier) else {
                 return nil
             }
 
             return Country(
-                name: name,
-                localeIdentifier: sanitizedIdentifier
+                identifier: identifier
             )
         }
         .sorted(using: KeyPathComparator(\.name))
@@ -32,8 +25,18 @@ public extension Country {
 
 private extension Country {
 
-    static func bundleImageExists(for sanitizedIdentifier: String) -> Bool {
-        UIImage(named: sanitizedIdentifier, in: .module, with: nil) != nil
+    static func bundleImageExists(for identifier: String) -> Bool {
+        UIImage(
+            named: identifier.lowercased(),
+            in: .module,
+            with: nil
+        ) != nil
+    }
+
+    static func localeNameExists(for identifier: String) -> Bool {
+        Locale.current.localizedString(
+            forRegionCode: identifier
+        ) != nil
     }
 
 }

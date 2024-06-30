@@ -1,751 +1,501 @@
 ▿ 250 elements
   ▿ Country
-    - localeIdentifier: "ad"
-    - name: "Andorra"
+    - identifier: "AF"
   ▿ Country
-    - localeIdentifier: "ae"
-    - name: "United Arab Emirates"
+    - identifier: "AX"
   ▿ Country
-    - localeIdentifier: "af"
-    - name: "Afghanistan"
+    - identifier: "AL"
   ▿ Country
-    - localeIdentifier: "ag"
-    - name: "Antigua & Barbuda"
+    - identifier: "DZ"
   ▿ Country
-    - localeIdentifier: "ai"
-    - name: "Anguilla"
+    - identifier: "AS"
   ▿ Country
-    - localeIdentifier: "al"
-    - name: "Albania"
+    - identifier: "AD"
   ▿ Country
-    - localeIdentifier: "am"
-    - name: "Armenia"
+    - identifier: "AO"
   ▿ Country
-    - localeIdentifier: "ao"
-    - name: "Angola"
+    - identifier: "AI"
   ▿ Country
-    - localeIdentifier: "aq"
-    - name: "Antarctica"
+    - identifier: "AQ"
   ▿ Country
-    - localeIdentifier: "ar"
-    - name: "Argentina"
+    - identifier: "AG"
   ▿ Country
-    - localeIdentifier: "as"
-    - name: "American Samoa"
+    - identifier: "AR"
   ▿ Country
-    - localeIdentifier: "at"
-    - name: "Austria"
+    - identifier: "AM"
   ▿ Country
-    - localeIdentifier: "au"
-    - name: "Australia"
+    - identifier: "AW"
   ▿ Country
-    - localeIdentifier: "aw"
-    - name: "Aruba"
+    - identifier: "AU"
   ▿ Country
-    - localeIdentifier: "ax"
-    - name: "Åland Islands"
+    - identifier: "AT"
   ▿ Country
-    - localeIdentifier: "az"
-    - name: "Azerbaijan"
+    - identifier: "AZ"
   ▿ Country
-    - localeIdentifier: "ba"
-    - name: "Bosnia & Herzegovina"
+    - identifier: "BS"
   ▿ Country
-    - localeIdentifier: "bb"
-    - name: "Barbados"
+    - identifier: "BH"
   ▿ Country
-    - localeIdentifier: "bd"
-    - name: "Bangladesh"
+    - identifier: "BD"
   ▿ Country
-    - localeIdentifier: "be"
-    - name: "Belgium"
+    - identifier: "BB"
   ▿ Country
-    - localeIdentifier: "bf"
-    - name: "Burkina Faso"
+    - identifier: "BY"
   ▿ Country
-    - localeIdentifier: "bg"
-    - name: "Bulgaria"
+    - identifier: "BE"
   ▿ Country
-    - localeIdentifier: "bh"
-    - name: "Bahrain"
+    - identifier: "BZ"
   ▿ Country
-    - localeIdentifier: "bi"
-    - name: "Burundi"
+    - identifier: "BJ"
   ▿ Country
-    - localeIdentifier: "bj"
-    - name: "Benin"
+    - identifier: "BM"
   ▿ Country
-    - localeIdentifier: "bl"
-    - name: "St. Barthélemy"
+    - identifier: "BT"
   ▿ Country
-    - localeIdentifier: "bm"
-    - name: "Bermuda"
+    - identifier: "BO"
   ▿ Country
-    - localeIdentifier: "bn"
-    - name: "Brunei"
+    - identifier: "BA"
   ▿ Country
-    - localeIdentifier: "bo"
-    - name: "Bolivia"
+    - identifier: "BW"
   ▿ Country
-    - localeIdentifier: "bq"
-    - name: "Caribbean Netherlands"
+    - identifier: "BV"
   ▿ Country
-    - localeIdentifier: "br"
-    - name: "Brazil"
+    - identifier: "BR"
   ▿ Country
-    - localeIdentifier: "bs"
-    - name: "Bahamas"
+    - identifier: "VG"
   ▿ Country
-    - localeIdentifier: "bt"
-    - name: "Bhutan"
+    - identifier: "BN"
   ▿ Country
-    - localeIdentifier: "bv"
-    - name: "Bouvet Island"
+    - identifier: "BG"
   ▿ Country
-    - localeIdentifier: "bw"
-    - name: "Botswana"
+    - identifier: "BF"
   ▿ Country
-    - localeIdentifier: "by"
-    - name: "Belarus"
+    - identifier: "BI"
   ▿ Country
-    - localeIdentifier: "bz"
-    - name: "Belize"
+    - identifier: "KH"
   ▿ Country
-    - localeIdentifier: "ca"
-    - name: "Canada"
+    - identifier: "CM"
   ▿ Country
-    - localeIdentifier: "cc"
-    - name: "Cocos (Keeling) Islands"
+    - identifier: "CA"
   ▿ Country
-    - localeIdentifier: "cd"
-    - name: "Congo - Kinshasa"
+    - identifier: "CV"
   ▿ Country
-    - localeIdentifier: "cf"
-    - name: "Central African Republic"
+    - identifier: "BQ"
   ▿ Country
-    - localeIdentifier: "cg"
-    - name: "Congo - Brazzaville"
+    - identifier: "KY"
   ▿ Country
-    - localeIdentifier: "ch"
-    - name: "Switzerland"
+    - identifier: "CF"
   ▿ Country
-    - localeIdentifier: "ci"
-    - name: "Côte d’Ivoire"
+    - identifier: "TD"
   ▿ Country
-    - localeIdentifier: "ck"
-    - name: "Cook Islands"
+    - identifier: "IO"
   ▿ Country
-    - localeIdentifier: "cl"
-    - name: "Chile"
+    - identifier: "CL"
   ▿ Country
-    - localeIdentifier: "cm"
-    - name: "Cameroon"
+    - identifier: "CN"
   ▿ Country
-    - localeIdentifier: "cn"
-    - name: "China"
+    - identifier: "CX"
   ▿ Country
-    - localeIdentifier: "co"
-    - name: "Colombia"
+    - identifier: "CC"
   ▿ Country
-    - localeIdentifier: "cr"
-    - name: "Costa Rica"
+    - identifier: "CO"
   ▿ Country
-    - localeIdentifier: "cu"
-    - name: "Cuba"
+    - identifier: "KM"
   ▿ Country
-    - localeIdentifier: "cv"
-    - name: "Cape Verde"
+    - identifier: "CG"
   ▿ Country
-    - localeIdentifier: "cw"
-    - name: "Curaçao"
+    - identifier: "CD"
   ▿ Country
-    - localeIdentifier: "cx"
-    - name: "Christmas Island"
+    - identifier: "CK"
   ▿ Country
-    - localeIdentifier: "cy"
-    - name: "Cyprus"
+    - identifier: "CR"
   ▿ Country
-    - localeIdentifier: "cz"
-    - name: "Czechia"
+    - identifier: "CI"
   ▿ Country
-    - localeIdentifier: "de"
-    - name: "Germany"
+    - identifier: "HR"
   ▿ Country
-    - localeIdentifier: "dj"
-    - name: "Djibouti"
+    - identifier: "CU"
   ▿ Country
-    - localeIdentifier: "dk"
-    - name: "Denmark"
+    - identifier: "CW"
   ▿ Country
-    - localeIdentifier: "dm"
-    - name: "Dominica"
+    - identifier: "CY"
   ▿ Country
-    - localeIdentifier: "do"
-    - name: "Dominican Republic"
+    - identifier: "CZ"
   ▿ Country
-    - localeIdentifier: "dz"
-    - name: "Algeria"
+    - identifier: "DK"
   ▿ Country
-    - localeIdentifier: "ec"
-    - name: "Ecuador"
+    - identifier: "DJ"
   ▿ Country
-    - localeIdentifier: "ee"
-    - name: "Estonia"
+    - identifier: "DM"
   ▿ Country
-    - localeIdentifier: "eg"
-    - name: "Egypt"
+    - identifier: "DO"
   ▿ Country
-    - localeIdentifier: "eh"
-    - name: "Western Sahara"
+    - identifier: "EC"
   ▿ Country
-    - localeIdentifier: "er"
-    - name: "Eritrea"
+    - identifier: "EG"
   ▿ Country
-    - localeIdentifier: "es"
-    - name: "Spain"
+    - identifier: "SV"
   ▿ Country
-    - localeIdentifier: "et"
-    - name: "Ethiopia"
+    - identifier: "GQ"
   ▿ Country
-    - localeIdentifier: "fi"
-    - name: "Finland"
+    - identifier: "ER"
   ▿ Country
-    - localeIdentifier: "fj"
-    - name: "Fiji"
+    - identifier: "EE"
   ▿ Country
-    - localeIdentifier: "fk"
-    - name: "Falkland Islands"
+    - identifier: "SZ"
   ▿ Country
-    - localeIdentifier: "fm"
-    - name: "Micronesia"
+    - identifier: "ET"
   ▿ Country
-    - localeIdentifier: "fo"
-    - name: "Faroe Islands"
+    - identifier: "FK"
   ▿ Country
-    - localeIdentifier: "fr"
-    - name: "France"
+    - identifier: "FO"
   ▿ Country
-    - localeIdentifier: "ga"
-    - name: "Gabon"
+    - identifier: "FJ"
   ▿ Country
-    - localeIdentifier: "gb"
-    - name: "United Kingdom"
+    - identifier: "FI"
   ▿ Country
-    - localeIdentifier: "gd"
-    - name: "Grenada"
+    - identifier: "FR"
   ▿ Country
-    - localeIdentifier: "ge"
-    - name: "Georgia"
+    - identifier: "GF"
   ▿ Country
-    - localeIdentifier: "gf"
-    - name: "French Guiana"
+    - identifier: "PF"
   ▿ Country
-    - localeIdentifier: "gg"
-    - name: "Guernsey"
+    - identifier: "TF"
   ▿ Country
-    - localeIdentifier: "gh"
-    - name: "Ghana"
+    - identifier: "GA"
   ▿ Country
-    - localeIdentifier: "gi"
-    - name: "Gibraltar"
+    - identifier: "GM"
   ▿ Country
-    - localeIdentifier: "gl"
-    - name: "Greenland"
+    - identifier: "GE"
   ▿ Country
-    - localeIdentifier: "gm"
-    - name: "Gambia"
+    - identifier: "DE"
   ▿ Country
-    - localeIdentifier: "gn"
-    - name: "Guinea"
+    - identifier: "GH"
   ▿ Country
-    - localeIdentifier: "gp"
-    - name: "Guadeloupe"
+    - identifier: "GI"
   ▿ Country
-    - localeIdentifier: "gq"
-    - name: "Equatorial Guinea"
+    - identifier: "GR"
   ▿ Country
-    - localeIdentifier: "gr"
-    - name: "Greece"
+    - identifier: "GL"
   ▿ Country
-    - localeIdentifier: "gs"
-    - name: "So. Georgia & So. Sandwich Isl."
+    - identifier: "GD"
   ▿ Country
-    - localeIdentifier: "gt"
-    - name: "Guatemala"
+    - identifier: "GP"
   ▿ Country
-    - localeIdentifier: "gu"
-    - name: "Guam"
+    - identifier: "GU"
   ▿ Country
-    - localeIdentifier: "gw"
-    - name: "Guinea-Bissau"
+    - identifier: "GT"
   ▿ Country
-    - localeIdentifier: "gy"
-    - name: "Guyana"
+    - identifier: "GG"
   ▿ Country
-    - localeIdentifier: "hk"
-    - name: "Hong Kong (China)"
+    - identifier: "GN"
   ▿ Country
-    - localeIdentifier: "hm"
-    - name: "Heard & McDonald Islands"
+    - identifier: "GW"
   ▿ Country
-    - localeIdentifier: "hn"
-    - name: "Honduras"
+    - identifier: "GY"
   ▿ Country
-    - localeIdentifier: "hr"
-    - name: "Croatia"
+    - identifier: "HT"
   ▿ Country
-    - localeIdentifier: "ht"
-    - name: "Haiti"
+    - identifier: "HM"
   ▿ Country
-    - localeIdentifier: "hu"
-    - name: "Hungary"
+    - identifier: "HN"
   ▿ Country
-    - localeIdentifier: "id"
-    - name: "Indonesia"
+    - identifier: "HK"
   ▿ Country
-    - localeIdentifier: "ie"
-    - name: "Ireland"
+    - identifier: "HU"
   ▿ Country
-    - localeIdentifier: "il"
-    - name: "Israel"
+    - identifier: "IS"
   ▿ Country
-    - localeIdentifier: "im"
-    - name: "Isle of Man"
+    - identifier: "IN"
   ▿ Country
-    - localeIdentifier: "in"
-    - name: "India"
+    - identifier: "ID"
   ▿ Country
-    - localeIdentifier: "io"
-    - name: "Chagos Archipelago"
+    - identifier: "IR"
   ▿ Country
-    - localeIdentifier: "iq"
-    - name: "Iraq"
+    - identifier: "IQ"
   ▿ Country
-    - localeIdentifier: "ir"
-    - name: "Iran"
+    - identifier: "IE"
   ▿ Country
-    - localeIdentifier: "is"
-    - name: "Iceland"
+    - identifier: "IM"
   ▿ Country
-    - localeIdentifier: "it"
-    - name: "Italy"
+    - identifier: "IL"
   ▿ Country
-    - localeIdentifier: "je"
-    - name: "Jersey"
+    - identifier: "IT"
   ▿ Country
-    - localeIdentifier: "jm"
-    - name: "Jamaica"
+    - identifier: "JM"
   ▿ Country
-    - localeIdentifier: "jo"
-    - name: "Jordan"
+    - identifier: "JP"
   ▿ Country
-    - localeIdentifier: "jp"
-    - name: "Japan"
+    - identifier: "JE"
   ▿ Country
-    - localeIdentifier: "ke"
-    - name: "Kenya"
+    - identifier: "JO"
   ▿ Country
-    - localeIdentifier: "kg"
-    - name: "Kyrgyzstan"
+    - identifier: "KZ"
   ▿ Country
-    - localeIdentifier: "kh"
-    - name: "Cambodia"
+    - identifier: "KE"
   ▿ Country
-    - localeIdentifier: "ki"
-    - name: "Kiribati"
+    - identifier: "KI"
   ▿ Country
-    - localeIdentifier: "km"
-    - name: "Comoros"
+    - identifier: "XK"
   ▿ Country
-    - localeIdentifier: "kn"
-    - name: "St. Kitts & Nevis"
+    - identifier: "KW"
   ▿ Country
-    - localeIdentifier: "kp"
-    - name: "North Korea"
+    - identifier: "KG"
   ▿ Country
-    - localeIdentifier: "kr"
-    - name: "South Korea"
+    - identifier: "LA"
   ▿ Country
-    - localeIdentifier: "kw"
-    - name: "Kuwait"
+    - identifier: "LV"
   ▿ Country
-    - localeIdentifier: "ky"
-    - name: "Cayman Islands"
+    - identifier: "LB"
   ▿ Country
-    - localeIdentifier: "kz"
-    - name: "Kazakhstan"
+    - identifier: "LS"
   ▿ Country
-    - localeIdentifier: "la"
-    - name: "Laos"
+    - identifier: "LR"
   ▿ Country
-    - localeIdentifier: "lb"
-    - name: "Lebanon"
+    - identifier: "LY"
   ▿ Country
-    - localeIdentifier: "lc"
-    - name: "St. Lucia"
+    - identifier: "LI"
   ▿ Country
-    - localeIdentifier: "li"
-    - name: "Liechtenstein"
+    - identifier: "LT"
   ▿ Country
-    - localeIdentifier: "lk"
-    - name: "Sri Lanka"
+    - identifier: "LU"
   ▿ Country
-    - localeIdentifier: "lr"
-    - name: "Liberia"
+    - identifier: "MO"
   ▿ Country
-    - localeIdentifier: "ls"
-    - name: "Lesotho"
+    - identifier: "MG"
   ▿ Country
-    - localeIdentifier: "lt"
-    - name: "Lithuania"
+    - identifier: "MW"
   ▿ Country
-    - localeIdentifier: "lu"
-    - name: "Luxembourg"
+    - identifier: "MY"
   ▿ Country
-    - localeIdentifier: "lv"
-    - name: "Latvia"
+    - identifier: "MV"
   ▿ Country
-    - localeIdentifier: "ly"
-    - name: "Libya"
+    - identifier: "ML"
   ▿ Country
-    - localeIdentifier: "ma"
-    - name: "Morocco"
+    - identifier: "MT"
   ▿ Country
-    - localeIdentifier: "mc"
-    - name: "Monaco"
+    - identifier: "MH"
   ▿ Country
-    - localeIdentifier: "md"
-    - name: "Moldova"
+    - identifier: "MQ"
   ▿ Country
-    - localeIdentifier: "me"
-    - name: "Montenegro"
+    - identifier: "MR"
   ▿ Country
-    - localeIdentifier: "mf"
-    - name: "St. Martin"
+    - identifier: "MU"
   ▿ Country
-    - localeIdentifier: "mg"
-    - name: "Madagascar"
+    - identifier: "YT"
   ▿ Country
-    - localeIdentifier: "mh"
-    - name: "Marshall Islands"
+    - identifier: "MX"
   ▿ Country
-    - localeIdentifier: "mk"
-    - name: "North Macedonia"
+    - identifier: "FM"
   ▿ Country
-    - localeIdentifier: "ml"
-    - name: "Mali"
+    - identifier: "MD"
   ▿ Country
-    - localeIdentifier: "mm"
-    - name: "Myanmar (Burma)"
+    - identifier: "MC"
   ▿ Country
-    - localeIdentifier: "mn"
-    - name: "Mongolia"
+    - identifier: "MN"
   ▿ Country
-    - localeIdentifier: "mo"
-    - name: "Macao (China)"
+    - identifier: "ME"
   ▿ Country
-    - localeIdentifier: "mp"
-    - name: "Northern Mariana Islands"
+    - identifier: "MS"
   ▿ Country
-    - localeIdentifier: "mq"
-    - name: "Martinique"
+    - identifier: "MA"
   ▿ Country
-    - localeIdentifier: "mr"
-    - name: "Mauritania"
+    - identifier: "MZ"
   ▿ Country
-    - localeIdentifier: "ms"
-    - name: "Montserrat"
+    - identifier: "MM"
   ▿ Country
-    - localeIdentifier: "mt"
-    - name: "Malta"
+    - identifier: "NA"
   ▿ Country
-    - localeIdentifier: "mu"
-    - name: "Mauritius"
+    - identifier: "NR"
   ▿ Country
-    - localeIdentifier: "mv"
-    - name: "Maldives"
+    - identifier: "NP"
   ▿ Country
-    - localeIdentifier: "mw"
-    - name: "Malawi"
+    - identifier: "NL"
   ▿ Country
-    - localeIdentifier: "mx"
-    - name: "Mexico"
+    - identifier: "NC"
   ▿ Country
-    - localeIdentifier: "my"
-    - name: "Malaysia"
+    - identifier: "NZ"
   ▿ Country
-    - localeIdentifier: "mz"
-    - name: "Mozambique"
+    - identifier: "NI"
   ▿ Country
-    - localeIdentifier: "na"
-    - name: "Namibia"
+    - identifier: "NE"
   ▿ Country
-    - localeIdentifier: "nc"
-    - name: "New Caledonia"
+    - identifier: "NG"
   ▿ Country
-    - localeIdentifier: "ne"
-    - name: "Niger"
+    - identifier: "NU"
   ▿ Country
-    - localeIdentifier: "nf"
-    - name: "Norfolk Island"
+    - identifier: "NF"
   ▿ Country
-    - localeIdentifier: "ng"
-    - name: "Nigeria"
+    - identifier: "KP"
   ▿ Country
-    - localeIdentifier: "ni"
-    - name: "Nicaragua"
+    - identifier: "MK"
   ▿ Country
-    - localeIdentifier: "nl"
-    - name: "Netherlands"
+    - identifier: "MP"
   ▿ Country
-    - localeIdentifier: "no"
-    - name: "Norway"
+    - identifier: "NO"
   ▿ Country
-    - localeIdentifier: "np"
-    - name: "Nepal"
+    - identifier: "OM"
   ▿ Country
-    - localeIdentifier: "nr"
-    - name: "Nauru"
+    - identifier: "PK"
   ▿ Country
-    - localeIdentifier: "nu"
-    - name: "Niue"
+    - identifier: "PW"
   ▿ Country
-    - localeIdentifier: "nz"
-    - name: "New Zealand"
+    - identifier: "PS"
   ▿ Country
-    - localeIdentifier: "om"
-    - name: "Oman"
+    - identifier: "PA"
   ▿ Country
-    - localeIdentifier: "pa"
-    - name: "Panama"
+    - identifier: "PG"
   ▿ Country
-    - localeIdentifier: "pe"
-    - name: "Peru"
+    - identifier: "PY"
   ▿ Country
-    - localeIdentifier: "pf"
-    - name: "French Polynesia"
+    - identifier: "PE"
   ▿ Country
-    - localeIdentifier: "pg"
-    - name: "Papua New Guinea"
+    - identifier: "PH"
   ▿ Country
-    - localeIdentifier: "ph"
-    - name: "Philippines"
+    - identifier: "PN"
   ▿ Country
-    - localeIdentifier: "pk"
-    - name: "Pakistan"
+    - identifier: "PL"
   ▿ Country
-    - localeIdentifier: "pl"
-    - name: "Poland"
+    - identifier: "PT"
   ▿ Country
-    - localeIdentifier: "pm"
-    - name: "St. Pierre & Miquelon"
+    - identifier: "PR"
   ▿ Country
-    - localeIdentifier: "pn"
-    - name: "Pitcairn Islands"
+    - identifier: "QA"
   ▿ Country
-    - localeIdentifier: "pr"
-    - name: "Puerto Rico"
+    - identifier: "RE"
   ▿ Country
-    - localeIdentifier: "ps"
-    - name: "Palestinian Territories"
+    - identifier: "RO"
   ▿ Country
-    - localeIdentifier: "pt"
-    - name: "Portugal"
+    - identifier: "RU"
   ▿ Country
-    - localeIdentifier: "pw"
-    - name: "Palau"
+    - identifier: "RW"
   ▿ Country
-    - localeIdentifier: "py"
-    - name: "Paraguay"
+    - identifier: "WS"
   ▿ Country
-    - localeIdentifier: "qa"
-    - name: "Qatar"
+    - identifier: "SM"
   ▿ Country
-    - localeIdentifier: "re"
-    - name: "Réunion"
+    - identifier: "ST"
   ▿ Country
-    - localeIdentifier: "ro"
-    - name: "Romania"
+    - identifier: "SA"
   ▿ Country
-    - localeIdentifier: "rs"
-    - name: "Serbia"
+    - identifier: "SN"
   ▿ Country
-    - localeIdentifier: "ru"
-    - name: "Russia"
+    - identifier: "RS"
   ▿ Country
-    - localeIdentifier: "rw"
-    - name: "Rwanda"
+    - identifier: "SC"
   ▿ Country
-    - localeIdentifier: "sa"
-    - name: "Saudi Arabia"
+    - identifier: "SL"
   ▿ Country
-    - localeIdentifier: "sb"
-    - name: "Solomon Islands"
+    - identifier: "SG"
   ▿ Country
-    - localeIdentifier: "sc"
-    - name: "Seychelles"
+    - identifier: "SX"
   ▿ Country
-    - localeIdentifier: "sd"
-    - name: "Sudan"
+    - identifier: "SK"
   ▿ Country
-    - localeIdentifier: "se"
-    - name: "Sweden"
+    - identifier: "SI"
   ▿ Country
-    - localeIdentifier: "sg"
-    - name: "Singapore"
+    - identifier: "GS"
   ▿ Country
-    - localeIdentifier: "sh"
-    - name: "St. Helena"
+    - identifier: "SB"
   ▿ Country
-    - localeIdentifier: "si"
-    - name: "Slovenia"
+    - identifier: "SO"
   ▿ Country
-    - localeIdentifier: "sj"
-    - name: "Svalbard & Jan Mayen"
+    - identifier: "ZA"
   ▿ Country
-    - localeIdentifier: "sk"
-    - name: "Slovakia"
+    - identifier: "KR"
   ▿ Country
-    - localeIdentifier: "sl"
-    - name: "Sierra Leone"
+    - identifier: "SS"
   ▿ Country
-    - localeIdentifier: "sm"
-    - name: "San Marino"
+    - identifier: "ES"
   ▿ Country
-    - localeIdentifier: "sn"
-    - name: "Senegal"
+    - identifier: "LK"
   ▿ Country
-    - localeIdentifier: "so"
-    - name: "Somalia"
+    - identifier: "BL"
   ▿ Country
-    - localeIdentifier: "sr"
-    - name: "Suriname"
+    - identifier: "SH"
   ▿ Country
-    - localeIdentifier: "ss"
-    - name: "South Sudan"
+    - identifier: "KN"
   ▿ Country
-    - localeIdentifier: "st"
-    - name: "São Tomé & Príncipe"
+    - identifier: "LC"
   ▿ Country
-    - localeIdentifier: "sv"
-    - name: "El Salvador"
+    - identifier: "MF"
   ▿ Country
-    - localeIdentifier: "sx"
-    - name: "Sint Maarten"
+    - identifier: "PM"
   ▿ Country
-    - localeIdentifier: "sy"
-    - name: "Syria"
+    - identifier: "VC"
   ▿ Country
-    - localeIdentifier: "sz"
-    - name: "Eswatini"
+    - identifier: "SD"
   ▿ Country
-    - localeIdentifier: "tc"
-    - name: "Turks & Caicos Islands"
+    - identifier: "SR"
   ▿ Country
-    - localeIdentifier: "td"
-    - name: "Chad"
+    - identifier: "SJ"
   ▿ Country
-    - localeIdentifier: "tf"
-    - name: "French Southern Territories"
+    - identifier: "SE"
   ▿ Country
-    - localeIdentifier: "tg"
-    - name: "Togo"
+    - identifier: "CH"
   ▿ Country
-    - localeIdentifier: "th"
-    - name: "Thailand"
+    - identifier: "SY"
   ▿ Country
-    - localeIdentifier: "tj"
-    - name: "Tajikistan"
+    - identifier: "TW"
   ▿ Country
-    - localeIdentifier: "tk"
-    - name: "Tokelau"
+    - identifier: "TJ"
   ▿ Country
-    - localeIdentifier: "tl"
-    - name: "Timor-Leste"
+    - identifier: "TZ"
   ▿ Country
-    - localeIdentifier: "tm"
-    - name: "Turkmenistan"
+    - identifier: "TH"
   ▿ Country
-    - localeIdentifier: "tn"
-    - name: "Tunisia"
+    - identifier: "TL"
   ▿ Country
-    - localeIdentifier: "to"
-    - name: "Tonga"
+    - identifier: "TG"
   ▿ Country
-    - localeIdentifier: "tr"
-    - name: "Türkiye"
+    - identifier: "TK"
   ▿ Country
-    - localeIdentifier: "tt"
-    - name: "Trinidad & Tobago"
+    - identifier: "TO"
   ▿ Country
-    - localeIdentifier: "tv"
-    - name: "Tuvalu"
+    - identifier: "TT"
   ▿ Country
-    - localeIdentifier: "tw"
-    - name: "Taiwan (China)"
+    - identifier: "TN"
   ▿ Country
-    - localeIdentifier: "tz"
-    - name: "Tanzania"
+    - identifier: "TR"
   ▿ Country
-    - localeIdentifier: "ua"
-    - name: "Ukraine"
+    - identifier: "TM"
   ▿ Country
-    - localeIdentifier: "ug"
-    - name: "Uganda"
+    - identifier: "TC"
   ▿ Country
-    - localeIdentifier: "um"
-    - name: "U.S. Outlying Islands"
+    - identifier: "TV"
   ▿ Country
-    - localeIdentifier: "us"
-    - name: "United States"
+    - identifier: "UM"
   ▿ Country
-    - localeIdentifier: "uy"
-    - name: "Uruguay"
+    - identifier: "VI"
   ▿ Country
-    - localeIdentifier: "uz"
-    - name: "Uzbekistan"
+    - identifier: "UG"
   ▿ Country
-    - localeIdentifier: "va"
-    - name: "Vatican City"
+    - identifier: "UA"
   ▿ Country
-    - localeIdentifier: "vc"
-    - name: "St. Vincent & Grenadines"
+    - identifier: "AE"
   ▿ Country
-    - localeIdentifier: "ve"
-    - name: "Venezuela"
+    - identifier: "GB"
   ▿ Country
-    - localeIdentifier: "vg"
-    - name: "British Virgin Islands"
+    - identifier: "US"
   ▿ Country
-    - localeIdentifier: "vi"
-    - name: "U.S. Virgin Islands"
+    - identifier: "UY"
   ▿ Country
-    - localeIdentifier: "vn"
-    - name: "Vietnam"
+    - identifier: "UZ"
   ▿ Country
-    - localeIdentifier: "vu"
-    - name: "Vanuatu"
+    - identifier: "VU"
   ▿ Country
-    - localeIdentifier: "wf"
-    - name: "Wallis & Futuna"
+    - identifier: "VA"
   ▿ Country
-    - localeIdentifier: "ws"
-    - name: "Samoa"
+    - identifier: "VE"
   ▿ Country
-    - localeIdentifier: "xk"
-    - name: "Kosovo"
+    - identifier: "VN"
   ▿ Country
-    - localeIdentifier: "ye"
-    - name: "Yemen"
+    - identifier: "WF"
   ▿ Country
-    - localeIdentifier: "yt"
-    - name: "Mayotte"
+    - identifier: "EH"
   ▿ Country
-    - localeIdentifier: "za"
-    - name: "South Africa"
+    - identifier: "YE"
   ▿ Country
-    - localeIdentifier: "zm"
-    - name: "Zambia"
+    - identifier: "ZM"
   ▿ Country
-    - localeIdentifier: "zw"
-    - name: "Zimbabwe"
+    - identifier: "ZW"
