@@ -6,6 +6,7 @@ public extension CFProject {
     static let capeBocce = CFProject.default(
         name: "CapeBocce",
         targets: [
+            .apiClients,
             .bracketModel,
             .capeBocceApp,
             .countryKit,
