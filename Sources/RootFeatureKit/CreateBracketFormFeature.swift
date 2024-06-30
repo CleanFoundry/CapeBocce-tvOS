@@ -6,9 +6,24 @@ import ComposableArchitecture
     @ObservableState public struct State {
 
         public var name: String
+        public var selectedParticipants: IdentifiedArrayOf<Participant> = [
+            Participant(name: "Connor"),
+            Participant(name: "Kelly"),
+        ]
 
         @Shared(.fileStorage(.recentParticipantsStorageURL))
-        public var recentParticipants: IdentifiedArrayOf<Participant> = []
+        public var recentParticipants: IdentifiedArrayOf<Participant> = [
+            Participant(name: "Connor"),
+            Participant(name: "Drake"),
+            Participant(name: "Kelly"),
+            Participant(name: "Liam"),
+        ]
+
+        public var filteredRecentParticipants: IdentifiedArrayOf<Participant> {
+            recentParticipants.filter { participant in
+                !selectedParticipants.contains(participant)
+            }
+        }
 
         public init(
             name: String

@@ -14,6 +14,7 @@ public struct CreateBracketFormFeatureView: View {
         Form {
             bracketNameSection
             participantsSection
+            addPastParticipantsSection
         }
     }
 
@@ -26,11 +27,44 @@ private extension CreateBracketFormFeatureView {
             TextField("Bracket Name", text: $store.name)
         }
     }
+
     var participantsSection: some View {
         Section("Participants") {
-            ForEach(store.recentParticipants) { participant in
-                Text(participant.name)
+            if store.selectedParticipants.isEmpty {
+                HStack {
+                    Spacer()
+                    ContentUnavailableView(
+                        "No participants yet",
+                        systemImage: "person.3"
+                    )
+                    Spacer()
+                }
+                .listRowBackground(Color.clear)
+            } else {
+                ForEach(store.selectedParticipants) { participant in
+                    Button(participant.name) {
+
+                    }
+                }
             }
+            Button(
+                "Add New Participant",
+                systemImage: "person.badge.plus"
+            ) {
+            }
+            .buttonStyle(.borderedProminent)
+        }
+    }
+
+    var addPastParticipantsSection: some View {
+        Section {
+            ForEach(store.filteredRecentParticipants) { participant in
+                Button(participant.name) {
+
+                }
+            }
+        } header: {
+            Text("Add Past Participants")
         }
     }
 
