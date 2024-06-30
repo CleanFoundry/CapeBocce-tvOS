@@ -64,16 +64,18 @@ private extension CreateBracketFormFeatureView {
                 Button {
 
                 } label: {
-                    Label {
-                        Text(participant.name)
-                            .font(.headline)
-                    } icon: {
+                    HStack(alignment: .center, spacing: 12) {
                         participant.country.bundleAsset
                             .resizable()
                             .frame(width: 300, height: 150, alignment: .trailing)
+                            .shadow(radius: 18)
                             .padding()
+                        VStack(alignment: .leading) {
+                            Text(participant.name)
+                                .font(.title)
+                            Text(participant.country.name)
+                        }
                     }
-
                 }
             }
         } header: {
