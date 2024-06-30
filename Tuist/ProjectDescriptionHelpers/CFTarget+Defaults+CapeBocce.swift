@@ -36,14 +36,16 @@ public extension CFTarget.Default.CapeBocce {
     func framework(
         name: CFTarget.Name,
         internalDependencies: [CFTarget.Name],
-        externalDependencies: [CFExternalTargetName]
+        externalDependencies: [CFExternalTargetName],
+        includeResources: Bool = false
     ) -> CFTarget {
         .default.framework(
             name: name,
             destinations: [.tvOS],
             internalDependencies: internalDependencies,
             externalDependencies: externalDependencies,
-            deploymentTarget: .tvOSDefault()
+            deploymentTarget: .tvOSDefault(),
+            includeResources: includeResources
         )
     }
 
