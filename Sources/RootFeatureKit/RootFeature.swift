@@ -7,7 +7,10 @@ import ComposableArchitecture
 
         @Shared(.fileStorage(.bracketsStorageURL)) var brackets: IdentifiedArrayOf<Bracket> = []
 
+        public var createBracket: CreateBracketFeature.State?
+
         public init() {
+
         }
 
     }
