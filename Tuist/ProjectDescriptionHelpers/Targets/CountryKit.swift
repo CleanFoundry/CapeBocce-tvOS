@@ -17,7 +17,9 @@ public extension CFTarget {
     static let countryKitTests = CFTarget.default.capeBocce.frameworkUnitTests(
         testing: .countryKit,
         internalDependencies: [],
-        externalDependencies: []
+        externalDependencies: [
+            .snapshotTesting,
+        ]
     )
 
 }
