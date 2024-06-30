@@ -22,6 +22,11 @@ public struct RootFeatureView: View {
             }
             .navigationTitle("Cape Bocce")
         }
+        .sheet(
+            item: $store.scope(state: \.createBracket, action: \.createBracket)
+        ) { foo in
+            Text("Create")
+        }
     }
 }
 
