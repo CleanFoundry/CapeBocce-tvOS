@@ -7,6 +7,7 @@ final class CountryLoadingTests: XCTestCase {
     func testLoadedCountries() {
         let countries = Country.load()
         assertSnapshot(of: countries, as: .dump, record: true)
+        XCTAssertEqual(countries.count, 250)
     }
 
 }
