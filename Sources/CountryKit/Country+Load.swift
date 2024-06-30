@@ -21,7 +21,7 @@ public extension Country {
                     }
 
                     return Country(
-                        identifier: identifier
+                        id: identifier
                     )
                 }
                 .sorted(using: KeyPathComparator(\.name))

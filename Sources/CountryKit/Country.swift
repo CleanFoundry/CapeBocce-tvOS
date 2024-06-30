@@ -1,31 +1,27 @@
 import Foundation
 import SwiftUI
 
-public struct Country {
+public struct Country: Identifiable {
 
-    public let identifier: String
+    public let id: String
 
-    public init(identifier: String) {
-        self.identifier = identifier
+    public init(id: String) {
+        self.id = id
     }
 
 }
 
 public extension Country {
 
-    var bundleAssetName: String {
-        identifier.lowercased()
-    }
-
     var bundleAsset: Image {
         Image(
-            bundleAssetName,
+            id.lowercased(),
             bundle: .module
         )
     }
 
     var name: String {
-        Locale.current.localizedString(forRegionCode: identifier)!
+        Locale.current.localizedString(forRegionCode: id)!
     }
 
 }
