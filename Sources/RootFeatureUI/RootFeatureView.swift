@@ -23,15 +23,12 @@ public struct RootFeatureView: View {
             .navigationTitle("Cape Bocce")
         }
         .sheet(
-            item: $store.scope(state: \.createBracket, action: \.createBracket)
-        ) { foo in
-            Text("Create")
+            item: $store.scope(
+                state: \.createBracketForm,
+                action: \.createBracketForm
+            )
+        ) { store in
+            CreateBracketFormFeatureView(store: store)
         }
     }
 }
-
-//struct RootFeatureView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        RootFeatureView()
-//    }
-//}

@@ -1,6 +1,6 @@
 import ComposableArchitecture
 
-@Reducer public struct CreateBracketFeature {
+@Reducer public struct CreateBracketFormFeature {
 
     public struct State {
 

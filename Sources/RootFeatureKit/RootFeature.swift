@@ -7,7 +7,7 @@ import ComposableArchitecture
 
         @Shared(.fileStorage(.bracketsStorageURL)) var brackets: IdentifiedArrayOf<Bracket> = []
 
-        @Presents public var createBracket: CreateBracketFeature.State?
+        @Presents public var createBracketForm: CreateBracketFormFeature.State?
 
         public init() {
 
@@ -18,7 +18,7 @@ import ComposableArchitecture
     public enum Action {
 
         case tappedCreateBracket
-        case createBracket(PresentationAction<CreateBracketFeature.Action>)
+        case createBracketForm(PresentationAction<CreateBracketFormFeature.Action>)
 
     }
 
@@ -28,17 +28,17 @@ import ComposableArchitecture
         Reduce { state, action in
             switch action {
             case .tappedCreateBracket:
-                state.createBracket = .init()
+                state.createBracketForm = .init()
                 return .none
-            case .createBracket:
+            case .createBracketForm:
                 return .none
             }
         }
         EmptyReducer()
             .ifLet(
-                \.$createBracket,
-                 action: \.createBracket,
-                 destination: CreateBracketFeature.init
+                \.$createBracketForm,
+                 action: \.createBracketForm,
+                 destination: CreateBracketFormFeature.init
             )
     }
 
