@@ -4,8 +4,17 @@ public struct RootFeatureView: View {
     public init() {}
 
     public var body: some View {
-        Text("Hello, World!")
-            .padding()
+        NavigationStack {
+            VStack {
+                Button("Create Bracket") {
+
+                }
+                Button("View All Brackets") {
+
+                }
+            }
+            .navigationTitle("Cape Bocce")
+        }
     }
 }
 
