@@ -8,6 +8,8 @@ public extension CFProject {
         targets: [
             .bracketModel,
             .capeBocceApp,
+            .createBracketFormFeatureKit,
+            .createBracketFormFeatureUI,
             .rootFeatureKit,
             .rootFeatureUI,
         ],

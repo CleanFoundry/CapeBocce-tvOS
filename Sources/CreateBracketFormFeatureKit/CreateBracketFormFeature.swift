@@ -37,6 +37,8 @@ import ComposableArchitecture
         case binding(BindingAction<CreateBracketFormFeature.State>)
     }
 
+    public init() { }
+
     public var body: some ReducerOf<Self> {
         BindingReducer()
     }
