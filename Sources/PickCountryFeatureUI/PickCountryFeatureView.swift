@@ -13,11 +13,26 @@ public struct PickCountryFeatureView: View {
 
     public var body: some View {
         NavigationStack {
-            Form {
-                ForEach(Country.load()) { county in
+            List {
+                ForEach(store.availableCountries) { country in
+                    Button {
 
+                    } label: {
+                        HStack(alignment: .center, spacing: 12) {
+                            country.bundleAsset
+                                .resizable()
+                                .frame(width: 300, height: 150, alignment: .trailing)
+                                .shadow(radius: 18)
+                                .padding()
+                            VStack(alignment: .leading) {
+                                Text(country.name)
+                                    .font(.title)
+                            }
+                        }
+                    }
                 }
             }
+            .searchable(text: $store.searchText)
             .navigationTitle(store.title)
         }
     }
