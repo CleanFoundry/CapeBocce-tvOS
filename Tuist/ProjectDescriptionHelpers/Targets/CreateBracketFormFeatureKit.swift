@@ -11,10 +11,11 @@ public extension CFTarget {
         name: .createBracketFormFeatureKit,
         internalDependencies: [
             .apiClients,
-            .bracketModel,
+            .apiExtensions,
             .pickCountryFeatureKit,
         ],
         externalDependencies: [
+            .api,
             .composableArchitecture,
         ]
     )

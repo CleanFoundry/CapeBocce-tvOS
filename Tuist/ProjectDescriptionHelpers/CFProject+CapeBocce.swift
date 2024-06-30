@@ -7,7 +7,7 @@ public extension CFProject {
         name: "CapeBocce",
         targets: [
             .apiClients,
-            .bracketModel,
+            .apiExtensions,
             .capeBocceApp,
             .countryKit,
             .countryKitTests,
