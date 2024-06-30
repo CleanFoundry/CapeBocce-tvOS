@@ -2,9 +2,19 @@ import ComposableArchitecture
 
 @Reducer public struct PickCountryFeature {
 
-    public struct State {
+    @ObservableState public struct State {
 
-        public init() { }
+        public let title: String
+
+        public init(
+            title: String
+        ) {
+            self.title = title
+        }
+
+    }
+
+    public enum Action {
 
     }
 

@@ -43,12 +43,11 @@ import Foundation
                 return .none
             }
         }
-        EmptyReducer()
-            .ifLet(
-                \.$createBracketForm,
-                 action: \.createBracketForm,
-                 destination: CreateBracketFormFeature.init
-            )
+        .ifLet(
+            \.$createBracketForm,
+             action: \.createBracketForm,
+             destination: CreateBracketFormFeature.init
+        )
     }
 
 }

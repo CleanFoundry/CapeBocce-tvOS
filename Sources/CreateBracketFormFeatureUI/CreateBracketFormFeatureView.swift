@@ -1,5 +1,6 @@
 import ComposableArchitecture
 import CreateBracketFormFeatureKit
+import PickCountryFeatureUI
 import SwiftUI
 
 public struct CreateBracketFormFeatureView: View {
@@ -18,6 +19,14 @@ public struct CreateBracketFormFeatureView: View {
             if !store.unselectedRecentParticipants.isEmpty {
                 addRecentParticipantsSection
             }
+        }
+        .sheet(
+            item: $store.scope(
+                state: \.addNewParticipantPickCountry,
+                action: \.pickCountry
+            )
+        ) { store in
+            PickCountryFeatureView(store: store)
         }
     }
 
@@ -59,9 +68,10 @@ private extension CreateBracketFormFeatureView {
                 "Add New Participant",
                 systemImage: "person.badge.plus"
             ) {
+                store.send(.tappedAddParticipant)
             }
             .buttonStyle(.borderedProminent)
-            .withoutTVOSFormStyling()
+//            .withoutTVOSFormStyling()
         }
     }
 

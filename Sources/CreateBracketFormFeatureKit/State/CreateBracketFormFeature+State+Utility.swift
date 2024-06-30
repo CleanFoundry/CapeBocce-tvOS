@@ -1,5 +1,6 @@
 import BracketModel
 import ComposableArchitecture
+import Foundation
 
 public extension CreateBracketFormFeature.State {
 
@@ -7,6 +8,13 @@ public extension CreateBracketFormFeature.State {
         recentParticipants.filter { participant in
             !selectedParticipants.contains(participant)
         }
+    }
+
+    var sanitizedAddParticipantName: String {
+        let excluded: CharacterSet = .whitespacesAndNewlines
+            .union(.illegalCharacters)
+            .union(["\u{FFFC}"])
+        return addNewParticipantName.trimmingCharacters(in: excluded)
     }
 
 }
