@@ -15,7 +15,9 @@ public struct CreateBracketFormFeatureView: View {
         Form {
             bracketNameSection
             participantsSection
-            addPastParticipantsSection
+            if !store.unselectedRecentParticipants.isEmpty {
+                addRecentParticipantsSection
+            }
         }
     }
 
@@ -54,9 +56,9 @@ private extension CreateBracketFormFeatureView {
         }
     }
 
-    var addPastParticipantsSection: some View {
+    var addRecentParticipantsSection: some View {
         Section {
-            ForEach(store.filteredRecentParticipants) { participant in
+            ForEach(store.unselectedRecentParticipants) { participant in
                 Button(participant.name) {
 
                 }

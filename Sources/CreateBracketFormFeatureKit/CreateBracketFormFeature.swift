@@ -16,12 +16,6 @@ import ComposableArchitecture
             Participant(name: "Liam"),
         ]
 
-        public var filteredRecentParticipants: IdentifiedArrayOf<Participant> {
-            recentParticipants.filter { participant in
-                !selectedParticipants.contains(participant)
-            }
-        }
-
         public init(
             name: String
         ) {
