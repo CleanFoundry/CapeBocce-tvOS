@@ -7,18 +7,11 @@ public extension CFTarget.Name {
 
 public extension CFTarget {
 
-    static let capeBocceApp = CFTarget.defaultApp(
+    static let capeBocceApp = CFTarget.default.capeBocce.app(
         name: .capeBocceApp,
-        destinations: [.tvOS],
-        infoPlist: .extendingDefault([
-            "UILaunchStoryboardName": "LaunchScreen.storyboard",
-        ]),
-        internalDependencies: [],
-        externalDependencies: [],
-        deploymentTarget: .tvOSDefault(),
-        settings: [
-            "DEVELOPMENT_TEAM": "QHJFG75NY8",
-            "OTHER_LDFLAGS": "$(inherited) -ObjC",
+        internalDependencies: [
+            .rootFeatureKit,
+            .rootFeatureUI,
         ]
     )
 

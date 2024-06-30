@@ -7,6 +7,8 @@ public extension CFProject {
         name: "CapeBocce",
         targets: [
             .capeBocceApp,
+            .rootFeatureKit,
+            .rootFeatureUI,
         ],
         additionalFiles: []
     )

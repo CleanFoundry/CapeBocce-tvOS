@@ -6,7 +6,7 @@ let config = Config(
     plugins: [
         .git(
             url: "git@github.com:CleanFoundry/cf-tuist-helpers.git",
-            tag: Version(0, 0, 10).description
+            tag: Version(0, 0, 12).description
         )
     ]
 )
