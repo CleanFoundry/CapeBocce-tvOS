@@ -21,6 +21,14 @@ public struct CreateBracketFormFeatureView: View {
                 if !store.unselectedRecentParticipants.isEmpty {
                     addRecentParticipantsSection
                 }
+                Button(
+                    "Start Bracket",
+                    systemImage: "figure.bowling"
+                ) {
+                }
+                .font(.title)
+                .buttonStyle(.borderedProminent)
+                .withoutTVOSFormStyling()
             }
             .navigationTitle("Create Bracket")
             .sheet(
