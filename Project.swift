@@ -15,7 +15,11 @@ let project = Project(
             ),
             sources: ["CapeBocce/Sources/**"],
             resources: ["CapeBocce/Resources/**"],
-            dependencies: []
+            dependencies: [],
+            settings: .settings(base: [
+                "DEVELOPMENT_TEAM": "QHJFG75NY8",
+                "OTHER_LDFLAGS": "$(inherited) -ObjC",
+            ])
         ),
         .target(
             name: "CapeBocceTests",
