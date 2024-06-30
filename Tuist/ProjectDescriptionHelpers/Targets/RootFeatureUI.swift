@@ -11,7 +11,8 @@ public extension CFTarget {
         name: .rootFeatureUI,
         internalDependencies: [
             .rootFeatureKit,
-        ]
+        ],
+        externalDependencies: []
     )
 
 }
