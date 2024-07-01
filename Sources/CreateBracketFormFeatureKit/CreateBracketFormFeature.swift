@@ -37,6 +37,7 @@ import PickCountryFeatureKit
         case tappedUpdateCountry(Participant)
         case tappedDeleteParticipant(Participant)
         case tappedAddAllRecentParticipants
+        case tappedStartBracket
     }
 
     @Dependency(\.getRecentParticipantsAPIClient) var getRecentParticipantsAPIClient
@@ -48,10 +49,14 @@ import PickCountryFeatureKit
         Reduce { state, action in
             switch action {
             case .didAppear:
-                return .run { send in
-                    let participants = try await getRecentParticipantsAPIClient
-                        .get().recentParticipants
-                    await send(.loadedRecentParticipants(participants))
+                if state.recentParticipants == nil {
+                    return .run { send in
+                        let participants = try await getRecentParticipantsAPIClient
+                            .get().recentParticipants
+                        await send(.loadedRecentParticipants(participants))
+                    }
+                } else {
+                    return .none
                 }
             case let .loadedRecentParticipants(participants):
                 state.recentParticipants = .init(uniqueElements: participants)
@@ -115,11 +120,12 @@ import PickCountryFeatureKit
                 return .none
             case .tappedAddAllRecentParticipants:
                 state.selectedParticipants.append(
-                    contentsOf: state.unselectedRecentParticipants
+                    contentsOf: state.unselectedRecentParticipants!
                 )
                 return .none
             case .binding,
-                    .pickCountry:
+                    .pickCountry,
+                    .tappedStartBracket:
                 return .none
             }
         }

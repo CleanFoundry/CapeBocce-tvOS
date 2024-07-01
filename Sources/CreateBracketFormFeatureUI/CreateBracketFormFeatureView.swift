@@ -18,17 +18,15 @@ public struct CreateBracketFormFeatureView: View {
                 bracketNameSection
                 participantsSection
                 addNewParticipantSection
-                if !store.unselectedRecentParticipants.isEmpty {
-                    addRecentParticipantsSection
+                if let recentParticipants = store.unselectedRecentParticipants {
+                    if !recentParticipants.isEmpty {
+                        addRecentParticipantsSection(participants: recentParticipants)
+                    }
+                    startButton
+                } else {
+                    ProgressView()
+                        .withoutTVOSFormStyling()
                 }
-                Button(
-                    "Start Bracket",
-                    systemImage: "figure.bowling"
-                ) {
-                }
-                .font(.title)
-                .buttonStyle(.borderedProminent)
-                .withoutTVOSFormStyling()
             }
             .navigationTitle("Create Bracket")
             .sheet(
@@ -95,9 +93,11 @@ private extension CreateBracketFormFeatureView {
         }
     }
 
-    var addRecentParticipantsSection: some View {
+    func addRecentParticipantsSection(
+        participants: IdentifiedArrayOf<Participant>
+    ) -> some View {
         Section {
-            ForEach(store.unselectedRecentParticipants) { participant in
+            ForEach(participants) { participant in
                 ParticipantButton(participant: participant) {
                     Button("Add to bracket", systemImage: "plus.circle") {
                         store.send(.addedRecentParticipant(participant))
@@ -121,6 +121,18 @@ private extension CreateBracketFormFeatureView {
         } header: {
             Text("Add Recent Participant")
         }
+    }
+
+    var startButton: some View {
+        Button(
+            "Start Bracket",
+            systemImage: "figure.bowling"
+        ) {
+            store.send(.tappedStartBracket)
+        }
+        .font(.title)
+        .buttonStyle(.borderedProminent)
+        .withoutTVOSFormStyling()
     }
 
 }
