@@ -124,19 +124,23 @@ private extension CreateBracketFormFeatureView {
     }
 
     var startButton: some View {
-        Button(
-            "Start Bracket",
-            systemImage: "figure.bowling"
-        ) {
-            store.send(
-                .tappedStartBracket(
-                    store.selectedParticipants.elements,
-                    store.bracketName
+        VStack {
+            Button(
+                "Start Bracket",
+                systemImage: "figure.bowling"
+            ) {
+                store.send(
+                    .tappedStartBracket(
+                        store.selectedParticipants.elements,
+                        store.bracketName
+                    )
                 )
-            )
+            }
+            .font(.title)
+            .buttonStyle(.borderedProminent)
+            Text("_\(store.selectedParticipants.count) participants_")
+                .font(.footnote)
         }
-        .font(.title)
-        .buttonStyle(.borderedProminent)
         .withoutTVOSFormStyling()
     }
 

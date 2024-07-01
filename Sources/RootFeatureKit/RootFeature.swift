@@ -20,6 +20,7 @@ import Foundation
     public enum Action {
 
         case tappedCreateBracket
+        case startedBracket(Bracket)
         case destination(PresentationAction<DestinationFeature.Action>)
 
     }
@@ -41,14 +42,21 @@ import Foundation
                 .tappedStartBracket(participants, name)
             ))):
                 return .run { send in
-                    let value = try await startBracketAPIClient.start(
+                    let response = try await startBracketAPIClient.start(
                         .init(
                             name: name,
                             participants: participants
                         )
                     )
-                    print("Response: \(value)")
+                    await send(.startedBracket(response.bracket))
                 }
+            case let .startedBracket(bracket):
+                state.destination = .bracket(
+                    .init(
+                        bracket: bracket
+                    )
+                )
+                return .none
             case .destination:
                 return .none
             }
