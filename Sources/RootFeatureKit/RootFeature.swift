@@ -37,9 +37,14 @@ import Foundation
                     bracketName: defaultBracketName.create()
                 )
                 return .none
-            case let .createBracketForm(.presented(.tappedStartBracket(content))):
+            case let .createBracketForm(.presented(.tappedStartBracket(participants, name))):
                 return .run { send in
-                    let value = try await startBracketAPIClient.start(.init(participants: content))
+                    let value = try await startBracketAPIClient.start(
+                        .init(
+                            name: name,
+                            participants: participants
+                        )
+                    )
                     print("Response: \(value)")
                 }
             case .createBracketForm:

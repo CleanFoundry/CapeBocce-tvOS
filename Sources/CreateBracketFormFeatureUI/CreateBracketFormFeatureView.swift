@@ -128,7 +128,12 @@ private extension CreateBracketFormFeatureView {
             "Start Bracket",
             systemImage: "figure.bowling"
         ) {
-            store.send(.tappedStartBracket(store.selectedParticipants.elements))
+            store.send(
+                .tappedStartBracket(
+                    store.selectedParticipants.elements,
+                    store.sanitizedAddParticipantName
+                )
+            )
         }
         .font(.title)
         .buttonStyle(.borderedProminent)
