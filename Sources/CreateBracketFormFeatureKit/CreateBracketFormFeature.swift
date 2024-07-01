@@ -37,7 +37,7 @@ import PickCountryFeatureKit
         case tappedUpdateCountry(Participant)
         case tappedDeleteParticipant(Participant)
         case tappedAddAllRecentParticipants
-        case tappedStartBracket
+        case tappedStartBracket([Participant])
     }
 
     @Dependency(\.getRecentParticipantsAPIClient) var getRecentParticipantsAPIClient

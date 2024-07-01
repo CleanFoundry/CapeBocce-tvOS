@@ -25,6 +25,7 @@ import Foundation
     }
 
     @Dependency(\.defaultBracketName) var defaultBracketName
+    @Dependency(\.startBracketAPIClient) var startBracketAPIClient
 
     public init() { }
 
@@ -36,6 +37,11 @@ import Foundation
                     bracketName: defaultBracketName.create()
                 )
                 return .none
+            case let .createBracketForm(.presented(.tappedStartBracket(content))):
+                return .run { send in
+                    let value = try await startBracketAPIClient.start(.init(participants: content))
+                    print("Response: \(value)")
+                }
             case .createBracketForm:
                 return .none
             }
