@@ -28,7 +28,7 @@ import PickCountryFeatureKit
 
     public enum Action: BindableAction {
         case didAppear
-        case loadedRecentParticipants([Participant])
+        case loadedRecentParticipants(IdentifiedArrayOf<Participant>)
         case binding(BindingAction<CreateBracketFormFeature.State>)
         case submittedAddParticipant
         case pickCountry(PresentationAction<PickCountryFeature.Action>)
