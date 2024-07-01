@@ -4,7 +4,7 @@ import Foundation
 import URLRouting
 
 public let genericAPIRouter: some Router<EndpointRoute> = EndpointRouter.default
-    .baseURL("https://silent-dolls-enjoy.loca.lt/")
+    .baseURL("https://puny-ants-burn.loca.lt")
 
 public let genericAPIClient = GenericAPIClient(
     router: genericAPIRouter
