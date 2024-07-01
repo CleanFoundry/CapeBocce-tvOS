@@ -25,8 +25,8 @@ public struct RootFeatureView: View {
         }
         .sheet(
             item: $store.scope(
-                state: \.createBracketForm,
-                action: \.createBracketForm
+                state: \.destination?.createBracket,
+                action: \.destination.createBracket
             )
         ) { store in
             CreateBracketFormFeatureView(store: store)

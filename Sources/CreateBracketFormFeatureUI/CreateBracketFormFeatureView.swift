@@ -131,7 +131,7 @@ private extension CreateBracketFormFeatureView {
             store.send(
                 .tappedStartBracket(
                     store.selectedParticipants.elements,
-                    store.sanitizedAddParticipantName
+                    store.bracketName
                 )
             )
         }

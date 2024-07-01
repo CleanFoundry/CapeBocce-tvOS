@@ -7,12 +7,12 @@ import Foundation
 
     @ObservableState public struct State {
 
-        @Presents public var createBracketForm: CreateBracketFormFeature.State?
+        @Presents public var destination: DestinationFeature.State?
 
         public init(
-            createBracketForm: CreateBracketFormFeature.State? = nil
+            destination: DestinationFeature.State? = nil
         ) {
-            self.createBracketForm = createBracketForm
+            self.destination = destination
         }
 
     }
@@ -20,7 +20,7 @@ import Foundation
     public enum Action {
 
         case tappedCreateBracket
-        case createBracketForm(PresentationAction<CreateBracketFormFeature.Action>)
+        case destination(PresentationAction<DestinationFeature.Action>)
 
     }
 
@@ -33,11 +33,13 @@ import Foundation
         Reduce { state, action in
             switch action {
             case .tappedCreateBracket:
-                state.createBracketForm = .init(
+                state.destination = .createBracket(.init(
                     bracketName: defaultBracketName.create()
-                )
+                ))
                 return .none
-            case let .createBracketForm(.presented(.tappedStartBracket(participants, name))):
+            case let .destination(.presented(.createBracket(
+                .tappedStartBracket(participants, name)
+            ))):
                 return .run { send in
                     let value = try await startBracketAPIClient.start(
                         .init(
@@ -47,14 +49,13 @@ import Foundation
                     )
                     print("Response: \(value)")
                 }
-            case .createBracketForm:
+            case .destination:
                 return .none
             }
         }
         .ifLet(
-            \.$createBracketForm,
-             action: \.createBracketForm,
-             destination: CreateBracketFormFeature.init
+            \.$destination,
+             action: \.destination
         )
     }
 
