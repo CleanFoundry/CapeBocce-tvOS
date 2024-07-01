@@ -8,6 +8,8 @@ public extension CFProject {
         targets: [
             .apiClients,
             .apiExtensions,
+            .bracketFeatureKit,
+            .bracketFeatureUI,
             .capeBocceApp,
             .countryKit,
             .countryKitTests,
