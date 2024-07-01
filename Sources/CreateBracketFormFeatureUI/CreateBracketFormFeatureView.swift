@@ -1,4 +1,4 @@
-import BracketModel
+import API
 import ComposableArchitecture
 import CreateBracketFormFeatureKit
 import PickCountryFeatureUI
@@ -39,6 +39,9 @@ public struct CreateBracketFormFeatureView: View {
             ) { store in
                 PickCountryFeatureView(store: store)
             }
+        }
+        .task {
+            store.send(.didAppear)
         }
     }
 

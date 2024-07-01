@@ -1,13 +1,14 @@
-import BracketModel
+import API
+import APIExtensions
 import ComposableArchitecture
 import Foundation
 
 public extension CreateBracketFormFeature.State {
 
     var unselectedRecentParticipants: IdentifiedArrayOf<Participant> {
-        recentParticipants.filter { participant in
+        recentParticipants?.filter { participant in
             !selectedParticipants.contains(participant)
-        }
+        } ?? []
     }
 
     var sanitizedAddParticipantName: String {

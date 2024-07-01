@@ -22,6 +22,9 @@ public extension CFTarget.Default.CapeBocce {
             destinations: [.tvOS],
             infoPlist: .extendingDefault([
                 "UILaunchStoryboardName": "LaunchScreen.storyboard",
+                "NSAppTransportSecurity": [
+                    "NSAllowsArbitraryLoads": true
+                ],
             ]),
             internalDependencies: internalDependencies,
             externalDependencies: externalDependencies,

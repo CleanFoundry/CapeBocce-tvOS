@@ -4,7 +4,7 @@ import Foundation
 import URLRouting
 
 public let genericAPIRouter: some Router<EndpointRoute> = EndpointRouter.default
-    .baseURL("http://Connors-21-Macbook-Pro.local:8080/")
+    .baseURL("https://silent-dolls-enjoy.loca.lt/")
 
 public let genericAPIClient = GenericAPIClient(
     router: genericAPIRouter

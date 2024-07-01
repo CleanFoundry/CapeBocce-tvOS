@@ -33,8 +33,10 @@ public extension GenericAPIClient {
     func fetch<Response: Decodable>(route: Route) async throws -> Response {
         try await maybeArtificialSleep(route: route)
 
+        let request = try router.request(for: route)
         let data = try await URLSession.shared
-            .data(for: router.request(for: route)).0
+            .data(for: request).0
+
         return try JSONDecoder.api.decode(Response.self, from: data)
     }
 
