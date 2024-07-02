@@ -20,7 +20,9 @@ public struct BracketFeatureView: View {
                             .background(.blue)
                     }
                 }
+                .frame(maxWidth: .infinity)
             }
+            .background(Color.purple)
             .navigationTitle(store.bracket.name)
         }
     }
