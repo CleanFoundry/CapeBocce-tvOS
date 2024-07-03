@@ -5,7 +5,7 @@ import GenericAPIClient
 
 @DependencyClient public struct GetAllBracketsAPIClient {
 
-    public var get: () async throws -> StartBracketResponse
+    public var get: () async throws -> GetAllBracketsResponse
 
 }
 

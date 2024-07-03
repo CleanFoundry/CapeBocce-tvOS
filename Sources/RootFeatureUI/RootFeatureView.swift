@@ -19,7 +19,7 @@ public struct RootFeatureView: View {
                     store.send(.tappedCreateBracket)
                 }
                 Button("View All Brackets") {
-
+                    store.send(.tappedViewAllBrackets)
                 }
             }
             .navigationTitle("Cape Bocce")

@@ -20,18 +20,23 @@ import Foundation
     public enum Action {
 
         case tappedCreateBracket
+        case tappedViewAllBrackets
         case startedBracket(Bracket)
+        case loadedAllBrackets(IdentifiedArrayOf<Bracket>)
         case destination(PresentationAction<DestinationFeature.Action>)
 
     }
 
     @Dependency(\.defaultBracketName) var defaultBracketName
     @Dependency(\.startBracketAPIClient) var startBracketAPIClient
+    @Dependency(\.getAllBracketsAPIClient) var getAllBracketsAPIClient
 
     public init() { }
 
     public var body: some ReducerOf<Self> {
-        Reduce { state, action in
+        Reduce {
+            state,
+            action in
             switch action {
             case .tappedCreateBracket:
                 state.destination = .createBracket(.init(
@@ -54,6 +59,18 @@ import Foundation
                 state.destination = .bracket(
                     .init(
                         bracket: bracket
+                    )
+                )
+                return .none
+            case .tappedViewAllBrackets:
+                return .run { send in
+                    let response = try await getAllBracketsAPIClient.get()
+                    await send(.loadedAllBrackets(response.brackets))
+                }
+            case let .loadedAllBrackets(brackets):
+                state.destination = .allBrackets(
+                    .init(
+                        brackets: brackets
                     )
                 )
                 return .none
