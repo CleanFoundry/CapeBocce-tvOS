@@ -13,6 +13,10 @@ import ComposableArchitecture
         }
     }
 
+    public enum Action {
+        case tappedBracket(Bracket)
+    }
+
     public init() { }
 
 }

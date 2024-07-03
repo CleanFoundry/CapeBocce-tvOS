@@ -14,7 +14,7 @@ public struct AllBracketsFeatureView: View {
         NavigationStack {
             List(store.brackets) { bracket in
                 Button(bracket.name) {
-
+                    store.send(.tappedBracket(bracket))
                 }
             }
             .navigationTitle("All Brackets (\(store.brackets.count))")

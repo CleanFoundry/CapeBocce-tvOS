@@ -55,7 +55,11 @@ import Foundation
                     )
                     await send(.startedBracket(response.bracket))
                 }
-            case let .startedBracket(bracket):
+            case
+                let .startedBracket(bracket),
+                let .destination(.presented(.allBrackets(
+                    .tappedBracket(bracket)
+                ))):
                 state.destination = .bracket(
                     .init(
                         bracket: bracket
