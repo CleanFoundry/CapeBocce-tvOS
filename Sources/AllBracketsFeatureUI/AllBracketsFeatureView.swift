@@ -11,7 +11,14 @@ public struct AllBracketsFeatureView: View {
     }
 
     public var body: some View {
-        Text("All brackets")
+        NavigationStack {
+            List(store.brackets) { bracket in
+                Button(bracket.name) {
+
+                }
+            }
+            .navigationTitle("All Brackets (\(store.brackets.count))")
+        }
     }
 
 }

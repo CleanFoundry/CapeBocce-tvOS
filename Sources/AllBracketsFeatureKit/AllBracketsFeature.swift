@@ -3,7 +3,7 @@ import ComposableArchitecture
 
 @Reducer public struct AllBracketsFeature {
 
-    public struct State {
+    @ObservableState public struct State {
         public let brackets: IdentifiedArrayOf<Bracket>
 
         public init(
