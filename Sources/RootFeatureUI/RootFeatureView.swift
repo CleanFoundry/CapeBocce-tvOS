@@ -1,3 +1,4 @@
+import AllBracketsFeatureUI
 import BracketFeatureUI
 import ComposableArchitecture
 import CreateBracketFormFeatureUI
@@ -31,6 +32,11 @@ public struct RootFeatureView: View {
             )
         ) { store in
             CreateBracketFormFeatureView(store: store)
+        }
+        .fullScreenCover(
+            item: $store.scope(state: \.destination?.allBrackets, action: \.destination.allBrackets)
+        ) { store in
+            AllBracketsFeatureView(store: store)
         }
         .fullScreenCover(
             item: $store.scope(state: \.destination?.bracket, action: \.destination.bracket)
