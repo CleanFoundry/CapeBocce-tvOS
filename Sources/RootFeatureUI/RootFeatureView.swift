@@ -34,12 +34,18 @@ public struct RootFeatureView: View {
             CreateBracketFormFeatureView(store: store)
         }
         .sheet(
-            item: $store.scope(state: \.destination?.allBrackets, action: \.destination.allBrackets)
+            item: $store.scope(
+                state: \.destination?.allBrackets,
+                action: \.destination.allBrackets
+            )
         ) { store in
             AllBracketsFeatureView(store: store)
         }
-        .fullScreenCover(
-            item: $store.scope(state: \.destination?.bracket, action: \.destination.bracket)
+        .sheet(
+            item: $store.scope(
+                state: \.destination?.bracket,
+                action: \.destination.bracket
+            )
         ) { store in
             BracketFeatureView(store: store)
         }

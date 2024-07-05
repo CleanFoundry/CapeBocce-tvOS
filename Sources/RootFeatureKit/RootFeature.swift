@@ -61,7 +61,7 @@ import Foundation
                     .tappedBracket(bracket)
                 ))):
                 state.destination = .bracket(
-                    .init(
+                    .build(
                         bracket: bracket
                     )
                 )

@@ -13,17 +13,23 @@ public struct BracketFeatureView: View {
     public var body: some View {
         NavigationStack {
             ScrollView {
-                Section("Winners Bracket") {
-                    Button { } label: {
-                        RoundedRectangle(cornerRadius: 24)
-                            .frame(width: 600, height: 240)
-                            .background(.blue)
-                    }
-                }
-                .frame(maxWidth: .infinity)
+//                if let winnersMatches = store.groupedMatches[.winners] {
+//                    Section("Winners Bracket") {
+//                        ForEach(winnersMatches) { <#Identifiable#> in
+//                            <#code#>
+//                        }
+//
+//                        Button { } label: {
+//                            RoundedRectangle(cornerRadius: 24)
+//                                .frame(width: 600, height: 240)
+//                                .background(.blue)
+//                        }
+//                    }
+//                    .frame(maxWidth: .infinity)
+//
+//                }
             }
-            .background(Color.purple)
-            .navigationTitle(store.bracket.name)
+            .navigationTitle(store.bracketName)
         }
     }
 
