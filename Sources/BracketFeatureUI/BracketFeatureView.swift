@@ -7,6 +7,7 @@ import SwiftUI
 public struct BracketFeatureView: View {
 
     @Bindable var store: StoreOf<BracketFeature>
+    @FocusState var focusedMatchNumber: MatchNumber?
 
     public init(store: StoreOf<BracketFeature>) {
         self.store = store
@@ -48,8 +49,10 @@ private extension BracketFeatureView {
                         Text("Round \(round)")
                         ForEach(matches) { match in
                             Button { } label: {
-                                matchView(match: match)
+                                matchView(match: match, focused: focusedMatchNumber == match.matchNumber)
                             }
+                            .focused($focusedMatchNumber, equals: match.matchNumber)
+                            .buttonStyle(CustomButtonStyle(focused: focusedMatchNumber == match.matchNumber))
                         }
                         Spacer()
                     }
@@ -61,7 +64,6 @@ private extension BracketFeatureView {
                             value * 3 / 4
                         }
                     }
-                    .border(.red)
                 }
             }
         }
@@ -69,21 +71,34 @@ private extension BracketFeatureView {
     }
 
     func matchView(
-        match: Match
+        match: Match,
+        focused: Bool
     ) -> some View {
         VStack(spacing: 8) {
-            participantLabel(match.participant1)
+            participantLabel(match.participant1, focused: focused)
                 .font(.headline)
+                .overlay(alignment: .bottom) {
+                    (focused ? Color.black : Color.yellow)
+                        .frame(height: 1)
+                        .frame(maxWidth: .infinity)
+                }
             Text("VS")
                 .font(.caption)
-            participantLabel(match.participant2)
+                .foregroundStyle(focused ? .black : .primary)
+            participantLabel(match.participant2, focused: focused)
                 .font(.headline)
+                .overlay(alignment: .bottom) {
+                    (focused ? Color.black : Color.yellow)
+                        .frame(height: 1)
+                        .frame(maxWidth: .infinity)
+                }
         }
         .frame(maxWidth: .infinity)
     }
 
     func participantLabel(
-        _ participant: MatchParticipant
+        _ participant: MatchParticipant,
+        focused: Bool
     ) -> some View {
         HStack(spacing: 8) {
             switch participant {
@@ -92,13 +107,39 @@ private extension BracketFeatureView {
                     .resizable()
                     .frame(width: 60, height: 40, alignment: .bottomTrailing)
                 Text(participant.name)
+                    .foregroundStyle(focused ? .black : .primary)
             case let .awaitingWinner(matchNumber):
                 Text("Winner of #\(matchNumber)")
+                    .foregroundStyle(focused ? .black : .primary)
             case let .awaitingLoser(matchNumber):
                 Text("Loser of #\(matchNumber)")
+                    .foregroundStyle(focused ? .black : .primary)
             }
             Spacer()
         }
+    }
+
+}
+
+struct CustomButtonStyle: ButtonStyle {
+
+    private let focused: Bool
+
+    init(focused: Bool) {
+        self.focused = focused
+    }
+
+    @ViewBuilder func makeBody(configuration: Configuration) -> some View {
+//        if focused {
+            configuration.label
+                .padding()
+                .background(focused ? .primary : .secondary)
+                .clipShape(RoundedRectangle(cornerRadius: 12))
+                .scaleEffect(focused ? 1.1 : 1.0)
+                .animation(.snappy, value: focused)
+//        } else {
+//            BorderedButtonStyle().makeBody(configuration: configuration)
+//        }
     }
 
 }
