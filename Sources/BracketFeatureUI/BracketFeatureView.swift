@@ -48,11 +48,7 @@ private extension BracketFeatureView {
                         let matches = groupedMatches[round]!
                         Text("Round \(round)")
                         ForEach(matches) { match in
-                            Button { } label: {
-                                matchView(match: match, focused: focusedMatchNumber == match.matchNumber)
-                            }
-                            .focused($focusedMatchNumber, equals: match.matchNumber)
-                            .buttonStyle(CustomButtonStyle(focused: focusedMatchNumber == match.matchNumber))
+                            matchButton(match)
                         }
                         Spacer()
                     }
@@ -70,28 +66,46 @@ private extension BracketFeatureView {
         .frame(maxWidth: .infinity)
     }
 
+    func matchButton(
+        _ match: Match
+    ) -> some View {
+        Button { } label: {
+            matchView(match, focused: focusedMatchNumber == match.matchNumber)
+        }
+        .focused(
+            $focusedMatchNumber,
+            equals: match.matchNumber
+        )
+        .buttonStyle(CustomButtonStyle(focused: focusedMatchNumber == match.matchNumber))
+
+    }
+
     func matchView(
-        match: Match,
+        _ match: Match,
         focused: Bool
     ) -> some View {
-        VStack(spacing: 8) {
+        VStack(spacing: 0) {
             participantLabel(match.participant1, focused: focused)
                 .font(.headline)
-                .overlay(alignment: .bottom) {
-                    (focused ? Color.black : Color.yellow)
-                        .frame(height: 1)
-                        .frame(maxWidth: .infinity)
+            HStack(spacing: 0) {
+                VStack(spacing: 8) {
+                    Spacer().frame(width: 0, height: 0)
+                    Text("VS")
+                        .font(.caption)
+                        .foregroundStyle(focused ? .black : .primary)
+                    participantLabel(match.participant2, focused: focused)
+                        .font(.headline)
                 }
-            Text("VS")
-                .font(.caption)
-                .foregroundStyle(focused ? .black : .primary)
-            participantLabel(match.participant2, focused: focused)
-                .font(.headline)
-                .overlay(alignment: .bottom) {
-                    (focused ? Color.black : Color.yellow)
-                        .frame(height: 1)
-                        .frame(maxWidth: .infinity)
+                .overlay(alignment: .trailing) {
+                    participantBorderView(along: .vertical, focused: focused)
                 }
+                .overlay(alignment: .trailing) {
+                    Rectangle()
+                        .foregroundStyle(focused ? AnyShapeStyle(.black) : AnyShapeStyle(.tint))
+                        .frame(width: 36, height: 2)
+                        .offset(x: 36)
+                }
+            }
         }
         .frame(maxWidth: .infinity)
     }
@@ -106,16 +120,61 @@ private extension BracketFeatureView {
                 participant.country.bundleAsset
                     .resizable()
                     .frame(width: 60, height: 40, alignment: .bottomTrailing)
-                Text(participant.name)
-                    .foregroundStyle(focused ? .black : .primary)
+                HStack(spacing: 8) {
+                    Text(participant.name)
+                        .foregroundStyle(focused ? .black : .primary)
+                        .fixedSize(horizontal: false, vertical: true)
+                    Spacer()
+                    if focused {
+                        Text(participant.country.name)
+                            .foregroundStyle(.black)
+                            .font(.caption)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.5)
+                            .fixedSize(horizontal: false, vertical: true)
+                        Spacer().frame(width: 8)
+                    }
+                }
+                .overlay(alignment: .bottom) {
+                    participantBorderView(along: .horizontal, focused: focused)
+                }
             case let .awaitingWinner(matchNumber):
-                Text("Winner of #\(matchNumber)")
-                    .foregroundStyle(focused ? .black : .primary)
+                HStack(spacing: 0) {
+                    Text("Winner of #\(matchNumber)")
+                        .foregroundStyle(focused ? .black : .primary)
+                    Spacer()
+                }
+                .overlay(alignment: .bottom) {
+                    participantBorderView(along: .horizontal, focused: focused)
+                }
             case let .awaitingLoser(matchNumber):
-                Text("Loser of #\(matchNumber)")
-                    .foregroundStyle(focused ? .black : .primary)
+                HStack(spacing: 0) {
+                    Text("Loser of #\(matchNumber)")
+                        .foregroundStyle(focused ? .black : .primary)
+                    Spacer()
+                }
+                .overlay(alignment: .bottom) {
+                    participantBorderView(along: .horizontal, focused: focused)
+                }
             }
-            Spacer()
+        }
+    }
+
+    @ViewBuilder func participantBorderView(
+        along axis: Axis,
+        focused: Bool
+    ) -> some View {
+        switch axis {
+        case .horizontal:
+            Rectangle()
+                .foregroundStyle(focused ? AnyShapeStyle(.black) : AnyShapeStyle(.tint))
+                .frame(height: 2)
+                .frame(maxWidth: .infinity)
+        case .vertical:
+            Rectangle()
+                .foregroundStyle(focused ? AnyShapeStyle(.black) : AnyShapeStyle(.tint))
+                .frame(width: 2)
+                .frame(maxHeight: .infinity)
         }
     }
 
@@ -130,17 +189,16 @@ struct CustomButtonStyle: ButtonStyle {
     }
 
     @ViewBuilder func makeBody(configuration: Configuration) -> some View {
-//        if focused {
             configuration.label
-                .padding()
-                .background(focused ? .primary : .secondary)
-                .clipShape(RoundedRectangle(cornerRadius: 12))
-                .overlay(RoundedRectangle(cornerRadius: 12).stroke(.tint))
+                .padding(18)
+                .background(
+                    RoundedRectangle(cornerRadius: 12)
+                        .foregroundStyle(focused ? .primary : .secondary)
+                )
+//                .clipShape(RoundedRectangle(cornerRadius: 12))
+//                .overlay(RoundedRectangle(cornerRadius: 12).stroke(.tint))
                 .scaleEffect(focused ? 1.1 : 1.0)
                 .animation(.snappy, value: focused)
-//        } else {
-//            BorderedButtonStyle().makeBody(configuration: configuration)
-//        }
     }
 
 }

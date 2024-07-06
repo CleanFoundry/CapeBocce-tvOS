@@ -11,7 +11,7 @@ struct CapeBocceApp: App {
             RootFeatureView(
                 store: CapeBocceAppStore.shared.store
             )
-            .tint(Color.indigo)
+            .tint(.indigo)
         }
     }
 
