@@ -8,6 +8,7 @@ public struct BracketFeatureView: View {
 
     @Bindable var store: StoreOf<BracketFeature>
     @FocusState var focusedMatchNumber: MatchNumber?
+    @Namespace var namespace
 
     public init(store: StoreOf<BracketFeature>) {
         self.store = store
@@ -90,9 +91,16 @@ private extension BracketFeatureView {
             HStack(spacing: 0) {
                 VStack(spacing: 8) {
                     Spacer().frame(width: 0, height: 0)
-                    Text("VS")
-                        .font(.caption)
-                        .foregroundStyle(focused ? .black : .primary)
+                    HStack {
+                        Image(systemName: "\(match.matchNumber).square")
+                            .font(.title2)
+                            .foregroundStyle(focused ? AnyShapeStyle(.black) : AnyShapeStyle(.tint))
+                        Spacer()
+                        Text("VS")
+                            .font(.caption)
+                            .foregroundStyle(focused ? .black : .primary)
+                        Spacer()
+                    }
                     participantLabel(match.participant2, focused: focused)
                         .font(.headline)
                 }
