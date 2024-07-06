@@ -22,6 +22,7 @@ public struct RootFeatureView: View {
                 Button("View All Brackets") {
                     store.send(.tappedViewAllBrackets)
                 }
+                .buttonStyle(.plain)
             }
             .navigationTitle("Cape Bocce")
         }

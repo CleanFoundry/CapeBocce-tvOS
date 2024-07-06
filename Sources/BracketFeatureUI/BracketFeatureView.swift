@@ -135,6 +135,7 @@ struct CustomButtonStyle: ButtonStyle {
                 .padding()
                 .background(focused ? .primary : .secondary)
                 .clipShape(RoundedRectangle(cornerRadius: 12))
+                .overlay(RoundedRectangle(cornerRadius: 12).stroke(.tint))
                 .scaleEffect(focused ? 1.1 : 1.0)
                 .animation(.snappy, value: focused)
 //        } else {
