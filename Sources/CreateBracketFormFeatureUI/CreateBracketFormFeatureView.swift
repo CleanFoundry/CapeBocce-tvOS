@@ -110,6 +110,7 @@ private extension CreateBracketFormFeatureView {
                     }
                 }
             }
+            .tint(nil)
             Button(
                 "Add All Recent Participants",
                 systemImage: "person.3"
