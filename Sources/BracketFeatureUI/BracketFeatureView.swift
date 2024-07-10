@@ -8,7 +8,6 @@ public struct BracketFeatureView: View {
 
     @Bindable var store: StoreOf<BracketFeature>
     @FocusState var focusedMatchNumber: MatchNumber?
-    @Namespace var namespace
 
     public init(store: StoreOf<BracketFeature>) {
         self.store = store
@@ -17,26 +16,28 @@ public struct BracketFeatureView: View {
     public var body: some View {
         NavigationStack {
             ScrollView([.horizontal, .vertical]) {
-                VStack(alignment: .leading) {
+                VStack {
                     if let winnersMatches = store.groupedMatches[.winners] {
-                        Section {
-                            bracketSide(
-                                groupedMatches: winnersMatches
-                            )
-                            .frame(maxWidth: .infinity)
-                        } header: {
+                        HStack {
                             Text("Winners’ Bracket")
                                 .font(.title2)
+                            Spacer()
                         }
+                        bracketSide(
+                            groupedMatches: winnersMatches
+                        )
                     }
                     if let losersMatches = store.groupedMatches[.losers] {
-                        Text("We’re All Winners Bracket")
+                        HStack {
+                            Text("We’re All Winners Bracket")
+                                .font(.title2)
+                            Spacer()
+                        }
                         bracketSide(
                             groupedMatches: losersMatches
                         )
                     }
                 }
-                .containerRelativeFrame([.horizontal]) { value, _ in value }
                 .navigationTitle(store.bracketName)
             }
         }
@@ -53,6 +54,7 @@ private extension BracketFeatureView {
                 VStack {
                     let matches = groupedMatches[round]!.sorted(using: KeyPathComparator(\.matchNumber))
                     Text("Round \(round)")
+                        .font(.subheadline)
                     ForEach(matches) { match in
                         matchButton(match)
                     }
@@ -93,11 +95,11 @@ private extension BracketFeatureView {
                     HStack {
                         Image(systemName: "\(match.matchNumber).square")
                             .font(.title2)
-                            .foregroundStyle(focused ? AnyShapeStyle(.black) : AnyShapeStyle(.tint))
+                            .foregroundStyle(focused ? AnyShapeStyle(.tint) : AnyShapeStyle(.primary))
                         Spacer()
                         Text("VS")
                             .font(.caption)
-                            .foregroundStyle(focused ? .black : .primary)
+                            .foregroundStyle(focused ? AnyShapeStyle(.tint) : AnyShapeStyle(.primary))
                         Spacer()
                     }
                     participantLabel(match.participant2, focused: focused)
@@ -108,7 +110,7 @@ private extension BracketFeatureView {
                 }
                 .overlay(alignment: .trailing) {
                     Rectangle()
-                        .foregroundStyle(focused ? AnyShapeStyle(.black) : AnyShapeStyle(.tint))
+                        .foregroundStyle(focused ? AnyShapeStyle(.black) : AnyShapeStyle(.primary))
                         .frame(width: 18, height: 2)
                         .offset(x: 18)
                 }
@@ -177,12 +179,12 @@ private extension BracketFeatureView {
         switch axis {
         case .horizontal:
             Rectangle()
-                .foregroundStyle(focused ? AnyShapeStyle(.black) : AnyShapeStyle(.tint))
+                .foregroundStyle(focused ? AnyShapeStyle(.black) : AnyShapeStyle(.primary))
                 .frame(height: 2)
                 .frame(maxWidth: .infinity)
         case .vertical:
             Rectangle()
-                .foregroundStyle(focused ? AnyShapeStyle(.black) : AnyShapeStyle(.tint))
+                .foregroundStyle(focused ? AnyShapeStyle(.black) : AnyShapeStyle(.primary))
                 .frame(width: 2)
                 .frame(maxHeight: .infinity)
         }
@@ -203,9 +205,10 @@ struct CustomButtonStyle: ButtonStyle {
             .padding(18)
             .background(
                 RoundedRectangle(cornerRadius: 12)
-                    .foregroundStyle(focused ? .primary : .secondary)
+                    .fill(focused ? .secondary : .tertiary)
+                    .strokeBorder(.tint, lineWidth: focused ? 4 : 0)
             )
-            .scaleEffect(focused ? 1.1 : 1.0)
+            .scaleEffect(focused ? 1.2 : 1.0)
             .animation(.snappy, value: focused)
     }
 
