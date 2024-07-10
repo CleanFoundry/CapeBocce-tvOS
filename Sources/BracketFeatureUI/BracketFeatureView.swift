@@ -16,55 +16,54 @@ public struct BracketFeatureView: View {
 
     public var body: some View {
         NavigationStack {
-            ScrollView {
-                if let winnersMatches = store.groupedMatches[.winners] {
-                    bracketSide(
-                        groupedMatches: winnersMatches,
-                        title: "Winners’ Bracket"
-                    )
+            ScrollView([.horizontal, .vertical]) {
+                VStack(alignment: .leading) {
+                    if let winnersMatches = store.groupedMatches[.winners] {
+                        Section {
+                            bracketSide(
+                                groupedMatches: winnersMatches
+                            )
+                            .frame(maxWidth: .infinity)
+                        } header: {
+                            Text("Winners’ Bracket")
+                                .font(.title2)
+                        }
+                    }
+                    if let losersMatches = store.groupedMatches[.losers] {
+                        Text("We’re All Winners Bracket")
+                        bracketSide(
+                            groupedMatches: losersMatches
+                        )
+                    }
                 }
-                if let losersMatches = store.groupedMatches[.losers] {
-                    bracketSide(
-                        groupedMatches: losersMatches,
-                        title: "We’re All Winners Bracket"
-                    )
-                }
+                .containerRelativeFrame([.horizontal]) { value, _ in value }
+                .navigationTitle(store.bracketName)
             }
-            .navigationTitle(store.bracketName)
         }
     }
-
 }
 
 private extension BracketFeatureView {
 
     func bracketSide(
-        groupedMatches: [Round: IdentifiedArrayOf<Match>],
-        title: String
+        groupedMatches: [Round: IdentifiedArrayOf<Match>]
     ) -> some View {
-        Section(title) {
-            HStack(alignment: .top) {
-                ForEach(Array(groupedMatches.keys).sorted(), id: \.self) { round in
-                    VStack {
-                        let matches = groupedMatches[round]!
-                        Text("Round \(round)")
-                        ForEach(matches) { match in
-                            matchButton(match)
-                        }
-                        Spacer()
+        HStack(alignment: .top) {
+            ForEach(Array(groupedMatches.keys).sorted(), id: \.self) { round in
+                VStack {
+                    let matches = groupedMatches[round]!
+                    Text("Round \(round)")
+                    ForEach(matches) { match in
+                        matchButton(match)
                     }
-                    .containerRelativeFrame([.horizontal, .vertical]) { value, axis in
-                        switch axis {
-                        case .horizontal:
-                            value / 4
-                        case .vertical:
-                            value * 3 / 4
-                        }
-                    }
+                    Spacer()
+                }
+                .containerRelativeFrame([.horizontal]) { value, _ in
+                    value / 4
                 }
             }
+            Spacer()
         }
-        .frame(maxWidth: .infinity)
     }
 
     func matchButton(
@@ -148,7 +147,7 @@ private extension BracketFeatureView {
                 }
             case let .awaitingWinner(matchNumber):
                 HStack(spacing: 0) {
-                    Text("Winner of #\(matchNumber)")
+                    Text("Winner of \(Image(systemName: "\(matchNumber).square"))")
                         .foregroundStyle(focused ? .black : .primary)
                     Spacer()
                 }
@@ -157,7 +156,7 @@ private extension BracketFeatureView {
                 }
             case let .awaitingLoser(matchNumber):
                 HStack(spacing: 0) {
-                    Text("Loser of #\(matchNumber)")
+                    Text("Loser of \(Image(systemName: "\(matchNumber).square"))")
                         .foregroundStyle(focused ? .black : .primary)
                     Spacer()
                 }
@@ -197,16 +196,14 @@ struct CustomButtonStyle: ButtonStyle {
     }
 
     @ViewBuilder func makeBody(configuration: Configuration) -> some View {
-            configuration.label
-                .padding(18)
-                .background(
-                    RoundedRectangle(cornerRadius: 12)
-                        .foregroundStyle(focused ? .primary : .secondary)
-                )
-//                .clipShape(RoundedRectangle(cornerRadius: 12))
-//                .overlay(RoundedRectangle(cornerRadius: 12).stroke(.tint))
-                .scaleEffect(focused ? 1.1 : 1.0)
-                .animation(.snappy, value: focused)
+        configuration.label
+            .padding(18)
+            .background(
+                RoundedRectangle(cornerRadius: 12)
+                    .foregroundStyle(focused ? .primary : .secondary)
+            )
+            .scaleEffect(focused ? 1.1 : 1.0)
+            .animation(.snappy, value: focused)
     }
 
 }
