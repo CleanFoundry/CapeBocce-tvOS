@@ -3,9 +3,9 @@ import CasePaths
 import Foundation
 import URLRouting
 
-public let genericAPIRouter: some Router<EndpointRoute> = EndpointRouter.default
-    .baseURL("https://petite-eagles-peel.loca.lt")
+@MainActor public let genericAPIRouter: some Router<EndpointRoute> = EndpointRouter.default
+    .baseURL("https://tall-rats-obey.loca.lt")
 
-public let genericAPIClient = GenericAPIClient(
+@MainActor public let genericAPIClient = GenericAPIClient(
     router: genericAPIRouter
 )

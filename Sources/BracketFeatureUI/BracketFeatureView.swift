@@ -51,7 +51,7 @@ private extension BracketFeatureView {
         HStack(alignment: .top) {
             ForEach(Array(groupedMatches.keys).sorted(), id: \.self) { round in
                 VStack {
-                    let matches = groupedMatches[round]!
+                    let matches = groupedMatches[round]!.sorted(using: KeyPathComparator(\.matchNumber))
                     Text("Round \(round)")
                     ForEach(matches) { match in
                         matchButton(match)
@@ -109,8 +109,8 @@ private extension BracketFeatureView {
                 .overlay(alignment: .trailing) {
                     Rectangle()
                         .foregroundStyle(focused ? AnyShapeStyle(.black) : AnyShapeStyle(.tint))
-                        .frame(width: 36, height: 2)
-                        .offset(x: 36)
+                        .frame(width: 18, height: 2)
+                        .offset(x: 18)
                 }
             }
         }
@@ -127,18 +127,21 @@ private extension BracketFeatureView {
                 participant.country.bundleAsset
                     .resizable()
                     .frame(width: 60, height: 40, alignment: .bottomTrailing)
-                HStack(spacing: 8) {
+                HStack(alignment: .firstTextBaseline, spacing: 0) {
                     Text(participant.name)
                         .foregroundStyle(focused ? .black : .primary)
-                        .fixedSize(horizontal: false, vertical: true)
+                        .lineLimit(1)
+                        .layoutPriority(2)
                     Spacer()
+                        .frame(height: 0)
+                        .frame(minWidth: 8)
                     if focused {
                         Text(participant.country.name)
                             .foregroundStyle(.black)
                             .font(.caption)
                             .lineLimit(1)
-                            .minimumScaleFactor(0.5)
-                            .fixedSize(horizontal: false, vertical: true)
+                            .minimumScaleFactor(0.6)
+                            .layoutPriority(1)
                         Spacer().frame(width: 8)
                     }
                 }
