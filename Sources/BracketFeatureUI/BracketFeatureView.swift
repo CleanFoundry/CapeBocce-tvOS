@@ -56,7 +56,7 @@ private extension BracketFeatureView {
                     Text("Round \(round)")
                         .font(.subheadline)
                     ForEach(matches) { match in
-                        matchButton(match)
+                        matchButtonView(match)
                     }
                     Spacer()
                 }
@@ -66,20 +66,30 @@ private extension BracketFeatureView {
             }
             Spacer()
         }
+        .focusSection()
     }
 
-    func matchButton(
+    func matchButtonView(
         _ match: Match
     ) -> some View {
-        Button { } label: {
-            matchView(match, focused: focusedMatchNumber == match.matchNumber)
+        VStack(spacing: 0) {
+            Spacer()
+            Button { } label: {
+                matchView(match, focused: focusedMatchNumber == match.matchNumber)
+            }
+            .focused(
+                $focusedMatchNumber,
+                equals: match.matchNumber
+            )
+            .buttonStyle(CustomButtonStyle(focused: focusedMatchNumber == match.matchNumber))
+            Spacer()
         }
-        .focused(
-            $focusedMatchNumber,
-            equals: match.matchNumber
-        )
-        .buttonStyle(CustomButtonStyle(focused: focusedMatchNumber == match.matchNumber))
-
+        .containerRelativeFrame(.vertical, alignment: .center) { availableHeight, _ in
+            let baseHeight = availableHeight / 4
+            let scaleFactor = heightScaleFactor(for: match)
+            return baseHeight * scaleFactor
+        }
+        .focusSection()
     }
 
     func matchView(
@@ -188,6 +198,18 @@ private extension BracketFeatureView {
                 .frame(width: 2)
                 .frame(maxHeight: .infinity)
         }
+    }
+
+
+    func heightScaleFactor(for match: Match) -> CGFloat {
+        var base: CGFloat = 0
+        if case .awaitingWinner(let p1ID) = match.participant1, let p1 = store.matches[id: p1ID] {
+            base += heightScaleFactor(for: p1)
+        }
+        if case .awaitingWinner(let p2ID) = match.participant2, let p2 = store.matches[id: p2ID] {
+            base += heightScaleFactor(for: p2)
+        }
+        return max(base, 1)
     }
 
 }
