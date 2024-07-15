@@ -22,14 +22,12 @@ import Foundation
         case tappedCreateBracket
         case tappedViewAllBrackets
         case startedBracket(Bracket)
-        case loadedAllBrackets(IdentifiedArrayOf<Bracket>)
         case destination(PresentationAction<DestinationFeature.Action>)
 
     }
 
     @Dependency(\.defaultBracketName) var defaultBracketName
     @Dependency(\.startBracketAPIClient) var startBracketAPIClient
-    @Dependency(\.getAllBracketsAPIClient) var getAllBracketsAPIClient
 
     public init() { }
 
@@ -67,16 +65,7 @@ import Foundation
                 )
                 return .none
             case .tappedViewAllBrackets:
-                return .run { send in
-                    let response = try await getAllBracketsAPIClient.get()
-                    await send(.loadedAllBrackets(response.brackets))
-                }
-            case let .loadedAllBrackets(brackets):
-                state.destination = .allBrackets(
-                    .init(
-                        brackets: brackets
-                    )
-                )
+                state.destination = .allBrackets(.init())
                 return .none
             case .destination:
                 return .none
