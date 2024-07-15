@@ -74,6 +74,14 @@ private extension BracketFeatureView {
     ) -> some View {
         VStack(spacing: 0) {
             Spacer()
+            if case .championship = match.kind {
+                Text("🏆 Championship 🏆")
+                    .multilineTextAlignment(.center)
+                    .font(.headline)
+                    .offset(y: focusedMatchNumber == match.matchNumber ? -20 : 0)
+                    .scaleEffect(focusedMatchNumber == match.matchNumber ? 1.2 : 1)
+                    .animation(.snappy, value: focusedMatchNumber == match.matchNumber)
+            }
             Button { } label: {
                 matchView(match, focused: focusedMatchNumber == match.matchNumber)
             }
