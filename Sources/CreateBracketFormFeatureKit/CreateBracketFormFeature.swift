@@ -16,7 +16,16 @@ import PickCountryFeatureKit
 
         @Presents public var pickCountry: PickCountryFeature.State?
 
-        public var recentParticipants: IdentifiedArrayOf<Participant>?
+        @Shared(.appStorage("recentParticipants")) private var recentParticipantsData: Data?
+        fileprivate(set) public var recentParticipants: IdentifiedArrayOf<Participant> {
+            get {
+                guard let recentParticipantsData else { return [] }
+                return try! JSONDecoder.api
+                    .decode(IdentifiedArrayOf<Participant>.self, from: recentParticipantsData)
+            } set {
+                recentParticipantsData = try! JSONEncoder.api.encode(newValue)
+            }
+        }
 
         public init(
             bracketName: String
@@ -27,8 +36,6 @@ import PickCountryFeatureKit
     }
 
     public enum Action: BindableAction {
-        case didAppear
-        case loadedRecentParticipants(IdentifiedArrayOf<Participant>)
         case binding(BindingAction<CreateBracketFormFeature.State>)
         case submittedAddParticipant
         case pickCountry(PresentationAction<PickCountryFeature.Action>)
@@ -40,27 +47,12 @@ import PickCountryFeatureKit
         case tappedStartBracket([Participant], String)
     }
 
-    @Dependency(\.getRecentParticipantsAPIClient) var getRecentParticipantsAPIClient
-
     public init() { }
 
     public var body: some ReducerOf<Self> {
         BindingReducer()
         Reduce { state, action in
             switch action {
-            case .didAppear:
-                if state.recentParticipants == nil {
-                    return .run { send in
-                        let participants = try await getRecentParticipantsAPIClient
-                            .get().recentParticipants
-                        await send(.loadedRecentParticipants(participants))
-                    }
-                } else {
-                    return .none
-                }
-            case let .loadedRecentParticipants(participants):
-                state.recentParticipants = .init(uniqueElements: participants)
-                return .none
             case .submittedAddParticipant:
                 state.pickCountry = .init(
                     title: "Choose Country for \(state.sanitizedAddParticipantName)"
@@ -80,12 +72,12 @@ import PickCountryFeatureKit
                         countryID: selectedCountry.id
                     )
 
-                    if state.recentParticipants?.contains(existingParticipant) == true {
-                        state.recentParticipants?[
+                    if state.recentParticipants.contains(existingParticipant) {
+                        state.recentParticipants[
                             id: existingParticipant.id
                         ]?.countryID = selectedCountry.id
                     } else {
-                        state.recentParticipants?.insert(updatedParticipant, at: 0)
+                        state.recentParticipants.insert(updatedParticipant, at: 0)
                     }
 
                     if state.selectedParticipants.contains(existingParticipant) {
@@ -102,7 +94,7 @@ import PickCountryFeatureKit
                         countryID: selectedCountry.id
                     )
 
-                    state.recentParticipants?.insert(newParticipant, at: 0)
+                    state.recentParticipants.insert(newParticipant, at: 0)
                     state.selectedParticipants.insert(newParticipant, at: 0)
                 }
 
@@ -116,11 +108,11 @@ import PickCountryFeatureKit
                 return .none
             case let .tappedDeleteParticipant(participant):
                 state.selectedParticipants.remove(participant)
-                state.recentParticipants?.remove(participant)
+                state.recentParticipants.remove(participant)
                 return .none
             case .tappedAddAllRecentParticipants:
                 state.selectedParticipants.append(
-                    contentsOf: state.unselectedRecentParticipants!
+                    contentsOf: state.unselectedRecentParticipants
                 )
                 return .none
             case .binding,

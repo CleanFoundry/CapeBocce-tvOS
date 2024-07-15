@@ -18,15 +18,10 @@ public struct CreateBracketFormFeatureView: View {
                 bracketNameSection
                 participantsSection
                 addNewParticipantSection
-                if let recentParticipants = store.unselectedRecentParticipants {
-                    if !recentParticipants.isEmpty {
-                        addRecentParticipantsSection(participants: recentParticipants)
-                    }
-                    startButton
-                } else {
-                    ProgressView()
-                        .withoutTVOSFormStyling()
+                if !store.unselectedRecentParticipants.isEmpty {
+                    addRecentParticipantsSection(participants: store.unselectedRecentParticipants)
                 }
+                startButton
             }
             .navigationTitle("Create Bracket")
             .sheet(
@@ -37,9 +32,6 @@ public struct CreateBracketFormFeatureView: View {
             ) { store in
                 PickCountryFeatureView(store: store)
             }
-        }
-        .task {
-            store.send(.didAppear)
         }
     }
 
