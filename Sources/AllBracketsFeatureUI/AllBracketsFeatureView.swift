@@ -12,11 +12,25 @@ public struct AllBracketsFeatureView: View {
 
     public var body: some View {
         NavigationStack {
-            List(store.brackets) { bracket in
-                Button(bracket.name) {
-                    store.send(.tappedBracket(bracket))
+            ScrollView {
+                ForEach(store.brackets) { bracket in
+                    HStack {
+                        Button(bracket.name) {
+                            store.send(.tappedBracket(bracket))
+                        }
+                        .tint(nil)
+                        .buttonStyle(.plain)
+                        .frame(maxWidth: .infinity)
+                        Button(role: .destructive) {
+                            store.send(.tappedDeleteBracket(bracket))
+                        } label: {
+                            Image(systemName: "trash")
+                        }
+                    }
                 }
+                .padding(.top)
             }
+            .scrollClipDisabled()
             .navigationTitle("All Brackets (\(store.brackets.count))")
         }
     }
