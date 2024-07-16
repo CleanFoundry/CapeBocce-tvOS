@@ -31,6 +31,7 @@ public struct AllBracketsFeatureView: View {
                 .padding(.top)
             }
             .scrollClipDisabled()
+            .alert($store.scope(state: \.alert, action: \.alert))
             .navigationTitle("All Brackets (\(store.brackets.count))")
         }
     }
