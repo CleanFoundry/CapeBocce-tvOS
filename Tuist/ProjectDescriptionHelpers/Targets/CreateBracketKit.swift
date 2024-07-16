@@ -2,17 +2,16 @@ import CFTuist
 import ProjectDescription
 
 public extension CFTarget.Name {
-    static let bracketFeatureKit: Self = "BracketFeatureKit"
+    static let createBracketKit: Self = "CreateBracketKit"
 }
 
 public extension CFTarget {
 
-    static let bracketFeatureKit = CFTarget.default.capeBocce.framework(
-        name: .bracketFeatureKit,
+    static let createBracketKit = CFTarget.default.capeBocce.framework(
+        name: .createBracketKit,
         internalDependencies: [],
         externalDependencies: [
             .api,
-            .composableArchitecture,
         ]
     )
 

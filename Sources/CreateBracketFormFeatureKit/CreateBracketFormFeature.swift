@@ -1,5 +1,4 @@
 import API
-import APIClients
 import APIExtensions
 import ComposableArchitecture
 import Foundation
@@ -17,7 +16,7 @@ import PickCountryFeatureKit
         @Presents public var pickCountry: PickCountryFeature.State?
 
         @Shared(.appStorage("recentParticipants")) private var recentParticipantsData: Data?
-        fileprivate(set) public var recentParticipants: IdentifiedArrayOf<Participant> {
+        public var recentParticipants: IdentifiedArrayOf<Participant> {
             get {
                 guard let recentParticipantsData else { return [] }
                 return try! JSONDecoder.api

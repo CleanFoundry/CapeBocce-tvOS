@@ -1,6 +1,7 @@
 import API
 import ComposableArchitecture
 import CreateBracketFormFeatureKit
+import CreateBracketKit
 import Foundation
 
 @Reducer public struct RootFeature {
@@ -8,6 +9,27 @@ import Foundation
     @ObservableState public struct State {
 
         @Presents public var destination: DestinationFeature.State?
+
+        @Shared(.appStorage("recentParticipants")) private var recentParticipantsData: Data?
+        public var recentParticipants: IdentifiedArrayOf<Participant> {
+            get {
+                guard let recentParticipantsData else { return [] }
+                return try! JSONDecoder.api
+                    .decode(IdentifiedArrayOf<Participant>.self, from: recentParticipantsData)
+            } set {
+                recentParticipantsData = try! JSONEncoder.api.encode(newValue)
+            }
+        }
+        @Shared(.appStorage("brackets")) private var bracketsData: Data?
+        public var brackets: IdentifiedArrayOf<Bracket> {
+            get {
+                guard let bracketsData else { return [] }
+                return try! JSONDecoder.api
+                    .decode(IdentifiedArrayOf<Bracket>.self, from: bracketsData)
+            } set {
+                bracketsData = try! JSONEncoder.api.encode(newValue)
+            }
+        }
 
         public init(
             destination: DestinationFeature.State? = nil
@@ -27,7 +49,6 @@ import Foundation
     }
 
     @Dependency(\.defaultBracketName) var defaultBracketName
-    @Dependency(\.startBracketAPIClient) var startBracketAPIClient
 
     public init() { }
 
@@ -44,15 +65,13 @@ import Foundation
             case let .destination(.presented(.createBracket(
                 .tappedStartBracket(participants, name)
             ))):
-                return .run { send in
-                    let response = try await startBracketAPIClient.start(
-                        .init(
-                            name: name,
-                            participants: participants
-                        )
-                    )
-                    await send(.startedBracket(response.bracket))
-                }
+                let bracket = try! Bracket.generate(
+                    name: name,
+                    participants: participants
+                )
+                state.brackets.updateOrAppend(bracket)
+                state.recentParticipants = .init(uniqueElements: participants)
+                return .send(.startedBracket(bracket))
             case
                 let .startedBracket(bracket),
                 let .destination(.presented(.allBrackets(

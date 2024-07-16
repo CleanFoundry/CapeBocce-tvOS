@@ -10,7 +10,6 @@ public extension CFTarget {
     static let createBracketFormFeatureKit = CFTarget.default.capeBocce.framework(
         name: .createBracketFormFeatureKit,
         internalDependencies: [
-            .apiClients,
             .apiExtensions,
             .pickCountryFeatureKit,
         ],
