@@ -47,10 +47,13 @@ struct MatchButtonView: View {
                 matchView(match, focused: isFocused)
             }
             .focused($isFocused, equals: true)
-            .buttonStyle(MatchButtonStyle(focused: isFocused))
-
+            .buttonStyle(
+                MatchButtonStyle(
+                    focused: isFocused
+                )
+            )
             if case .championship(.overall) = match.kind {
-                (participantText(match.participant2) + Text(" must win twice"))
+                overallChampionshipFooterLabel
                     .font(.footnote)
                     .offset(y: isFocused ? 20 : 0)
                     .scaleEffect(isFocused ? 1.2 : 1)
@@ -60,7 +63,7 @@ struct MatchButtonView: View {
         }
         .containerRelativeFrame(.vertical, alignment: .center) { availableHeight, _ in
             let baseHeight = availableHeight / 4
-            let scaleFactor = heightScaleFactor(for: match)
+            let scaleFactor = match.heightScaleFactor
             return baseHeight * scaleFactor
         }
         .focusSection()
@@ -76,7 +79,7 @@ private extension MatchButtonView {
         focused: Bool
     ) -> some View {
         VStack(spacing: 0) {
-            participantLabel(match.participant1, focused: focused)
+            participantLabel(match.participant1, position: .participant1, focused: focused)
                 .font(.headline)
             HStack(spacing: 0) {
                 VStack(spacing: 8) {
@@ -91,7 +94,7 @@ private extension MatchButtonView {
                             .foregroundStyle(focused ? AnyShapeStyle(.tint) : AnyShapeStyle(.primary))
                         Spacer()
                     }
-                    participantLabel(match.participant2, focused: focused)
+                    participantLabel(match.participant2, position: .participant2, focused: focused)
                         .font(.headline)
                 }
                 .overlay(alignment: .trailing) {
@@ -110,6 +113,7 @@ private extension MatchButtonView {
 
     func participantLabel(
         _ matchParticipant: MatchParticipant,
+        position: MatchWinner,
         focused: Bool
     ) -> some View {
         HStack(spacing: 8) {
@@ -120,7 +124,13 @@ private extension MatchButtonView {
                     .frame(width: 60, height: 40, alignment: .bottomTrailing)
                 HStack(alignment: .firstTextBaseline, spacing: 0) {
                     participantText(matchParticipant)
-                        .foregroundStyle(focused ? .black : .primary)
+                        .foregroundStyle(
+                            participantLabelForegroundStyle(
+                                matchParticipant,
+                                position: position,
+                                focused: focused
+                            )
+                        )
                         .lineLimit(1)
                         .layoutPriority(2)
                     Spacer()
@@ -128,7 +138,13 @@ private extension MatchButtonView {
                         .frame(minWidth: 8)
                     if focused {
                         Text(participant.country.name)
-                            .foregroundStyle(.black)
+                            .foregroundStyle(
+                                participantLabelForegroundStyle(
+                                    matchParticipant,
+                                    position: position,
+                                    focused: focused
+                                )
+                            )
                             .font(.caption)
                             .lineLimit(1)
                             .minimumScaleFactor(0.6)
@@ -138,6 +154,13 @@ private extension MatchButtonView {
                 }
                 .overlay(alignment: .bottom) {
                     participantBorderView(along: .horizontal, focused: focused)
+                        .foregroundStyle(
+                            participantLabelForegroundStyle(
+                                matchParticipant,
+                                position: position,
+                                focused: focused
+                            )
+                        )
                 }
             case .awaitingWinner, .awaitingLoser:
                 HStack(spacing: 0) {
@@ -149,6 +172,19 @@ private extension MatchButtonView {
                     participantBorderView(along: .horizontal, focused: focused)
                 }
             }
+        }
+    }
+
+    func participantLabelForegroundStyle(
+        _ matchParticipant: MatchParticipant,
+        position: MatchWinner,
+        focused: Bool
+    ) -> AnyShapeStyle {
+        let opacity = [position, nil].contains(match.winner) ? 1 : 0.3
+        if focused {
+            return AnyShapeStyle(.black.opacity(opacity))
+        } else {
+            return AnyShapeStyle(.primary.opacity(opacity))
         }
     }
 
@@ -192,19 +228,20 @@ private extension MatchButtonView {
         }
     }
 
-    func heightScaleFactor(for match: Match) -> CGFloat {
-        var base: CGFloat = 0
-        if case .awaitingWinner(let p1ID) = match.participant1,
-           let p1 = allMatches[id: p1ID],
-           p1.side == match.side {
-            base += heightScaleFactor(for: p1)
+    @ViewBuilder var overallChampionshipFooterLabel: some View {
+        let matchWinner = match.winner.map { matchWinner in
+            switch matchWinner {
+            case .participant1:
+                match.participant1
+            case .participant2:
+                match.participant2
+            }
         }
-        if case .awaitingWinner(let p2ID) = match.participant2,
-           let p2 = allMatches[id: p2ID],
-           p2.side == match.side {
-            base += heightScaleFactor(for: p2)
+        if case let .participant(winner) = matchWinner {
+            Text("\(winner.name) won!")
+        } else {
+            (participantText(match.participant2) + Text(" must win twice"))
         }
-        return max(base, 1)
     }
 
 }

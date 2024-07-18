@@ -35,6 +35,7 @@ import Foundation
             destination: DestinationFeature.State? = nil
         ) {
             self.destination = destination
+//            brackets = []
         }
 
     }

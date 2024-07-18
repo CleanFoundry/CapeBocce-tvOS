@@ -1,4 +1,5 @@
 import API
+import IdentifiedCollections
 import Foundation
 
 public extension Bracket {
@@ -40,7 +41,9 @@ public extension Bracket {
         )
 
         let recursiveRoundsInfo = generateRecursiveRoundsInfo(
+            winnerFillingRoundInfo: winnerFillingRoundInfo,
             winnerFirstFilledRoundInfo: winnerFirstFilledRoundInfo,
+            loserFillingRoundInfo: loserFillingRoundInfo,
             loserFirstFilledRoundInfo: loserFirstFilledRoundInfo
         )
 
@@ -90,7 +93,7 @@ private extension Bracket {
     struct WinnerFillingRoundInfo: Equatable {
         let numberOfParticipants: Int
         let everyOtherParticipant: [Int]
-        let matches: [Match]
+        let matches: IdentifiedArrayOf<Match>
         let lastMatchNumber: MatchNumber?
     }
     static func generateWinnerFillingRoundInfo(
@@ -99,17 +102,20 @@ private extension Bracket {
     ) -> WinnerFillingRoundInfo {
         let numberOfParticipants = (basicInfo.numberOfParticipants - basicInfo.greatestFillablePowerOfTwo) * 2
         let everyOtherParticipant = stride(from: 0, to: numberOfParticipants, by: 2)
-        let matches = everyOtherParticipant.enumerated().map { (offset, participantIndex) in
-            let matchNumber = MatchNumber(offset + 1)
-            return Match(
-                matchNumber: matchNumber,
-                participant1: .participant(participants[participantIndex]),
-                participant2: .participant(participants[participantIndex + 1]),
-                kind: .default,
-                side: .winners,
-                round: 1
-            )
-        }
+        let matches = IdentifiedArray(
+            uniqueElements: everyOtherParticipant.enumerated().map { (offset, participantIndex) in
+                let matchNumber = MatchNumber(offset + 1)
+                return Match.default(
+                    matchNumber: matchNumber,
+                    participant1: .participant(participants[participantIndex]),
+                    participant2: .participant(participants[participantIndex + 1]),
+                    kind: .default,
+                    side: .winners,
+                    round: 1,
+                    allMatches: []
+                )
+            }
+        )
         let lastMatchNumber = matches.last?.matchNumber
         return WinnerFillingRoundInfo(
             numberOfParticipants: numberOfParticipants,
@@ -127,12 +133,12 @@ private extension Bracket {
         struct SingleByeMatchInfo: Equatable {
             let numberOfParticipants: Int
             let participantIndices: [Int]
-            let matches: [Match]
+            let matches: IdentifiedArrayOf<Match>
             let lastMatchNumber: MatchNumber?
         }
         let singleByeMatchInfo: SingleByeMatchInfo
         struct ZeroByeMatchInfo: Equatable {
-            let matches: [Match]
+            let matches: IdentifiedArrayOf<Match>
             let lastMatchNumber: MatchNumber?
         }
         let zeroByeMatchInfo: ZeroByeMatchInfo
@@ -140,12 +146,12 @@ private extension Bracket {
             let numberOfMatches: Int
             let numberOfParticipants: Int
             let everyOtherParticipant: [Int]
-            let matches: [Match]
+            let matches: IdentifiedArrayOf<Match>
             let lastMatchNumber: MatchNumber?
         }
         let doubleByeMatchInfo: DoubleByeMatchInfo
 
-        var matches: [Match] {
+        var matches: IdentifiedArrayOf<Match> {
             singleByeMatchInfo.matches + zeroByeMatchInfo.matches + doubleByeMatchInfo.matches
         }
     }
@@ -168,37 +174,43 @@ private extension Bracket {
         let singleByeFirstParticipantIndex = winnerFillingRoundInfo.numberOfParticipants + numberOfDoubleByeParticipants
         let singleByeLastParticipantIndex = singleByeFirstParticipantIndex + numberOfSingleByeParticipants
         let singleByeParticipantIndices = Array(singleByeFirstParticipantIndex..<singleByeLastParticipantIndex)
-        let singleByeMatches = zip(
-            winnerFillingRoundInfo.matches.prefix(numberOfSingleByeParticipants),
-            singleByeParticipantIndices
-        ).enumerated().map { (offset, element) in
-            let (fillingRoundMatch, participantIndex) = element
-            let startMatchNumber = (winnerFillingRoundInfo.lastMatchNumber ?? 0) + 1
-            let matchNumber = startMatchNumber + MatchNumber(offset)
-            return Match(
-                matchNumber: matchNumber,
-                participant1: .participant(participants[participantIndex]),
-                participant2: .awaitingWinner(fillingRoundMatch.matchNumber),
-                kind: .default,
-                side: .winners,
-                round: roundNumber
-            )
-        }
+        let singleByeMatches = IdentifiedArray(
+            uniqueElements: zip(
+                winnerFillingRoundInfo.matches.prefix(numberOfSingleByeParticipants),
+                singleByeParticipantIndices
+            ).enumerated().map { (offset, element) in
+                let (fillingRoundMatch, participantIndex) = element
+                let startMatchNumber = (winnerFillingRoundInfo.lastMatchNumber ?? 0) + 1
+                let matchNumber = startMatchNumber + MatchNumber(offset)
+                return Match.default(
+                    matchNumber: matchNumber,
+                    participant1: .participant(participants[participantIndex]),
+                    participant2: .awaitingWinner(fillingRoundMatch.matchNumber),
+                    kind: .default,
+                    side: .winners,
+                    round: roundNumber,
+                    allMatches: winnerFillingRoundInfo.matches
+                )
+            }
+        )
         let singleByeLastMatchNumber = singleByeMatches.last?.matchNumber
 
         let zeroByeMatchIndices = stride(from: singleByeMatches.count, to: winnerFillingRoundInfo.matches.count, by: 2)
-        let zeroByeMatches = zeroByeMatchIndices.enumerated().map { (offset, matchIndex) in
-            let startMatchNumber = (singleByeLastMatchNumber ?? winnerFillingRoundInfo.lastMatchNumber ?? 0) + 1
-            let matchNumber = startMatchNumber + MatchNumber(offset)
-            return Match(
-                matchNumber: matchNumber,
-                participant1: .awaitingWinner(winnerFillingRoundInfo.matches[matchIndex].matchNumber),
-                participant2: .awaitingWinner(winnerFillingRoundInfo.matches[matchIndex + 1].matchNumber),
-                kind: .default,
-                side: .winners,
-                round: roundNumber
-            )
-        }
+        let zeroByeMatches = IdentifiedArray(
+            uniqueElements: zeroByeMatchIndices.enumerated().map { (offset, matchIndex) in
+                let startMatchNumber = (singleByeLastMatchNumber ?? winnerFillingRoundInfo.lastMatchNumber ?? 0) + 1
+                let matchNumber = startMatchNumber + MatchNumber(offset)
+                return Match.default(
+                    matchNumber: matchNumber,
+                    participant1: .awaitingWinner(winnerFillingRoundInfo.matches[matchIndex].matchNumber),
+                    participant2: .awaitingWinner(winnerFillingRoundInfo.matches[matchIndex + 1].matchNumber),
+                    kind: .default,
+                    side: .winners,
+                    round: roundNumber,
+                    allMatches: winnerFillingRoundInfo.matches + singleByeMatches
+                )
+            }
+        )
         let zeroByeLastMatchNumber = zeroByeMatches.last?.matchNumber
 
         let everyOtherDoubleByeParticipant = stride(
@@ -206,18 +218,21 @@ private extension Bracket {
             to: winnerFillingRoundInfo.numberOfParticipants + numberOfDoubleByeParticipants,
             by: 2
         )
-        let doubleByeMatches = everyOtherDoubleByeParticipant.enumerated().map { (offset, participantIndex) in
-            let startMatchNumber = (zeroByeLastMatchNumber ?? singleByeLastMatchNumber ?? winnerFillingRoundInfo.lastMatchNumber ?? 0) + 1
-            let matchNumber = startMatchNumber + MatchNumber(offset)
-            return Match(
-                matchNumber: matchNumber,
-                participant1: .participant(participants[participantIndex]),
-                participant2: .participant(participants[participantIndex + 1]),
-                kind: .default,
-                side: .winners,
-                round: roundNumber
-            )
-        }
+        let doubleByeMatches = IdentifiedArray(
+            uniqueElements: everyOtherDoubleByeParticipant.enumerated().map { (offset, participantIndex) in
+                let startMatchNumber = (zeroByeLastMatchNumber ?? singleByeLastMatchNumber ?? winnerFillingRoundInfo.lastMatchNumber ?? 0) + 1
+                let matchNumber = startMatchNumber + MatchNumber(offset)
+                return Match.default(
+                    matchNumber: matchNumber,
+                    participant1: .participant(participants[participantIndex]),
+                    participant2: .participant(participants[participantIndex + 1]),
+                    kind: .default,
+                    side: .winners,
+                    round: roundNumber,
+                    allMatches: winnerFillingRoundInfo.matches + singleByeMatches + zeroByeMatches
+                )
+            }
+        )
         let doubleByeLastMatchNumber = doubleByeMatches.last?.matchNumber
 
         let lastMatchNumber = (doubleByeLastMatchNumber ?? zeroByeLastMatchNumber ?? singleByeLastMatchNumber)!
@@ -277,7 +292,7 @@ private extension Bracket {
     static func priorityOrderedWinnerMatchParticipants(
         winnerFillingRoundInfo: WinnerFillingRoundInfo,
         winnerFirstFilledRoundInfo: WinnerFirstFilledRoundInfo
-    ) -> [Match] {
+    ) -> IdentifiedArrayOf<Match> {
         return winnerFirstFilledRoundInfo.doubleByeMatchInfo.matches
         + winnerFillingRoundInfo.matches
         + winnerFirstFilledRoundInfo.singleByeMatchInfo.matches
@@ -285,7 +300,7 @@ private extension Bracket {
     }
 
     struct LoserFillingRoundInfo: Equatable {
-        let matches: [Match]
+        let matches: IdentifiedArrayOf<Match>
         let lastMatchNumber: MatchNumber
     }
     static func generateLoserFillingRoundInfo(
@@ -307,18 +322,21 @@ private extension Bracket {
             .prefix(numberOfParticipants)
             .map { match in MatchParticipant.awaitingLoser(match.matchNumber) }
         let startMatchNumber = winnerFirstFilledRoundInfo.lastMatchNumber + 1
-        let matches = stride(from: 0, to: matchParticipants.endIndex, by: 2)
-            .enumerated()
-            .map { offset, matchParticipantIndex in
-                Match(
-                    matchNumber: startMatchNumber + MatchNumber(offset),
-                    participant1: matchParticipants[matchParticipantIndex],
-                    participant2: matchParticipants[matchParticipantIndex + 1],
-                    kind: .default,
-                    side: .losers,
-                    round: 1
-                )
-            }
+        let matches = IdentifiedArray(
+            uniqueElements: stride(from: 0, to: matchParticipants.endIndex, by: 2)
+                .enumerated()
+                .map { offset, matchParticipantIndex in
+                    Match.default(
+                        matchNumber: startMatchNumber + MatchNumber(offset),
+                        participant1: matchParticipants[matchParticipantIndex],
+                        participant2: matchParticipants[matchParticipantIndex + 1],
+                        kind: .default,
+                        side: .losers,
+                        round: 1,
+                        allMatches: []
+                    )
+                }
+        )
         return LoserFillingRoundInfo(
             matches: matches,
             lastMatchNumber: matches.last!.matchNumber
@@ -332,24 +350,24 @@ private extension Bracket {
         let lastMatchNumber: MatchNumber
         struct SingleByeMatchInfo: Equatable {
             let numberOfParticipants: Int
-            let matches: [Match]
+            let matches: IdentifiedArrayOf<Match>
             let lastMatchNumber: MatchNumber?
         }
         let singleByeMatchInfo: SingleByeMatchInfo
         struct ZeroByeMatchInfo: Equatable {
-            let matches: [Match]
+            let matches: IdentifiedArrayOf<Match>
             let lastMatchNumber: MatchNumber?
         }
         let zeroByeMatchInfo: ZeroByeMatchInfo
         struct DoubleByeMatchInfo: Equatable {
             let numberOfMatches: Int
             let numberOfParticipants: Int
-            let matches: [Match]
+            let matches: IdentifiedArrayOf<Match>
             let lastMatchNumber: MatchNumber?
         }
         let doubleByeMatchInfo: DoubleByeMatchInfo
 
-        var matches: [Match] {
+        var matches: IdentifiedArrayOf<Match> {
             singleByeMatchInfo.matches + zeroByeMatchInfo.matches + doubleByeMatchInfo.matches
         }
     }
@@ -387,13 +405,14 @@ private extension Bracket {
             let (fillingRoundMatch, byeParticipant) = element
             let startMatchNumber = loserFillingRoundInfo.lastMatchNumber + 1
             let matchNumber = startMatchNumber + MatchNumber(offset)
-            return Match(
+            return Match.default(
                 matchNumber: matchNumber,
                 participant1: byeParticipant,
                 participant2: .awaitingWinner(fillingRoundMatch.matchNumber),
                 kind: .default,
                 side: .losers,
-                round: roundNumber
+                round: roundNumber,
+                allMatches: loserFillingRoundInfo.matches
             )
         }
         let singleByeLastMatchNumber = singleByeMatches.last?.matchNumber
@@ -407,13 +426,14 @@ private extension Bracket {
         let zeroByeMatches = everyOtherZeroByeFillingMatch.enumerated().map { (offset, matchIndex) in
             let startMatchNumber = (singleByeLastMatchNumber ?? loserFillingRoundInfo.lastMatchNumber) + 1
             let matchNumber = startMatchNumber + MatchNumber(offset)
-            return Match(
+            return Match.default(
                 matchNumber: matchNumber,
                 participant1: .awaitingWinner(zeroByeFillingMatches[matchIndex].matchNumber),
                 participant2: .awaitingWinner(zeroByeFillingMatches[matchIndex + 1].matchNumber),
                 kind: .default,
                 side: .losers,
-                round: roundNumber
+                round: roundNumber,
+                allMatches: loserFillingRoundInfo.matches
             )
         }
         let zeroByeLastMatchNumber = zeroByeMatches.last?.matchNumber
@@ -427,13 +447,14 @@ private extension Bracket {
         let doubleByeMatches = everyOtherDoubleByeParticipant.enumerated().map { (offset, participantIndex) in
             let startMatchNumber = (zeroByeLastMatchNumber ?? singleByeLastMatchNumber ?? loserFillingRoundInfo.lastMatchNumber) + 1
             let matchNumber = startMatchNumber + MatchNumber(offset)
-            return Match(
+            return Match.default(
                 matchNumber: matchNumber,
                 participant1: doubleByeParticipants[participantIndex],
                 participant2: doubleByeParticipants[participantIndex + 1],
                 kind: .default,
                 side: .losers,
-                round: roundNumber
+                round: roundNumber,
+                allMatches: loserFillingRoundInfo.matches
             )
         }
         let doubleByeLastMatchNumber = doubleByeMatches.last?.matchNumber
@@ -447,17 +468,17 @@ private extension Bracket {
             lastMatchNumber: lastMatchNumber,
             singleByeMatchInfo: LoserFirstFilledRoundInfo.SingleByeMatchInfo(
                 numberOfParticipants: numberOfSingleByeParticipants,
-                matches: singleByeMatches,
+                matches: IdentifiedArray(uniqueElements: singleByeMatches),
                 lastMatchNumber: singleByeLastMatchNumber
             ),
             zeroByeMatchInfo: LoserFirstFilledRoundInfo.ZeroByeMatchInfo(
-                matches: zeroByeMatches,
+                matches: IdentifiedArray(uniqueElements: zeroByeMatches),
                 lastMatchNumber: zeroByeLastMatchNumber
             ),
             doubleByeMatchInfo: LoserFirstFilledRoundInfo.DoubleByeMatchInfo(
                 numberOfMatches: numberOfDoubleByeMatches,
                 numberOfParticipants: numberOfDoubleByeParticipants,
-                matches: doubleByeMatches,
+                matches: IdentifiedArray(uniqueElements: doubleByeMatches),
                 lastMatchNumber: doubleByeLastMatchNumber
             )
         )
@@ -469,21 +490,24 @@ private extension Bracket {
 private extension Bracket {
 
     struct RecursiveRoundsInfo {
-        let matches: [Match]
+        let matches: IdentifiedArrayOf<Match>
     }
     static func generateRecursiveRoundsInfo(
+        winnerFillingRoundInfo: WinnerFillingRoundInfo,
         winnerFirstFilledRoundInfo: WinnerFirstFilledRoundInfo,
+        loserFillingRoundInfo: LoserFillingRoundInfo,
         loserFirstFilledRoundInfo: LoserFirstFilledRoundInfo
     ) -> RecursiveRoundsInfo {
 
         struct NextWinnerRoundMatches {
-            let matches: [Match]
+            let matches: IdentifiedArrayOf<Match>
             let lastMatchNumber: MatchNumber
         }
         func nextWinnerRoundMatches(
-            previousWinnerRoundMatches: [Match],
+            previousWinnerRoundMatches: IdentifiedArrayOf<Match>,
             startMatchNumber: MatchNumber,
-            round: Round
+            round: Round,
+            allPreviousMatches: IdentifiedArrayOf<Match>
         ) -> NextWinnerRoundMatches {
             guard previousWinnerRoundMatches.count > 1 else {
                 return NextWinnerRoundMatches(
@@ -495,7 +519,7 @@ private extension Bracket {
                 .enumerated()
                 .map { offset, matchIndex in
                     let matchNumber = startMatchNumber + MatchNumber(offset)
-                    return Match(
+                    return Match.default(
                         matchNumber: matchNumber,
                         participant1: .awaitingWinner(
                             previousWinnerRoundMatches[matchIndex].matchNumber
@@ -506,26 +530,28 @@ private extension Bracket {
                         kind: previousWinnerRoundMatches.count == 2 ?
                             .championship(.winners) : .default,
                         side: .winners,
-                        round: round
+                        round: round,
+                        allMatches: allPreviousMatches
                     )
                 }
             let lastMatchNumber = matches.last?.matchNumber ?? startMatchNumber
             return NextWinnerRoundMatches(
-                matches: matches,
+                matches: IdentifiedArray(uniqueElements: matches),
                 lastMatchNumber: lastMatchNumber
             )
         }
 
         struct NextLoserRoundMatches {
-            let matches: [Match]
+            let matches: IdentifiedArrayOf<Match>
             let lastMatchNumber: MatchNumber
             let didIncorporateWinnerRoundMatches: Bool
         }
         func nextLoserRoundMatches(
-            latestUnincorportatedWinnerRoundMatches: [Match],
-            previousLoserRoundMatches: [Match],
+            latestUnincorportatedWinnerRoundMatches: IdentifiedArrayOf<Match>,
+            previousLoserRoundMatches: IdentifiedArrayOf<Match>,
             startMatchNumber: MatchNumber,
-            round: Round
+            round: Round,
+            allPreviousMatches: IdentifiedArrayOf<Match>
         ) -> NextLoserRoundMatches {
             let shouldIncorporateWinnerRound = previousLoserRoundMatches.count == latestUnincorportatedWinnerRoundMatches.count
             if shouldIncorporateWinnerRound {
@@ -535,18 +561,19 @@ private extension Bracket {
                 ).enumerated().map { offset, tuple in
                     let (winnerMatch, loserMatch) = tuple
                     let matchNumber = startMatchNumber + MatchNumber(offset)
-                    return Match(
+                    return Match.default(
                         matchNumber: matchNumber,
                         participant1: .awaitingLoser(winnerMatch.matchNumber),
                         participant2: .awaitingWinner(loserMatch.matchNumber),
                         kind: .default,
                         side: .losers,
-                        round: round
+                        round: round,
+                        allMatches: allPreviousMatches
                     )
                 }
                 let lastMatchNumber = matches.last?.matchNumber ?? startMatchNumber
                 return NextLoserRoundMatches(
-                    matches: matches,
+                    matches: IdentifiedArray(uniqueElements: matches),
                     lastMatchNumber: lastMatchNumber,
                     didIncorporateWinnerRoundMatches: true
                 )
@@ -562,7 +589,7 @@ private extension Bracket {
                     .enumerated()
                     .map { offset, matchIndex in
                         let matchNumber = startMatchNumber + MatchNumber(offset)
-                        return Match(
+                        return Match.default(
                             matchNumber: matchNumber,
                             participant1: .awaitingWinner(
                                 previousLoserRoundMatches[matchIndex].matchNumber
@@ -572,12 +599,13 @@ private extension Bracket {
                             ),
                             kind: previousLoserRoundMatches.count == 2 ? .championship(.losers) : .default,
                             side: .losers,
-                            round: round
+                            round: round,
+                            allMatches: previousLoserRoundMatches
                         )
                     }
                 let lastMatchNumber = matches.last?.matchNumber ?? startMatchNumber
                 return NextLoserRoundMatches(
-                    matches: matches,
+                    matches: IdentifiedArray(uniqueElements: matches),
                     lastMatchNumber: lastMatchNumber,
                     didIncorporateWinnerRoundMatches: false
                 )
@@ -585,17 +613,19 @@ private extension Bracket {
         }
 
         func recurse(
-            previousWinnerMatches: [Match],
-            previousLoserMatches: [Match],
+            previousWinnerMatches: IdentifiedArrayOf<Match>,
+            previousLoserMatches: IdentifiedArrayOf<Match>,
             startMatchNumber: MatchNumber,
             winnerRound: Round,
             loserRound: Round,
-            unincorporatedWinnerMatches: inout [[Match]]
-        ) -> [Match] {
+            unincorporatedWinnerMatches: inout [IdentifiedArrayOf<Match>],
+            allPreviousMatches: IdentifiedArrayOf<Match>
+        ) -> IdentifiedArrayOf<Match> {
             let nextWinnerRoundMatches = nextWinnerRoundMatches(
                 previousWinnerRoundMatches: previousWinnerMatches,
                 startMatchNumber: startMatchNumber,
-                round: winnerRound
+                round: winnerRound,
+                allPreviousMatches: allPreviousMatches
             )
             unincorporatedWinnerMatches.append(nextWinnerRoundMatches.matches)
             let nextUnincorporatedWinnerMatches = unincorporatedWinnerMatches.first!
@@ -603,7 +633,8 @@ private extension Bracket {
                 latestUnincorportatedWinnerRoundMatches: nextUnincorporatedWinnerMatches,
                 previousLoserRoundMatches: previousLoserMatches,
                 startMatchNumber: nextWinnerRoundMatches.lastMatchNumber + 1,
-                round: loserRound
+                round: loserRound,
+                allPreviousMatches: allPreviousMatches
             )
             if nextLoserRoundMatches.didIncorporateWinnerRoundMatches {
                 unincorporatedWinnerMatches.removeFirst()
@@ -618,38 +649,109 @@ private extension Bracket {
                 startMatchNumber: nextLoserRoundMatches.lastMatchNumber + 1,
                 winnerRound: winnerRound + 1,
                 loserRound: loserRound + 1,
-                unincorporatedWinnerMatches: &unincorporatedWinnerMatches
+                unincorporatedWinnerMatches: &unincorporatedWinnerMatches,
+                allPreviousMatches: allPreviousMatches + currentIterationMatches
             )
         }
 
-        var unincorporatedWinnerMatches: [[Match]] = []
-        let matches = recurse(
+        let allPreviousMatches = winnerFillingRoundInfo.matches
+        + winnerFirstFilledRoundInfo.matches
+        + loserFillingRoundInfo.matches
+        + loserFirstFilledRoundInfo.matches
+        var unincorporatedWinnerMatches: [IdentifiedArrayOf<Match>] = []
+        let recursiveMatches = recurse(
             previousWinnerMatches: winnerFirstFilledRoundInfo.matches,
             previousLoserMatches: loserFirstFilledRoundInfo.matches,
             startMatchNumber: loserFirstFilledRoundInfo.lastMatchNumber + 1,
             winnerRound: winnerFirstFilledRoundInfo.roundNumber + 1,
             loserRound: loserFirstFilledRoundInfo.roundNumber + 1,
-            unincorporatedWinnerMatches: &unincorporatedWinnerMatches
+            unincorporatedWinnerMatches: &unincorporatedWinnerMatches,
+            allPreviousMatches: allPreviousMatches
         )
 
-        guard let winnerFinal = matches.first(where: { $0.kind == .championship(.winners) }),
-              let loserFinal = matches.first(where: { $0.kind == .championship(.losers) }),
-              let maxMatchNumber = matches.map(\.matchNumber).max(),
-              let maxWinnerRound = matches.filter({ $0.side == .winners }).map(\.round).max()
+        guard let winnerFinal = recursiveMatches.first(where: { $0.kind == .championship(.winners) }),
+              let loserFinal = recursiveMatches.first(where: { $0.kind == .championship(.losers) }),
+              let maxMatchNumber = recursiveMatches.map(\.matchNumber).max(),
+              let maxWinnerRound = recursiveMatches.filter({ $0.side == .winners }).map(\.round).max()
         else {
             fatalError()
         }
 
-        let championshipMatch = Match(
+        let championshipMatch = Match.default(
             matchNumber: maxMatchNumber + 1,
             participant1: .awaitingWinner(winnerFinal.matchNumber),
             participant2: .awaitingWinner(loserFinal.matchNumber),
             kind: .championship(.overall),
             side: .winners,
-            round: maxWinnerRound + 1
+            round: maxWinnerRound + 1,
+            allMatches: allPreviousMatches + recursiveMatches
         )
 
-        return RecursiveRoundsInfo(matches: matches + [championshipMatch])
+        return RecursiveRoundsInfo(matches: recursiveMatches + [championshipMatch])
+    }
+
+}
+
+private extension Match {
+
+    static func `default`(
+        matchNumber: MatchNumber,
+        participant1: MatchParticipant,
+        participant2: MatchParticipant,
+        kind: MatchKind,
+        side: MatchBracketSide,
+        round: Round,
+        allMatches: IdentifiedArrayOf<Match>
+    ) -> Match {
+        return Match(
+            matchNumber: matchNumber,
+            participant1: participant1,
+            participant2: participant2,
+            winner: nil,
+            heightScaleFactor: defaultScaleFactor(
+                participant1: participant1,
+                participant2: participant2,
+                side: side,
+                allMatches: allMatches
+            ),
+            kind: kind,
+            side: side,
+            round: round
+        )
+    }
+
+    private static func defaultScaleFactor(
+        participant1: MatchParticipant,
+        participant2: MatchParticipant,
+        side: MatchBracketSide,
+        allMatches: IdentifiedArrayOf<Match>
+    ) -> CGFloat {
+        var base: CGFloat = 0
+        if
+            case .awaitingWinner(let p1ID) = participant1,
+            let p1 = allMatches[id: p1ID],
+            p1.side == side {
+
+            base += defaultScaleFactor(
+                participant1: p1.participant1,
+                participant2: p1.participant2,
+                side: side,
+                allMatches: allMatches
+            )
+        }
+        if
+            case .awaitingWinner(let p2ID) = participant2,
+            let p2 = allMatches[id: p2ID],
+            p2.side == side {
+
+            base += defaultScaleFactor(
+                participant1: p2.participant1,
+                participant2: p2.participant2,
+                side: side,
+                allMatches: allMatches
+            )
+        }
+        return max(base, 1)
     }
 
 }
