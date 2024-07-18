@@ -10,4 +10,6 @@ public extension CFExternalTargetName {
     static let snapshotTesting: Self = "SnapshotTesting"
     static let urlRouting: Self = "URLRouting"
 
+    static let confetti: Self = "ConfettiSwiftUI"
+
 }

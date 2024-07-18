@@ -23,5 +23,7 @@ let package = Package(
         .package(url: "https://github.com/pointfreeco/swift-snapshot-testing", from: .init(1, 16, 1)),
         .package(url: "https://github.com/pointfreeco/swift-tagged", from: .init(0, 10, 0)),
         .package(url: "https://github.com/pointfreeco/swift-url-routing", from: .init(0, 6, 0)),
+        // Confetti
+        .package(url: "https://github.com/simibac/ConfettiSwiftUI", branch: "master")
     ]
 )

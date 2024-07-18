@@ -16,6 +16,7 @@ public extension CFTarget {
         externalDependencies: [
             .api,
             .composableArchitecture,
+            .confetti,
         ]
     )
 
