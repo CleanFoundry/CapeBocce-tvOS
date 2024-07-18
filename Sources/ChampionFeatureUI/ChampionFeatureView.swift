@@ -20,9 +20,15 @@ public struct ChampionFeatureView: View {
                 .containerRelativeFrame([.horizontal]) { value, _ in value / 3 }
             Text("\(store.participant.name) (\(store.participant.country.name)) won!")
                 .font(.largeTitle)
-            Spacer()
-            ProgressView()
-            Spacer()
+            VStack(spacing: 0) {
+                if let foo = "" as String? {
+
+                } else {
+                    Spacer()
+                    ProgressView()
+                }
+                Spacer()
+            }
         }
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
