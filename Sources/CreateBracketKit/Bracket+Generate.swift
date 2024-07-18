@@ -66,7 +66,7 @@ public extension Bracket {
 private extension Bracket {
 
     static var viablePowersOfTwo: [Int] {
-        [1, 2, 4, 8, 16]
+        [1, 2, 4, 8, 16, 32, 64]
     }
 
     struct BasicInfo: Equatable {

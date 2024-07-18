@@ -1,5 +1,6 @@
 import API
 import ComposableArchitecture
+import CountryKit
 import CreateBracketFormFeatureKit
 import CreateBracketKit
 import Foundation
@@ -35,6 +36,13 @@ import Foundation
             destination: DestinationFeature.State? = nil
         ) {
             self.destination = destination
+//            let testBracket = try! Bracket.generate(
+//                name: "Crazy Bracket",
+//                participants: Country.load().prefix(25).enumerated().map { offset, country in
+//                    Participant(name: "Player \(offset)", countryID: country.id)
+//                }
+//            )
+//            brackets.insert(testBracket, at: 0)
 //            brackets = []
         }
 
