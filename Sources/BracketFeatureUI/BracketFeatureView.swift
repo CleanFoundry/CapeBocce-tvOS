@@ -40,7 +40,21 @@ public struct BracketFeatureView: View {
                 }
                 .navigationTitle(store.bracketName)
             }
-            .confettiCannon(counter: .constant(1))
+            .onAppear {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    store.send(.didAppear)
+                }
+            }
+            .confettiCannon(
+                counter: .init(get: { store.showConfetti ? 1 : 0 }, set: { _ in fatalError() }),
+                num: 80,
+                confettis: ConfettiType.allCases + [.text("🏆"), .text("🏅")],
+                confettiSize: 32,
+                rainHeight: 2000,
+                radius: 1200,
+                repetitions: 100,
+                repetitionInterval: 8
+            )
         }
     }
 }
