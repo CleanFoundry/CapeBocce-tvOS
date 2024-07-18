@@ -21,7 +21,6 @@ struct MatchButtonView: View {
             Spacer()
             if case let .championship(championshipKind) = match.kind {
                 Text(championshipLabelText(championshipKind))
-                    .multilineTextAlignment(.center)
                     .font(.headline)
                     .offset(y: isFocused ? -20 : 0)
                     .scaleEffect(isFocused ? 1.2 : 1)
@@ -33,7 +32,11 @@ struct MatchButtonView: View {
             .focused($isFocused, equals: true)
             .buttonStyle(MatchButtonStyle(focused: isFocused))
             if case .championship(.overall) = match.kind {
-                Text("WAWB must win twice")
+                (participantText(match.participant2) + Text(" must win twice"))
+                    .font(.footnote)
+                    .offset(y: isFocused ? 20 : 0)
+                    .scaleEffect(isFocused ? 1.2 : 1)
+                    .animation(.snappy, value: isFocused)
             }
             Spacer()
         }
@@ -88,17 +91,17 @@ private extension MatchButtonView {
     }
 
     func participantLabel(
-        _ participant: MatchParticipant,
+        _ matchParticipant: MatchParticipant,
         focused: Bool
     ) -> some View {
         HStack(spacing: 8) {
-            switch participant {
+            switch matchParticipant {
             case let .participant(participant):
                 participant.country.bundleAsset
                     .resizable()
                     .frame(width: 60, height: 40, alignment: .bottomTrailing)
                 HStack(alignment: .firstTextBaseline, spacing: 0) {
-                    Text(participant.name)
+                    participantText(matchParticipant)
                         .foregroundStyle(focused ? .black : .primary)
                         .lineLimit(1)
                         .layoutPriority(2)
@@ -120,7 +123,7 @@ private extension MatchButtonView {
                 }
             case let .awaitingWinner(matchNumber):
                 HStack(spacing: 0) {
-                    Text("Winner of \(Image(systemName: "\(matchNumber).square"))")
+                    participantText(matchParticipant)
                         .foregroundStyle(focused ? .black : .primary)
                     Spacer()
                 }
@@ -129,7 +132,7 @@ private extension MatchButtonView {
                 }
             case let .awaitingLoser(matchNumber):
                 HStack(spacing: 0) {
-                    Text("Loser of \(Image(systemName: "\(matchNumber).square"))")
+                    participantText(matchParticipant)
                         .foregroundStyle(focused ? .black : .primary)
                     Spacer()
                 }
@@ -137,6 +140,17 @@ private extension MatchButtonView {
                     participantBorderView(along: .horizontal, focused: focused)
                 }
             }
+        }
+    }
+
+    func participantText(_ participant: MatchParticipant) -> Text {
+        switch participant {
+        case .participant(let participant):
+            Text(participant.name)
+        case .awaitingWinner(let matchNumber):
+            Text("Winner of \(Image(systemName: "\(matchNumber).square"))")
+        case .awaitingLoser(let matchNumber):
+            Text("Loser of \(Image(systemName: "\(matchNumber).square"))")
         }
     }
 
@@ -171,10 +185,14 @@ private extension MatchButtonView {
 
     func heightScaleFactor(for match: Match) -> CGFloat {
         var base: CGFloat = 0
-        if case .awaitingWinner(let p1ID) = match.participant1, let p1 = allMatches[id: p1ID] {
+        if case .awaitingWinner(let p1ID) = match.participant1,
+           let p1 = allMatches[id: p1ID],
+           p1.side == match.side {
             base += heightScaleFactor(for: p1)
         }
-        if case .awaitingWinner(let p2ID) = match.participant2, let p2 = allMatches[id: p2ID] {
+        if case .awaitingWinner(let p2ID) = match.participant2,
+           let p2 = allMatches[id: p2ID],
+           p2.side == match.side {
             base += heightScaleFactor(for: p2)
         }
         return max(base, 1)

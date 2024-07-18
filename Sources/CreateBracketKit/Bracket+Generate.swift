@@ -608,7 +608,7 @@ private extension Bracket {
             if nextLoserRoundMatches.didIncorporateWinnerRoundMatches {
                 unincorporatedWinnerMatches.removeFirst()
             }
-            let currentIterationMatches = nextWinnerRoundMatches.matches + nextLoserRoundMatches.matches
+            var currentIterationMatches = nextWinnerRoundMatches.matches + nextLoserRoundMatches.matches
             guard !currentIterationMatches.isEmpty else {
                 return []
             }
@@ -632,7 +632,24 @@ private extension Bracket {
             unincorporatedWinnerMatches: &unincorporatedWinnerMatches
         )
 
-        return RecursiveRoundsInfo(matches: matches)
+        guard let winnerFinal = matches.first(where: { $0.kind == .championship(.winners) }),
+              let loserFinal = matches.first(where: { $0.kind == .championship(.losers) }),
+              let maxMatchNumber = matches.map(\.matchNumber).max(),
+              let maxWinnerRound = matches.filter({ $0.side == .winners }).map(\.round).max()
+        else {
+            fatalError()
+        }
+
+        let championshipMatch = Match(
+            matchNumber: maxMatchNumber + 1,
+            participant1: .awaitingWinner(winnerFinal.matchNumber),
+            participant2: .awaitingWinner(loserFinal.matchNumber),
+            kind: .championship(.overall),
+            side: .winners,
+            round: maxWinnerRound + 1
+        )
+
+        return RecursiveRoundsInfo(matches: matches + [championshipMatch])
     }
 
 }
