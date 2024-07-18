@@ -71,7 +71,9 @@ import Foundation
                     participants: participants
                 )
                 state.brackets.updateOrAppend(bracket)
-                state.recentParticipants = .init(uniqueElements: participants)
+                for participant in participants {
+                    state.recentParticipants.updateOrInsert(participant, at: 0)
+                }
                 return .send(.startedBracket(bracket))
             case
                 let .startedBracket(bracket),
