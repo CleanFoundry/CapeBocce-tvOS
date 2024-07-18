@@ -133,6 +133,7 @@ private extension MatchButtonView {
                         )
                         .lineLimit(1)
                         .layoutPriority(2)
+                        .contentTransition(.interpolate)
                     Spacer()
                         .frame(height: 0)
                         .frame(minWidth: 8)
@@ -149,6 +150,7 @@ private extension MatchButtonView {
                             .lineLimit(1)
                             .minimumScaleFactor(0.6)
                             .layoutPriority(1)
+                            .contentTransition(.interpolate)
                         Spacer().frame(width: 8)
                     }
                 }

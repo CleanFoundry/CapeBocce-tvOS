@@ -600,7 +600,7 @@ private extension Bracket {
                             kind: previousLoserRoundMatches.count == 2 ? .championship(.losers) : .default,
                             side: .losers,
                             round: round,
-                            allMatches: previousLoserRoundMatches
+                            allMatches: allPreviousMatches
                         )
                     }
                 let lastMatchNumber = matches.last?.matchNumber ?? startMatchNumber

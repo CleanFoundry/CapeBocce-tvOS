@@ -1,3 +1,4 @@
+import APIExtensions
 import AllBracketsFeatureKit
 import ComposableArchitecture
 import SwiftUI
@@ -15,8 +16,24 @@ public struct AllBracketsFeatureView: View {
             ScrollView {
                 ForEach(store.brackets) { bracket in
                     HStack {
-                        Button(bracket.name) {
+                        Button {
                             store.send(.tappedBracket(bracket))
+                        } label: {
+                            HStack {
+                                Text(bracket.name)
+                                Spacer()
+                                if let winner = bracket.winner {
+                                    HStack(spacing: 8) {
+                                        Text(winner.name)
+                                        winner.country.bundleAsset
+                                            .resizable()
+                                            .frame(width: 60, height: 40)
+                                        Text("🏆")
+                                    }
+                                } else {
+                                    Text("In Progress")
+                                }
+                            }
                         }
                         .tint(nil)
                         .buttonStyle(.plain)
