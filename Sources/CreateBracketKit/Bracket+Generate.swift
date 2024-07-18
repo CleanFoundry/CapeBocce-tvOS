@@ -39,7 +39,7 @@ public extension Bracket {
             participants: participants
         )
 
-        let winnerRecursiveRoundsInfo = generateWinnerRecursiveRoundsInfo(
+        let recursiveRoundsInfo = generateRecursiveRoundsInfo(
             winnerFirstFilledRoundInfo: winnerFirstFilledRoundInfo,
             loserFirstFilledRoundInfo: loserFirstFilledRoundInfo
         )
@@ -48,7 +48,7 @@ public extension Bracket {
         + winnerFirstFilledRoundInfo.matches
         + loserFillingRoundInfo.matches
         + loserFirstFilledRoundInfo.matches
-        + winnerRecursiveRoundsInfo.matches
+        + recursiveRoundsInfo.matches
 
         return Bracket(
             name: "\(name) (\(participants.count))",
@@ -63,7 +63,7 @@ public extension Bracket {
 private extension Bracket {
 
     static var viablePowersOfTwo: [Int] {
-        [4, 8, 16]
+        [1, 2, 4, 8, 16]
     }
 
     struct BasicInfo: Equatable {
@@ -512,5 +512,166 @@ private extension Bracket {
         )
     }
 
+
+}
+
+private extension Bracket {
+
+    struct RecursiveRoundsInfo {
+        let matches: [Match]
+    }
+    static func generateRecursiveRoundsInfo(
+        winnerFirstFilledRoundInfo: WinnerFirstFilledRoundInfo,
+        loserFirstFilledRoundInfo: LoserFirstFilledRoundInfo
+    ) -> RecursiveRoundsInfo {
+
+        struct NextWinnerRoundMatches {
+            let matches: [Match]
+            let lastMatchNumber: MatchNumber
+        }
+        func nextWinnerRoundMatches(
+            previousWinnerRoundMatches: [Match],
+            startMatchNumber: MatchNumber,
+            round: Round
+        ) -> NextWinnerRoundMatches {
+            guard previousWinnerRoundMatches.count.isMultiple(of: 2) else {
+                fatalError("Need even number of matches")
+            }
+            let matches = stride(from: 0, to: previousWinnerRoundMatches.endIndex, by: 2)
+                .enumerated()
+                .map { offset, matchIndex in
+                    let matchNumber = startMatchNumber + MatchNumber(offset)
+                    return Match(
+                        matchNumber: matchNumber,
+                        participant1: .awaitingWinner(
+                            previousWinnerRoundMatches[matchIndex].matchNumber
+                        ),
+                        participant2: .awaitingWinner(
+                            previousWinnerRoundMatches[matchIndex + 1].matchNumber
+                        ),
+                        kind: previousWinnerRoundMatches.count == 2 ? .championship : .default,
+                        side: .winners,
+                        round: round
+                    )
+                }
+            let lastMatchNumber = matches.last?.matchNumber ?? startMatchNumber
+            return NextWinnerRoundMatches(
+                matches: matches,
+                lastMatchNumber: lastMatchNumber
+            )
+        }
+
+        struct NextLoserRoundMatches {
+            let matches: [Match]
+            let lastMatchNumber: MatchNumber
+            let didIncorporateWinnerRoundMatches: Bool
+        }
+        func nextLoserRoundMatches(
+            latestUnincorportatedWinnerRoundMatches: [Match],
+            previousLoserRoundMatches: [Match],
+            startMatchNumber: MatchNumber,
+            round: Round
+        ) -> NextLoserRoundMatches {
+            let shouldIncorporateWinnerRound = previousLoserRoundMatches.count == latestUnincorportatedWinnerRoundMatches.count
+            if shouldIncorporateWinnerRound {
+                let matches = zip(
+                    latestUnincorportatedWinnerRoundMatches,
+                    previousLoserRoundMatches
+                ).enumerated().map { offset, tuple in
+                    let (winnerMatch, loserMatch) = tuple
+                    let matchNumber = startMatchNumber + MatchNumber(offset)
+                    return Match(
+                        matchNumber: matchNumber,
+                        participant1: .awaitingLoser(winnerMatch.matchNumber),
+                        participant2: .awaitingWinner(loserMatch.matchNumber),
+                        kind: .default,
+                        side: .losers,
+                        round: round
+                    )
+                }
+                let lastMatchNumber = matches.last?.matchNumber ?? startMatchNumber
+                return NextLoserRoundMatches(
+                    matches: matches,
+                    lastMatchNumber: lastMatchNumber,
+                    didIncorporateWinnerRoundMatches: true
+                )
+            } else {
+                let matches = stride(from: 0, to: previousLoserRoundMatches.endIndex, by: 2)
+                    .enumerated()
+                    .map { offset, matchIndex in
+                        let matchNumber = startMatchNumber + MatchNumber(offset)
+                        return Match(
+                            matchNumber: matchNumber,
+                            participant1: .awaitingWinner(
+                                previousLoserRoundMatches[matchIndex].matchNumber
+                            ),
+                            participant2: .awaitingWinner(
+                                previousLoserRoundMatches[matchIndex + 1].matchNumber
+                            ),
+                            kind: .default,
+                            side: .losers,
+                            round: round
+                        )
+                    }
+                let lastMatchNumber = matches.last?.matchNumber ?? startMatchNumber
+                return NextLoserRoundMatches(
+                    matches: matches,
+                    lastMatchNumber: lastMatchNumber,
+                    didIncorporateWinnerRoundMatches: false
+                )
+            }
+        }
+
+        func recurse(
+            previousWinnerMatches: [Match],
+            previousLoserMatches: [Match],
+            startMatchNumber: MatchNumber,
+            winnerRound: Round,
+            loserRound: Round,
+            unincorporatedWinnerMatches: inout [[Match]]
+        ) -> [Match] {
+            guard previousWinnerMatches.count > 1 else {
+                return []
+            }
+            let nextWinnerRoundMatches = nextWinnerRoundMatches(
+                previousWinnerRoundMatches: previousWinnerMatches,
+                startMatchNumber: startMatchNumber,
+                round: winnerRound
+            )
+            unincorporatedWinnerMatches.append(nextWinnerRoundMatches.matches)
+            let nextUnincorporatedWinnerMatches = unincorporatedWinnerMatches.first!
+            let nextLoserRoundMatches = nextLoserRoundMatches(
+                latestUnincorportatedWinnerRoundMatches: nextUnincorporatedWinnerMatches,
+                previousLoserRoundMatches: previousLoserMatches,
+                startMatchNumber: nextWinnerRoundMatches.lastMatchNumber + 1,
+                round: loserRound
+            )
+            if nextLoserRoundMatches.didIncorporateWinnerRoundMatches {
+                unincorporatedWinnerMatches.removeFirst()
+            }
+            return nextWinnerRoundMatches.matches
+            + nextLoserRoundMatches.matches
+            + recurse(
+                previousWinnerMatches: nextWinnerRoundMatches.matches,
+                previousLoserMatches: nextLoserRoundMatches.matches,
+                startMatchNumber: nextLoserRoundMatches.lastMatchNumber + 1,
+                winnerRound: winnerRound + 1,
+                loserRound: loserRound + 1,
+                unincorporatedWinnerMatches: &unincorporatedWinnerMatches
+            )
+        }
+
+        var unincorporatedWinnerMatches: [[Match]] = []
+        let matches = recurse(
+            previousWinnerMatches: winnerFirstFilledRoundInfo.matches,
+            previousLoserMatches: loserFirstFilledRoundInfo.matches,
+            startMatchNumber: loserFirstFilledRoundInfo.lastMatchNumber + 1,
+            winnerRound: winnerFirstFilledRoundInfo.roundNumber + 1,
+            loserRound: loserFirstFilledRoundInfo.roundNumber + 1,
+            unincorporatedWinnerMatches: &unincorporatedWinnerMatches
+        )
+
+        return RecursiveRoundsInfo(matches: matches)
+    }
 
 }
