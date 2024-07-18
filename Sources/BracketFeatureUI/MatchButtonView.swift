@@ -20,7 +20,7 @@ struct MatchButtonView: View {
         VStack(spacing: 0) {
             Spacer()
             if case let .championship(championshipKind) = match.kind {
-                Text("🏆 Championship 🏆")
+                Text(championshipLabelText(championshipKind))
                     .multilineTextAlignment(.center)
                     .font(.headline)
                     .offset(y: isFocused ? -20 : 0)
@@ -32,6 +32,9 @@ struct MatchButtonView: View {
             }
             .focused($isFocused, equals: true)
             .buttonStyle(MatchButtonStyle(focused: isFocused))
+            if case .championship(.overall) = match.kind {
+                Text("WAWB must win twice")
+            }
             Spacer()
         }
         .containerRelativeFrame(.vertical, alignment: .center) { availableHeight, _ in
@@ -155,6 +158,16 @@ private extension MatchButtonView {
         }
     }
 
+    func championshipLabelText(_ kind: MatchKind.MatchChampionshipKind) -> String {
+        switch kind {
+        case .losers:
+            "🥉 WAWB Final 🥉"
+        case .winners:
+            "🥈 WB Final 🥈"
+        case .overall:
+            "🏅 Championship 🏅"
+        }
+    }
 
     func heightScaleFactor(for match: Match) -> CGFloat {
         var base: CGFloat = 0
