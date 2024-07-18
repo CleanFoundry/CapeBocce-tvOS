@@ -19,7 +19,7 @@ struct MatchButtonView: View {
     var body: some View {
         VStack(spacing: 0) {
             Spacer()
-            if case .championship = match.kind {
+            if case let .championship(championshipKind) = match.kind {
                 Text("🏆 Championship 🏆")
                     .multilineTextAlignment(.center)
                     .font(.headline)

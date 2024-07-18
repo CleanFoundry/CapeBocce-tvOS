@@ -247,55 +247,6 @@ private extension Bracket {
         )
     }
 
-    struct WinnerRecursiveRoundsInfo: Equatable {
-        let matches: [Match]
-    }
-    static func generateWinnerRecursiveRoundsInfo(
-        winnerFirstFilledRoundInfo: WinnerFirstFilledRoundInfo,
-        loserFirstFilledRoundInfo: LoserFirstFilledRoundInfo
-    ) -> WinnerRecursiveRoundsInfo {
-
-        func recurse(
-            _ matches: [Match],
-            startMatchNumber: MatchNumber,
-            round: Round
-        ) -> [Match] {
-            guard matches.count > 1 else {
-                return []
-            }
-            let nextRoundMatches = stride(from: 0, to: matches.endIndex, by: 2)
-                .enumerated()
-                .map { offset, matchIndex in
-                    let matchNumber = startMatchNumber + MatchNumber(offset)
-                    return Match(
-                        matchNumber: matchNumber,
-                        participant1: .awaitingWinner(matches[matchIndex].matchNumber),
-                        participant2: .awaitingWinner(matches[matchIndex + 1].matchNumber),
-                        kind: matches.count == 2 ? .championship : .default,
-                        side: .winners,
-                        round: round
-                    )
-                }
-            let nextStartMatchNumber = nextRoundMatches.last!.matchNumber + 1
-            let nextRoundNumber = round + 1
-            return nextRoundMatches + recurse(
-                nextRoundMatches,
-                startMatchNumber: nextStartMatchNumber,
-                round: nextRoundNumber
-            )
-        }
-
-        let matches = recurse(
-            winnerFirstFilledRoundInfo.matches,
-            startMatchNumber: loserFirstFilledRoundInfo.lastMatchNumber + 1,
-            round: winnerFirstFilledRoundInfo.roundNumber + 1
-        )
-
-        return WinnerRecursiveRoundsInfo(
-            matches: matches
-        )
-    }
-
 }
 
 // MARK: - Losers Bracket
@@ -552,7 +503,8 @@ private extension Bracket {
                         participant2: .awaitingWinner(
                             previousWinnerRoundMatches[matchIndex + 1].matchNumber
                         ),
-                        kind: previousWinnerRoundMatches.count == 2 ? .championship : .default,
+                        kind: previousWinnerRoundMatches.count == 2 ?
+                            .championship(.winners) : .default,
                         side: .winners,
                         round: round
                     )
@@ -618,7 +570,7 @@ private extension Bracket {
                             participant2: .awaitingWinner(
                                 previousLoserRoundMatches[matchIndex + 1].matchNumber
                             ),
-                            kind: .default,
+                            kind: previousLoserRoundMatches.count == 2 ? .championship(.losers) : .default,
                             side: .losers,
                             round: round
                         )
