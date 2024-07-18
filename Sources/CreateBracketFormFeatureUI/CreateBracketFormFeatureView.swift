@@ -7,6 +7,7 @@ import SwiftUI
 public struct CreateBracketFormFeatureView: View {
 
     @Bindable var store: StoreOf<CreateBracketFormFeature>
+    @FocusState var focus: Participant?
 
     public init(store: StoreOf<CreateBracketFormFeature>) {
         self.store = store
@@ -33,6 +34,7 @@ public struct CreateBracketFormFeatureView: View {
                 PickCountryFeatureView(store: store)
             }
         }
+        .bind($focus, to: $store.focusedParticipant)
     }
 
 }
@@ -63,6 +65,7 @@ private extension CreateBracketFormFeatureView {
                             store.send(.removedParticipant(participant))
                         }
                     }
+                    .focused($focus, equals: participant)
                 }
             }
         }
@@ -109,6 +112,7 @@ private extension CreateBracketFormFeatureView {
                         store.send(.tappedDeleteParticipant(participant))
                     }
                 }
+                .focused($focus, equals: participant)
             }
             .tint(nil)
         } header: {

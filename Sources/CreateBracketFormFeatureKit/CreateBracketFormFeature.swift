@@ -26,6 +26,8 @@ import PickCountryFeatureKit
             }
         }
 
+        public var focusedParticipant: Participant?
+
         public init(
             bracketName: String
         ) {
@@ -98,9 +100,11 @@ import PickCountryFeatureKit
                 }
 
                 state.pickCountry = nil
+                state.focusedParticipant = state.unselectedRecentParticipants.first ?? state.focusedParticipant
                 return .none
             case let .addedRecentParticipant(participant):
                 state.selectedParticipants.insert(participant, at: 0)
+                state.focusedParticipant = state.unselectedRecentParticipants.first ?? state.focusedParticipant
                 return .none
             case let .removedParticipant(participant):
                 state.selectedParticipants.remove(participant)
