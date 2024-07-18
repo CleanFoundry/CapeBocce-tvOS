@@ -89,6 +89,14 @@ private extension CreateBracketFormFeatureView {
         participants: IdentifiedArrayOf<Participant>
     ) -> some View {
         Section {
+            Button(
+                "Add All Recent Participants",
+                systemImage: "person.3"
+            ) {
+                store.send(.tappedAddAllRecentParticipants)
+            }
+            .buttonStyle(.borderedProminent)
+            .withoutTVOSFormStyling()
             ForEach(participants) { participant in
                 ParticipantButton(participant: participant) {
                     Button("Add to bracket", systemImage: "plus.circle") {
@@ -103,14 +111,6 @@ private extension CreateBracketFormFeatureView {
                 }
             }
             .tint(nil)
-            Button(
-                "Add All Recent Participants",
-                systemImage: "person.3"
-            ) {
-                store.send(.tappedAddAllRecentParticipants)
-            }
-            .buttonStyle(.borderedProminent)
-            .withoutTVOSFormStyling()
         } header: {
             Text("Add Recent Participant")
         }

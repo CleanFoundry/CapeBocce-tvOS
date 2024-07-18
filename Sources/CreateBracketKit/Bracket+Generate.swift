@@ -534,8 +534,11 @@ private extension Bracket {
             startMatchNumber: MatchNumber,
             round: Round
         ) -> NextWinnerRoundMatches {
-            guard previousWinnerRoundMatches.count.isMultiple(of: 2) else {
-                fatalError("Need even number of matches")
+            guard previousWinnerRoundMatches.count > 1 else {
+                return NextWinnerRoundMatches(
+                    matches: [],
+                    lastMatchNumber: startMatchNumber
+                )
             }
             let matches = stride(from: 0, to: previousWinnerRoundMatches.endIndex, by: 2)
                 .enumerated()
@@ -596,6 +599,13 @@ private extension Bracket {
                     didIncorporateWinnerRoundMatches: true
                 )
             } else {
+                guard previousLoserRoundMatches.count > 1 else {
+                    return NextLoserRoundMatches(
+                        matches: [],
+                        lastMatchNumber: startMatchNumber,
+                        didIncorporateWinnerRoundMatches: false
+                    )
+                }
                 let matches = stride(from: 0, to: previousLoserRoundMatches.endIndex, by: 2)
                     .enumerated()
                     .map { offset, matchIndex in
@@ -630,9 +640,6 @@ private extension Bracket {
             loserRound: Round,
             unincorporatedWinnerMatches: inout [[Match]]
         ) -> [Match] {
-            guard previousWinnerMatches.count > 1 else {
-                return []
-            }
             let nextWinnerRoundMatches = nextWinnerRoundMatches(
                 previousWinnerRoundMatches: previousWinnerMatches,
                 startMatchNumber: startMatchNumber,
@@ -649,9 +656,11 @@ private extension Bracket {
             if nextLoserRoundMatches.didIncorporateWinnerRoundMatches {
                 unincorporatedWinnerMatches.removeFirst()
             }
-            return nextWinnerRoundMatches.matches
-            + nextLoserRoundMatches.matches
-            + recurse(
+            let currentIterationMatches = nextWinnerRoundMatches.matches + nextLoserRoundMatches.matches
+            guard !currentIterationMatches.isEmpty else {
+                return []
+            }
+            return currentIterationMatches + recurse(
                 previousWinnerMatches: nextWinnerRoundMatches.matches,
                 previousLoserMatches: nextLoserRoundMatches.matches,
                 startMatchNumber: nextLoserRoundMatches.lastMatchNumber + 1,
