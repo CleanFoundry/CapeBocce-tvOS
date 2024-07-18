@@ -1,6 +1,7 @@
 import API
 import APIExtensions
 import BracketFeatureKit
+import ChampionFeatureUI
 import ConfettiSwiftUI
 import ComposableArchitecture
 import SwiftUI
@@ -55,6 +56,13 @@ public struct BracketFeatureView: View {
                 repetitions: 100,
                 repetitionInterval: 8
             )
+            .sheet(
+                item: $store.scope(
+                    state: \.champion,
+                    action: \.champion
+                )) { store in
+                    ChampionFeatureView(store: store)
+                }
         }
     }
 }

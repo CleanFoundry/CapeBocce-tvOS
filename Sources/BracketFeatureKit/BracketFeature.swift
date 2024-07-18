@@ -1,4 +1,5 @@
 import API
+import ChampionFeatureKit
 import ComposableArchitecture
 import Foundation
 import Tagged
@@ -9,7 +10,7 @@ import Tagged
 
         public let bracketName: String
         public let matches: IdentifiedArrayOf<Match>
-        public let champion: Participant?
+        @Presents public var champion: ChampionFeature.State?
         private(set) public var groupedMatches: [MatchBracketSide: [Round: IdentifiedArrayOf<Match>]]
         public var showConfetti: Bool
 
@@ -22,7 +23,7 @@ import Tagged
             self.bracketName = bracketName
             self.matches = matches
             self.groupedMatches = groupedMatches
-            self.champion = champion
+            self.champion = champion.map(ChampionFeature.State.init)
             self.showConfetti = false
         }
 
@@ -48,6 +49,7 @@ import Tagged
     }
 
     public enum Action {
+        case champion(PresentationAction<ChampionFeature.Action>)
         case didAppear
         case tappedParticipantWon(MatchWinner, Match, String)
     }
@@ -60,10 +62,11 @@ import Tagged
             case .didAppear:
                 state.showConfetti = state.champion != nil
                 return .none
-            case .tappedParticipantWon:
+            case .tappedParticipantWon, .champion:
                 return .none
             }
         }
+        .ifLet(\.$champion, action: \.champion, destination: ChampionFeature.init)
     }
 
 }
