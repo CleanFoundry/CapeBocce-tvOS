@@ -58,7 +58,9 @@ private extension BracketFeatureView {
                         MatchButtonView(
                             match: match,
                             allMatches: store.matches
-                        )
+                        ) { winner in
+                            store.send(.tappedParticipantWon(winner, match, store.bracketName))
+                        }
                     }
                     Spacer()
                 }

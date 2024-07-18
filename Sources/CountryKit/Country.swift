@@ -20,6 +20,13 @@ public extension Country {
         )
     }
 
+    var bundleImageResource: ImageResource {
+        ImageResource(
+            name: id.lowercased(),
+            bundle: .module
+        )
+    }
+
     var name: String {
         Locale.current.localizedString(forRegionCode: id)!
     }

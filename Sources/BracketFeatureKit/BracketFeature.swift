@@ -41,6 +41,10 @@ import Tagged
 
     }
 
+    public enum Action {
+        case tappedParticipantWon(MatchWinner, Match, String)
+    }
+
     public init() { }
 
 }

@@ -31,7 +31,7 @@ public extension Bracket {
             } else if nextMatch.participant2 == .awaitingWinner(match.matchNumber) {
                 nextMatch.participant2 = .participant(winner)
             }
-            return match
+            return nextMatch
         })
     }
 

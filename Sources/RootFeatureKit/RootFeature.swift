@@ -86,6 +86,16 @@ import Foundation
             case .tappedViewAllBrackets:
                 state.destination = .allBrackets(.init())
                 return .none
+            case let .destination(.presented(.bracket(
+                .tappedParticipantWon(matchWinner, match, bracketName)
+            ))):
+                guard var bracket = state.brackets[id: bracketName] else {
+                    fatalError()
+                }
+                bracket.completeMatch(match, winner: matchWinner)
+                state.destination = .bracket(.build(bracket: bracket))
+                state.brackets[id: bracketName] = bracket
+                return .none
             case .destination:
                 return .none
             }

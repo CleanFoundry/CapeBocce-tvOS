@@ -6,14 +6,17 @@ struct MatchButtonView: View {
 
     private let match: Match
     private let allMatches: IdentifiedArrayOf<Match>
+    private let tappedWinnerAction: (MatchWinner) -> Void
     @FocusState private var isFocused
 
     init(
         match: Match,
-        allMatches: IdentifiedArrayOf<Match>
+        allMatches: IdentifiedArrayOf<Match>,
+        tappedWinnerAction: @escaping (MatchWinner) -> Void
     ) {
         self.match = match
         self.allMatches = allMatches
+        self.tappedWinnerAction = tappedWinnerAction
     }
 
     var body: some View {
@@ -26,11 +29,26 @@ struct MatchButtonView: View {
                     .scaleEffect(isFocused ? 1.2 : 1)
                     .animation(.snappy, value: isFocused)
             }
-            Button { } label: {
+            Menu {
+                if case let .participant(participant1) = match.participant1,
+                   case let .participant(participant2) = match.participant2 {
+                    Button(
+                        "\(participant1.name) won",
+                        image: participant1.country.bundleImageResource,
+                        action: { tappedWinnerAction(.participant1) }
+                    )
+                    Button(
+                        "\(participant2.name) won",
+                        image: participant2.country.bundleImageResource,
+                        action: { tappedWinnerAction(.participant2) }
+                    )
+                }
+            } label: {
                 matchView(match, focused: isFocused)
             }
             .focused($isFocused, equals: true)
             .buttonStyle(MatchButtonStyle(focused: isFocused))
+
             if case .championship(.overall) = match.kind {
                 (participantText(match.participant2) + Text(" must win twice"))
                     .font(.footnote)
