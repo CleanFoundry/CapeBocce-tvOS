@@ -14,6 +14,7 @@ public extension CFTarget.Default.CapeBocce {
 
     func app(
         name: CFTarget.Name,
+        productName: String,
         internalDependencies: [CFTarget.Name],
         externalDependencies: [CFExternalTargetName]
     ) -> CFTarget {
@@ -32,6 +33,7 @@ public extension CFTarget.Default.CapeBocce {
             settings: [
                 "DEVELOPMENT_TEAM": "QHJFG75NY8",
                 "OTHER_LDFLAGS": "$(inherited) -ObjC",
+                "PRODUCT_NAME": "\(productName)"
             ]
         )
     }
