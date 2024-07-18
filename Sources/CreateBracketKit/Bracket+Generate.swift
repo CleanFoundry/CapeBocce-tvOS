@@ -409,7 +409,7 @@ private extension Bracket {
                 matchNumber: matchNumber,
                 participant1: byeParticipant,
                 participant2: .awaitingWinner(fillingRoundMatch.matchNumber),
-                kind: .default,
+                kind: numberOfMatches == 1 ? .championship(.losers) : .default,
                 side: .losers,
                 round: roundNumber,
                 allMatches: loserFillingRoundInfo.matches
@@ -430,7 +430,7 @@ private extension Bracket {
                 matchNumber: matchNumber,
                 participant1: .awaitingWinner(zeroByeFillingMatches[matchIndex].matchNumber),
                 participant2: .awaitingWinner(zeroByeFillingMatches[matchIndex + 1].matchNumber),
-                kind: .default,
+                kind: numberOfMatches == 1 ? .championship(.losers) : .default,
                 side: .losers,
                 round: roundNumber,
                 allMatches: loserFillingRoundInfo.matches
@@ -451,7 +451,7 @@ private extension Bracket {
                 matchNumber: matchNumber,
                 participant1: doubleByeParticipants[participantIndex],
                 participant2: doubleByeParticipants[participantIndex + 1],
-                kind: .default,
+                kind: numberOfMatches == 1 ? .championship(.losers) : .default,
                 side: .losers,
                 round: roundNumber,
                 allMatches: loserFillingRoundInfo.matches
@@ -669,10 +669,12 @@ private extension Bracket {
             allPreviousMatches: allPreviousMatches
         )
 
-        guard let winnerFinal = recursiveMatches.first(where: { $0.kind == .championship(.winners) }),
-              let loserFinal = recursiveMatches.first(where: { $0.kind == .championship(.losers) }),
-              let maxMatchNumber = recursiveMatches.map(\.matchNumber).max(),
-              let maxWinnerRound = recursiveMatches.filter({ $0.side == .winners }).map(\.round).max()
+        let allMatchesMinusChampionship = (allPreviousMatches + recursiveMatches)
+
+        guard let winnerFinal = allMatchesMinusChampionship.first(where: { $0.kind == .championship(.winners) }),
+              let loserFinal = allMatchesMinusChampionship.first(where: { $0.kind == .championship(.losers) }),
+              let maxMatchNumber = allMatchesMinusChampionship.map(\.matchNumber).max(),
+              let maxWinnerRound = allMatchesMinusChampionship.filter({ $0.side == .winners }).map(\.round).max()
         else {
             fatalError()
         }
