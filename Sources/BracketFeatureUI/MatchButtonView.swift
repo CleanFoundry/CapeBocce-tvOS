@@ -121,16 +121,7 @@ private extension MatchButtonView {
                 .overlay(alignment: .bottom) {
                     participantBorderView(along: .horizontal, focused: focused)
                 }
-            case let .awaitingWinner(matchNumber):
-                HStack(spacing: 0) {
-                    participantText(matchParticipant)
-                        .foregroundStyle(focused ? .black : .primary)
-                    Spacer()
-                }
-                .overlay(alignment: .bottom) {
-                    participantBorderView(along: .horizontal, focused: focused)
-                }
-            case let .awaitingLoser(matchNumber):
+            case .awaitingWinner, .awaitingLoser:
                 HStack(spacing: 0) {
                     participantText(matchParticipant)
                         .foregroundStyle(focused ? .black : .primary)
