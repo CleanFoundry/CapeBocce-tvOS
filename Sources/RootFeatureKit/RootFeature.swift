@@ -70,7 +70,7 @@ import Foundation
                     name: name,
                     participants: participants
                 )
-                state.brackets.updateOrAppend(bracket)
+                state.brackets.insert(bracket, at: 0)
                 for participant in participants {
                     state.recentParticipants.updateOrInsert(participant, at: 0)
                 }

@@ -186,7 +186,7 @@ private extension Bracket {
                     matchNumber: matchNumber,
                     participant1: .participant(participants[participantIndex]),
                     participant2: .awaitingWinner(fillingRoundMatch.matchNumber),
-                    kind: .default,
+                    kind: numberOfMatches == 1 ? .championship(.winners) : .default,
                     side: .winners,
                     round: roundNumber,
                     allMatches: winnerFillingRoundInfo.matches
@@ -204,7 +204,7 @@ private extension Bracket {
                     matchNumber: matchNumber,
                     participant1: .awaitingWinner(winnerFillingRoundInfo.matches[matchIndex].matchNumber),
                     participant2: .awaitingWinner(winnerFillingRoundInfo.matches[matchIndex + 1].matchNumber),
-                    kind: .default,
+                    kind: numberOfMatches == 1 ? .championship(.winners) : .default,
                     side: .winners,
                     round: roundNumber,
                     allMatches: winnerFillingRoundInfo.matches + singleByeMatches
@@ -226,7 +226,7 @@ private extension Bracket {
                     matchNumber: matchNumber,
                     participant1: .participant(participants[participantIndex]),
                     participant2: .participant(participants[participantIndex + 1]),
-                    kind: .default,
+                    kind: numberOfMatches == 1 ? .championship(.winners) : .default,
                     side: .winners,
                     round: roundNumber,
                     allMatches: winnerFillingRoundInfo.matches + singleByeMatches + zeroByeMatches

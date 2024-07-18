@@ -54,6 +54,7 @@ private extension BracketFeatureView {
                     let matches = groupedMatches[round]!.sorted(using: KeyPathComparator(\.matchNumber))
                     Text("Round \(round)")
                         .font(.subheadline)
+                    loserBracketEdgeCaseSpacing(matches)
                     ForEach(matches) { match in
                         MatchButtonView(
                             match: match,
@@ -71,6 +72,14 @@ private extension BracketFeatureView {
             Spacer()
         }
         .focusSection()
+    }
+
+    @ViewBuilder func loserBracketEdgeCaseSpacing(
+        _ matches: [Match]
+    ) -> some View {
+        let firstMatch = matches.first!
+        let needsExtraSpacing = firstMatch.kind != .default && firstMatch.heightScaleFactor == 1
+        Spacer().frame(height: needsExtraSpacing ? 60 : 24)
     }
 
 }
