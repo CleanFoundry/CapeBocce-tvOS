@@ -488,7 +488,7 @@ private extension Bracket {
             guard previousWinnerRoundMatches.count > 1 else {
                 return NextWinnerRoundMatches(
                     matches: [],
-                    lastMatchNumber: startMatchNumber
+                    lastMatchNumber: startMatchNumber - 1
                 )
             }
             let matches = stride(from: 0, to: previousWinnerRoundMatches.endIndex, by: 2)
@@ -554,7 +554,7 @@ private extension Bracket {
                 guard previousLoserRoundMatches.count > 1 else {
                     return NextLoserRoundMatches(
                         matches: [],
-                        lastMatchNumber: startMatchNumber,
+                        lastMatchNumber: startMatchNumber - 1,
                         didIncorporateWinnerRoundMatches: false
                     )
                 }
@@ -608,7 +608,7 @@ private extension Bracket {
             if nextLoserRoundMatches.didIncorporateWinnerRoundMatches {
                 unincorporatedWinnerMatches.removeFirst()
             }
-            var currentIterationMatches = nextWinnerRoundMatches.matches + nextLoserRoundMatches.matches
+            let currentIterationMatches = nextWinnerRoundMatches.matches + nextLoserRoundMatches.matches
             guard !currentIterationMatches.isEmpty else {
                 return []
             }
