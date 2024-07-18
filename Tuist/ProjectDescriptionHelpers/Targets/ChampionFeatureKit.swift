@@ -11,6 +11,7 @@ public extension CFTarget {
         name: .championFeatureKit,
         internalDependencies: [
             .countryKit,
+            .funFactDependency,
         ],
         externalDependencies: [
             .api,

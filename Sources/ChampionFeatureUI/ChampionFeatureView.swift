@@ -21,8 +21,10 @@ public struct ChampionFeatureView: View {
             Text("\(store.participant.name) (\(store.participant.country.name)) won!")
                 .font(.largeTitle)
             VStack(spacing: 0) {
-                if let foo = "" as String? {
-
+                if let funFact = store.funFact {
+                    Spacer().frame(height: 16)
+                    Text(funFact)
+                        .font(.callout)
                 } else {
                     Spacer()
                     ProgressView()

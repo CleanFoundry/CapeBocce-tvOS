@@ -19,6 +19,7 @@ public extension CFProject {
             .createBracketKit,
             .createBracketFormFeatureKit,
             .createBracketFormFeatureUI,
+            .funFactDependency,
             .pickCountryFeatureKit,
             .pickCountryFeatureUI,
             .rootFeatureKit,
