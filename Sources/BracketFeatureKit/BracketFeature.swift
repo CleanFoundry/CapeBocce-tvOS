@@ -10,6 +10,7 @@ import Tagged
 
         public let bracketName: String
         public let matches: IdentifiedArrayOf<Match>
+        public let initialChampion: Participant?
         @Presents public var champion: ChampionFeature.State?
         private(set) public var groupedMatches: [MatchBracketSide: [Round: IdentifiedArrayOf<Match>]]
         public var showConfetti: Bool
@@ -18,12 +19,13 @@ import Tagged
             bracketName: String,
             matches: IdentifiedArrayOf<Match>,
             groupedMatches: [MatchBracketSide: [Round: IdentifiedArrayOf<Match>]],
-            champion: Participant?
+            initialChampion: Participant?
         ) {
             self.bracketName = bracketName
             self.matches = matches
             self.groupedMatches = groupedMatches
-            self.champion = champion.map(ChampionFeature.State.init)
+            self.initialChampion = initialChampion
+            self.champion = initialChampion.map(ChampionFeature.State.init)
             self.showConfetti = false
         }
 
@@ -42,7 +44,7 @@ import Tagged
                         default: []
                     ].append(nextMatch)
                 },
-                champion: bracket.champion
+                initialChampion: bracket.champion
             )
         }
 
@@ -52,6 +54,7 @@ import Tagged
         case champion(PresentationAction<ChampionFeature.Action>)
         case didAppear
         case tappedParticipantWon(MatchWinner, Match, String)
+        case tappedChampion
     }
 
     public init() { }
@@ -61,6 +64,9 @@ import Tagged
             switch action {
             case .didAppear:
                 state.showConfetti = state.champion != nil
+                return .none
+            case .tappedChampion:
+                state.champion = state.initialChampion.map(ChampionFeature.State.init)
                 return .none
             case .tappedParticipantWon, .champion:
                 return .none

@@ -7,16 +7,19 @@ struct MatchButtonView: View {
     private let match: Match
     private let allMatches: IdentifiedArrayOf<Match>
     private let tappedWinnerAction: (MatchWinner) -> Void
+    private let tappedChampionAction: () -> Void
     @FocusState private var isFocused
 
     init(
         match: Match,
         allMatches: IdentifiedArrayOf<Match>,
-        tappedWinnerAction: @escaping (MatchWinner) -> Void
+        tappedWinnerAction: @escaping (MatchWinner) -> Void,
+        tappedChampionAction: @escaping () -> Void
     ) {
         self.match = match
         self.allMatches = allMatches
         self.tappedWinnerAction = tappedWinnerAction
+        self.tappedChampionAction = tappedChampionAction
     }
 
     var body: some View {
@@ -31,7 +34,8 @@ struct MatchButtonView: View {
             }
             Menu {
                 if case let .participant(participant1) = match.participant1,
-                   case let .participant(participant2) = match.participant2 {
+                   case let .participant(participant2) = match.participant2,
+                   match.winner == nil {
                     Button(
                         "\(participant1.name) won",
                         image: participant1.country.bundleImageResource,
@@ -41,6 +45,13 @@ struct MatchButtonView: View {
                         "\(participant2.name) won",
                         image: participant2.country.bundleImageResource,
                         action: { tappedWinnerAction(.participant2) }
+                    )
+                }
+                else if match.winner != nil, match.kind == .championship(.overall) {
+                    Button(
+                        "Champion Page",
+                        systemImage: "trophy",
+                        action: { tappedChampionAction() }
                     )
                 }
             } label: {

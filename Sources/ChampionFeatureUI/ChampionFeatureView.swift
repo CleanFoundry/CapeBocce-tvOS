@@ -21,12 +21,13 @@ public struct ChampionFeatureView: View {
             Text("\(store.participant.name) (\(store.participant.country.name)) won!")
                 .font(.largeTitle)
             VStack(spacing: 0) {
+                Spacer()
                 if let funFact = store.funFact {
-                    Spacer().frame(height: 16)
                     Text(funFact)
-                        .font(.callout)
+                        .font(.headline)
+                        .multilineTextAlignment(.center)
+                        .containerRelativeFrame(.horizontal) { value, _ in 3 * value / 4 }
                 } else {
-                    Spacer()
                     ProgressView()
                 }
                 Spacer()
@@ -38,13 +39,13 @@ public struct ChampionFeatureView: View {
             }
         }
         .confettiCannon(
-            counter: .init(get: { store.showConfetti ? 1 : 0 }, set: { _ in fatalError() }),
+            counter: .init(get: { store.funFact == nil ? 0 : 1 }, set: { _ in fatalError() }),
             num: 80,
             confettis: ConfettiType.allCases + [.text("🏆"), .text("🏅")],
             confettiSize: 32,
             rainHeight: 2000,
             radius: 1200,
-            repetitions: 100,
+            repetitions: 1,
             repetitionInterval: 8
         )
     }

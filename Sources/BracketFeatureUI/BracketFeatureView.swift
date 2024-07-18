@@ -54,7 +54,7 @@ public struct BracketFeatureView: View {
                 rainHeight: 2000,
                 radius: 1200,
                 repetitions: 100,
-                repetitionInterval: 8
+                repetitionInterval: 20
             )
             .sheet(
                 item: $store.scope(
@@ -85,6 +85,8 @@ private extension BracketFeatureView {
                             allMatches: store.matches
                         ) { winner in
                             store.send(.tappedParticipantWon(winner, match, store.bracketName))
+                        } tappedChampionAction: {
+                            store.send(.tappedChampion)
                         }
                     }
                     Spacer()

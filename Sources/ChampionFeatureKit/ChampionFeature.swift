@@ -9,7 +9,6 @@ import FunFactDependency
 
         public let participant: Participant
         public var funFact: String?
-        public var showConfetti: Bool = false
 
         public init(participant: Participant) {
             self.participant = participant
@@ -33,7 +32,6 @@ import FunFactDependency
                 state.funFact = funFact
                 return .none
             case .didAppear:
-                state.showConfetti = true
                 let countryName = state.participant.country.name
                 return .run { send in
                     let funFact = try await funFact.get(countryName: countryName)
