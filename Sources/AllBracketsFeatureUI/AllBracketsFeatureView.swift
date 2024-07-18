@@ -22,10 +22,10 @@ public struct AllBracketsFeatureView: View {
                             HStack {
                                 Text(bracket.name)
                                 Spacer()
-                                if let winner = bracket.winner {
+                                if let champion = bracket.champion {
                                     HStack(spacing: 8) {
-                                        Text(winner.name)
-                                        winner.country.bundleAsset
+                                        Text(champion.name)
+                                        champion.country.bundleAsset
                                             .resizable()
                                             .frame(width: 60, height: 40)
                                         Text("🏆")

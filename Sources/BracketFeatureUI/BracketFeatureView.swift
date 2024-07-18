@@ -1,6 +1,7 @@
 import API
 import APIExtensions
 import BracketFeatureKit
+import ConfettiSwiftUI
 import ComposableArchitecture
 import SwiftUI
 
@@ -39,6 +40,7 @@ public struct BracketFeatureView: View {
                 }
                 .navigationTitle(store.bracketName)
             }
+            .confettiCannon(counter: .constant(1))
         }
     }
 }

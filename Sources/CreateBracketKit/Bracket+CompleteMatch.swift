@@ -1,4 +1,5 @@
 import API
+import IdentifiedCollections
 
 public extension Bracket {
 
@@ -18,10 +19,14 @@ public extension Bracket {
         case .participant2:
             (winner, loser) = (participant2, participant1)
         }
-        matches = .init(uncheckedUniqueElements: matches.map { nextMatch in
-            var nextMatch = nextMatch
+
+        var updatedMatches: IdentifiedArrayOf<Match> = []
+        for var nextMatch in matches {
             if nextMatch.matchNumber == match.matchNumber {
                 nextMatch.winner = matchWinner
+                if nextMatch.kind == .championship(.overall) {
+                    self.champion = winner
+                }
             } else if nextMatch.participant1 == .awaitingLoser(match.matchNumber) {
                 nextMatch.participant1 = .participant(loser)
             } else if nextMatch.participant2 == .awaitingLoser(match.matchNumber) {
@@ -31,8 +36,10 @@ public extension Bracket {
             } else if nextMatch.participant2 == .awaitingWinner(match.matchNumber) {
                 nextMatch.participant2 = .participant(winner)
             }
-            return nextMatch
-        })
+            updatedMatches.append(nextMatch)
+        }
+
+        self.matches = updatedMatches
     }
 
 }
