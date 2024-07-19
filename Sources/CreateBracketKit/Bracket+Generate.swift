@@ -671,10 +671,20 @@ private extension Bracket {
 
         let allMatchesMinusChampionship = (allPreviousMatches + recursiveMatches)
 
-        guard let winnerFinal = allMatchesMinusChampionship.first(where: { $0.kind == .championship(.winners) }),
-              let loserFinal = allMatchesMinusChampionship.first(where: { $0.kind == .championship(.losers) }),
-              let maxMatchNumber = allMatchesMinusChampionship.map(\.matchNumber).max(),
-              let maxWinnerRound = allMatchesMinusChampionship.filter({ $0.side == .winners }).map(\.round).max()
+        guard
+            let winnerFinal = allMatchesMinusChampionship
+                .first(where: { $0.kind == .championship(.winners) }),
+            let lastLoserMatchNumber = allMatchesMinusChampionship
+                .filter({ $0.side == .losers })
+                .map(\.matchNumber)
+                .max(),
+            let maxMatchNumber = allMatchesMinusChampionship
+                .map(\.matchNumber)
+                .max(),
+            let maxWinnerRound = allMatchesMinusChampionship
+                .filter({ $0.side == .winners })
+                .map(\.round)
+                .max()
         else {
             fatalError()
         }
@@ -682,7 +692,7 @@ private extension Bracket {
         let championshipMatch = Match.default(
             matchNumber: maxMatchNumber + 1,
             participant1: .awaitingWinner(winnerFinal.matchNumber),
-            participant2: .awaitingWinner(loserFinal.matchNumber),
+            participant2: .awaitingWinner(lastLoserMatchNumber),
             kind: .championship(.overall),
             side: .winners,
             round: maxWinnerRound + 1,
