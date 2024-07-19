@@ -11,7 +11,7 @@ import PickCountryFeatureKit
         public var bracketName: String
         public var selectedParticipants: IdentifiedArrayOf<Participant> = []
 
-        public var addNewParticipantName: String = "Participant Name"
+        public var addNewParticipantName: String = ""
 
         @Presents public var pickCountry: PickCountryFeature.State?
 
@@ -99,6 +99,7 @@ import PickCountryFeatureKit
                     state.selectedParticipants.insert(newParticipant, at: 0)
                 }
 
+                state.addNewParticipantName = ""
                 state.pickCountry = nil
                 state.focusedParticipant = state.unselectedRecentParticipants.first ?? state.focusedParticipant
                 return .none
