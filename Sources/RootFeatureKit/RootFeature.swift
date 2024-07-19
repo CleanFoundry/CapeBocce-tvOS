@@ -90,7 +90,8 @@ import Foundation
                 ))):
                 state.destination = .bracket(
                     .build(
-                        bracket: bracket
+                        bracket: bracket,
+                        showChampion: false
                     )
                 )
                 return .none
@@ -104,7 +105,7 @@ import Foundation
                     fatalError()
                 }
                 bracket.completeMatch(match, winner: matchWinner)
-                state.destination = .bracket(.build(bracket: bracket))
+                state.destination = .bracket(.build(bracket: bracket, showChampion: true))
                 state.brackets[id: bracketName] = bracket
                 return .none
             case .destination:

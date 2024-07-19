@@ -19,18 +19,20 @@ import Tagged
             bracketName: String,
             matches: IdentifiedArrayOf<Match>,
             groupedMatches: [MatchBracketSide: [Round: IdentifiedArrayOf<Match>]],
-            initialChampion: Participant?
+            initialChampion: Participant?,
+            champion: ChampionFeature.State?
         ) {
             self.bracketName = bracketName
             self.matches = matches
             self.groupedMatches = groupedMatches
             self.initialChampion = initialChampion
-            self.champion = initialChampion.map(ChampionFeature.State.init)
+            self.champion = champion
             self.showConfetti = false
         }
 
         public static func build(
-            bracket: Bracket
+            bracket: Bracket,
+            showChampion: Bool
         ) -> Self {
             .init(
                 bracketName: bracket.name,
@@ -44,7 +46,8 @@ import Tagged
                         default: []
                     ].append(nextMatch)
                 },
-                initialChampion: bracket.champion
+                initialChampion: bracket.champion,
+                champion: showChampion ? bracket.champion.map(ChampionFeature.State.init) : nil
             )
         }
 
