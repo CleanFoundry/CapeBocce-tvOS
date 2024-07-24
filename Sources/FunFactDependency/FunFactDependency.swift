@@ -22,9 +22,7 @@ extension FunFactDependency: DependencyKey {
     public static var liveValue: FunFactDependency {
         FunFactDependency(
             get: { countryName in
-                guard let apiKey = ProcessInfo.processInfo.environment["OPENAI_API_KEY"] else {
-                    fatalError()
-                }
+                let apiKey = "sk-proj-HPHjZZHQEt3YtKLNtkKPT3BlbkFJWwGsBW5FkKH3U4p07QeC"
                 let query = Query.default(countryName: countryName)
                 let url = URL(string: "https://api.openai.com/v1/chat/completions")!
 
