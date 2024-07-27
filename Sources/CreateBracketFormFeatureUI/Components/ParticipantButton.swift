@@ -24,7 +24,7 @@ struct ParticipantButton<Content: View>: View {
                     .shadow(radius: 18)
                     .padding()
                 VStack(alignment: .leading) {
-                    Text(participant.name)
+                    Text(participant.name.rawValue)
                         .font(.title)
                     Text(participant.country.name)
                 }

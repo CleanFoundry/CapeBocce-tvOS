@@ -11,9 +11,9 @@ public extension CFTarget {
         name: .allBracketsFeatureUI,
         internalDependencies: [
             .allBracketsFeatureKit,
+            .api,
         ],
         externalDependencies: [
-            .api,
             .composableArchitecture,
         ]
     )

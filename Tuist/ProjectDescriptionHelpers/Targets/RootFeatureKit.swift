@@ -11,11 +11,11 @@ public extension CFTarget {
         name: .rootFeatureKit,
         internalDependencies: [
             .allBracketsFeatureKit,
+            .api,
             .createBracketKit,
             .createBracketFormFeatureKit,
         ],
         externalDependencies: [
-            .api,
             .composableArchitecture,
         ]
     )

@@ -20,11 +20,11 @@ public struct AllBracketsFeatureView: View {
                             store.send(.tappedBracket(bracket))
                         } label: {
                             HStack {
-                                Text(bracket.name)
+                                Text(bracket.name.rawValue)
                                 Spacer()
                                 if let champion = bracket.champion {
                                     HStack(spacing: 8) {
-                                        Text(champion.name)
+                                        Text(champion.name.rawValue)
                                         champion.country.bundleAsset
                                             .resizable()
                                             .frame(width: 60, height: 40)

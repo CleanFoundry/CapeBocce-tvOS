@@ -10,10 +10,10 @@ public extension CFTarget {
     static let apiExtensions = CFTarget.default.capeBocce.framework(
         name: .apiExtensions,
         internalDependencies: [
+            .api,
             .countryKit,
         ],
         externalDependencies: [
-            .api,
         ]
     )
 

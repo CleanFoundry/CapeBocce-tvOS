@@ -39,7 +39,7 @@ public struct BracketFeatureView: View {
                         )
                     }
                 }
-                .navigationTitle(store.bracketName)
+                .navigationTitle(store.bracketName.rawValue)
             }
             .onAppear {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {

@@ -10,9 +10,9 @@ public extension CFTarget {
     static let funFactDependency = CFTarget.default.capeBocce.framework(
         name: .funFactDependency,
         internalDependencies: [
+            .api,
         ],
         externalDependencies: [
-            .api,
             .dependencies,
             .dependenciesMacros,
         ]

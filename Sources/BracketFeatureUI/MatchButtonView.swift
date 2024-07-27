@@ -204,7 +204,7 @@ private extension MatchButtonView {
     func participantText(_ participant: MatchParticipant) -> Text {
         switch participant {
         case .participant(let participant):
-            Text(participant.name)
+            Text(participant.name.rawValue)
         case .awaitingWinner(let matchNumber):
             Text("Winner of \(Image(systemName: "\(matchNumber).square"))")
         case .awaitingLoser(let matchNumber):

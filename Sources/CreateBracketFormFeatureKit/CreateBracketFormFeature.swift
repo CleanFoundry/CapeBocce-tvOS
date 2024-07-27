@@ -91,7 +91,7 @@ import PickCountryFeatureKit
                 } else {
 
                     let newParticipant = Participant(
-                        name: state.sanitizedAddParticipantName,
+                        name: ParticipantName(state.sanitizedAddParticipantName),
                         countryID: selectedCountry.id
                     )
 

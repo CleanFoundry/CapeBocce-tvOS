@@ -10,11 +10,11 @@ public extension CFTarget {
     static let pickCountryFeatureKit = CFTarget.default.capeBocce.framework(
         name: .pickCountryFeatureKit,
         internalDependencies: [
+            .api,
             .apiExtensions,
             .countryKit,
         ],
         externalDependencies: [
-            .api,
             .composableArchitecture,
         ]
     )

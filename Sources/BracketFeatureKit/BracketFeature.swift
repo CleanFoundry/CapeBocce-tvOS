@@ -8,7 +8,7 @@ import Tagged
 
     @ObservableState public struct State {
 
-        public let bracketName: String
+        public let bracketName: Bracket.Name
         public let matches: IdentifiedArrayOf<Match>
         public let initialChampion: Participant?
         @Presents public var champion: ChampionFeature.State?
@@ -16,7 +16,7 @@ import Tagged
         public var showConfetti: Bool
 
         public init(
-            bracketName: String,
+            bracketName: Bracket.Name,
             matches: IdentifiedArrayOf<Match>,
             groupedMatches: [MatchBracketSide: [Round: IdentifiedArrayOf<Match>]],
             initialChampion: Participant?,
@@ -56,7 +56,7 @@ import Tagged
     public enum Action {
         case champion(PresentationAction<ChampionFeature.Action>)
         case didAppear
-        case tappedParticipantWon(MatchWinner, Match, String)
+        case tappedParticipantWon(MatchWinner, Match, Bracket.Name)
         case tappedChampion
     }
 
