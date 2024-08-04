@@ -5,23 +5,12 @@ import Foundation
 
 @Reducer public struct AllBracketsFeature {
 
-    @ObservableState public struct State {
-
+    @ObservableState public struct State: HasBracketsState {
         @Presents public var alert: AlertState<Action.Alert>?
 
-        @Shared(.bracketsData) private var bracketsData: Data?
-        public var brackets: IdentifiedArrayOf<Bracket> {
-            get {
-                guard let bracketsData else { return [] }
-                return try! JSONDecoder.api
-                    .decode(IdentifiedArrayOf<Bracket>.self, from: bracketsData)
-            } set {
-                bracketsData = try! JSONEncoder.api.encode(newValue)
-            }
-        }
+        @Shared(.bracketsData) public var bracketsData: Data?
 
-        public init() {
-        }
+        public init() { }
     }
 
     public enum Action {

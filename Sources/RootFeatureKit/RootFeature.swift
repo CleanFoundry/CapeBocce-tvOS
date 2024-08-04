@@ -8,21 +8,12 @@ import Foundation
 
 @Reducer public struct RootFeature {
 
-    @ObservableState public struct State: HasRecentParticipantsState {
+    @ObservableState public struct State: HasRecentParticipantsState, HasBracketsState {
 
         @Presents public var destination: DestinationFeature.State?
 
         @Shared(.recentParticipantsData) public var recentParticipantsData: Data?
-        @Shared(.bracketsData) private var bracketsData: Data?
-        public var brackets: IdentifiedArrayOf<Bracket> {
-            get {
-                guard let bracketsData else { return [] }
-                return try! JSONDecoder.api
-                    .decode(IdentifiedArrayOf<Bracket>.self, from: bracketsData)
-            } set {
-                bracketsData = try! JSONEncoder.api.encode(newValue)
-            }
-        }
+        @Shared(.bracketsData) public var bracketsData: Data?
 
         public init(
             destination: DestinationFeature.State? = nil

@@ -4,7 +4,7 @@ import IdentifiedCollections
 
 public protocol HasRecentParticipantsState {
 
-    var recentParticipantsData: Data? { get set  }
+    var recentParticipantsData: Data? { get set }
 
 }
 
