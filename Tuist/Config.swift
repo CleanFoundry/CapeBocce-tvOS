@@ -5,8 +5,8 @@ let config = Config(
     swiftVersion: .init(5, 9, 0),
     plugins: [
         .git(
-            url: "git@github.com:CleanFoundry/cf-tuist-helpers.git",
-            tag: Version(0, 0, 16).description
+            url: "https://github.com/CleanFoundry/cf-tuist-helpers.git",
+            tag: Version(0, 0, 19).description
         )
     ]
 )
