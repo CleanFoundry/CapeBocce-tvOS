@@ -13,6 +13,7 @@ public extension CFTarget {
             .allBracketsFeatureKit,
             .dataModel,
             .appStoragePersistenceKit,
+            .completeMatchKit,
             .createBracketKit,
             .createBracketFormFeatureKit,
         ],

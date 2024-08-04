@@ -15,6 +15,7 @@ public extension CFProject {
             .championFeatureKit,
             .championFeatureUI,
             .capeBocceApp,
+            .completeMatchKit,
             .countryKit,
             .countryKitTests,
             .createBracketKit,
