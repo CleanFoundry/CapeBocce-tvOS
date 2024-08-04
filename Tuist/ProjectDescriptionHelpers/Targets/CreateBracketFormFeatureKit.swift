@@ -11,6 +11,7 @@ public extension CFTarget {
         name: .createBracketFormFeatureKit,
         internalDependencies: [
             .api,
+            .appStoragePersistenceKit,
             .pickCountryFeatureKit,
         ],
         externalDependencies: [

@@ -8,4 +8,8 @@ public extension PersistenceReaderKey where Self == AppStorageKey<Data?> {
         .appStorage("brackets")
     }
 
+    static var recentParticipantsData: Self {
+        .appStorage("recentParticipants")
+    }
+
 }

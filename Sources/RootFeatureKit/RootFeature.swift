@@ -12,7 +12,7 @@ import Foundation
 
         @Presents public var destination: DestinationFeature.State?
 
-        @Shared(.appStorage("recentParticipants")) private var recentParticipantsData: Data?
+        @Shared(.recentParticipantsData) private var recentParticipantsData: Data?
         public var recentParticipants: IdentifiedArrayOf<Participant> {
             get {
                 guard let recentParticipantsData else { return [] }

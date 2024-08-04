@@ -1,5 +1,6 @@
 import API
 import APIExtensions
+import AppStoragePersistenceKit
 import ComposableArchitecture
 import Foundation
 import PickCountryFeatureKit
@@ -15,7 +16,7 @@ import PickCountryFeatureKit
 
         @Presents public var pickCountry: PickCountryFeature.State?
 
-        @Shared(.appStorage("recentParticipants")) private var recentParticipantsData: Data?
+        @Shared(.recentParticipantsData) private var recentParticipantsData: Data?
         public var recentParticipants: IdentifiedArrayOf<Participant> {
             get {
                 guard let recentParticipantsData else { return [] }
