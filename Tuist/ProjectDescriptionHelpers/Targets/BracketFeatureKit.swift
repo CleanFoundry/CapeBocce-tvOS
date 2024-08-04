@@ -10,7 +10,7 @@ public extension CFTarget {
     static let bracketFeatureKit = CFTarget.default.capeBocce.framework(
         name: .bracketFeatureKit,
         internalDependencies: [
-            .api,
+            .dataModel,
             .championFeatureKit,
         ],
         externalDependencies: [

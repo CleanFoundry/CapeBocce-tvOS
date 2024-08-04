@@ -2,13 +2,13 @@ import CFTuist
 import ProjectDescription
 
 public extension CFTarget.Name {
-    static let api: Self = "API"
+    static let dataModel: Self = "DataModel"
 }
 
 public extension CFTarget {
 
-    static let api = CFTarget.default.capeBocce.framework(
-        name: .api,
+    static let dataModel = CFTarget.default.capeBocce.framework(
+        name: .dataModel,
         internalDependencies: [
             .countryKit,
         ],

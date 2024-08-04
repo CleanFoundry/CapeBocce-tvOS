@@ -1,6 +1,5 @@
-import API
 import ComposableArchitecture
-import APIExtensions
+import DataModel
 import FunFactDependency
 
 @Reducer public struct ChampionFeature {

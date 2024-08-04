@@ -1,7 +1,7 @@
-import APIExtensions
 import ChampionFeatureKit
 import ComposableArchitecture
 import ConfettiSwiftUI
+import DataModel
 import SwiftUI
 
 public struct ChampionFeatureView: View {

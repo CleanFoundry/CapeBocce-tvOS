@@ -10,7 +10,7 @@ public extension CFTarget {
     static let championFeatureUI = CFTarget.default.capeBocce.framework(
         name: .championFeatureUI,
         internalDependencies: [
-            .api,
+            .dataModel,
             .championFeatureKit,
             .countryKit,
         ],

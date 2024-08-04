@@ -1,4 +1,4 @@
-import API
+import DataModel
 import CountryKit
 import SwiftUI
 

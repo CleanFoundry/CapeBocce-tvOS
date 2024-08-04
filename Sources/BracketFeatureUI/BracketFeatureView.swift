@@ -1,5 +1,4 @@
-import API
-import APIExtensions
+import DataModel
 import BracketFeatureKit
 import ChampionFeatureUI
 import ConfettiSwiftUI

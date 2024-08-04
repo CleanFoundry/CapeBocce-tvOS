@@ -1,6 +1,6 @@
-import APIExtensions
 import AllBracketsFeatureKit
 import ComposableArchitecture
+import DataModel
 import SwiftUI
 
 public struct AllBracketsFeatureView: View {

@@ -8,7 +8,7 @@ public extension CFProject {
         targets: [
             .allBracketsFeatureKit,
             .allBracketsFeatureUI,
-            .api,
+            .dataModel,
             .appStoragePersistenceKit,
             .bracketFeatureKit,
             .bracketFeatureUI,

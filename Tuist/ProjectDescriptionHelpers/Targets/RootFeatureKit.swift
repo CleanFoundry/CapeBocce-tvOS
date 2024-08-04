@@ -11,7 +11,7 @@ public extension CFTarget {
         name: .rootFeatureKit,
         internalDependencies: [
             .allBracketsFeatureKit,
-            .api,
+            .dataModel,
             .appStoragePersistenceKit,
             .createBracketKit,
             .createBracketFormFeatureKit,
