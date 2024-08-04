@@ -13,10 +13,11 @@ public extension HasBracketsState {
     var brackets: IdentifiedArrayOf<Bracket> {
         get {
             guard let bracketsData else { return [] }
-            return try! JSONDecoder.api
+            return try! JSONDecoder.appStoragePersistence
                 .decode(IdentifiedArrayOf<Bracket>.self, from: bracketsData)
         } set {
-            bracketsData = try! JSONEncoder.api.encode(newValue)
+            bracketsData = try! JSONEncoder.appStoragePersistence
+                .encode(newValue)
         }
     }
 
