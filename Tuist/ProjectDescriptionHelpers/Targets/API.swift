@@ -9,7 +9,9 @@ public extension CFTarget {
 
     static let api = CFTarget.default.capeBocce.framework(
         name: .api,
-        internalDependencies: [],
+        internalDependencies: [
+            .countryKit,
+        ],
         externalDependencies: [
             .identifiedCollections,
             .tagged,
