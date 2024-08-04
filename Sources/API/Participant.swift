@@ -1,3 +1,4 @@
+import CountryKit
 import Tagged
 
 public struct Participant: Codable, Equatable, Identifiable, Hashable {
@@ -11,5 +12,11 @@ public struct Participant: Codable, Equatable, Identifiable, Hashable {
         self.name = name
         self.countryID = countryID
     }
+
+}
+
+public extension Participant {
+
+    var country: Country { .init(id: countryID) }
 
 }
