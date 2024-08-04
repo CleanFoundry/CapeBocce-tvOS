@@ -1,4 +1,5 @@
 import API
+import AppStoragePersistenceKit
 import ComposableArchitecture
 import CountryKit
 import CreateBracketFormFeatureKit
@@ -21,7 +22,7 @@ import Foundation
                 recentParticipantsData = try! JSONEncoder.api.encode(newValue)
             }
         }
-        @Shared(.appStorage("brackets")) private var bracketsData: Data?
+        @Shared(.bracketsData) private var bracketsData: Data?
         public var brackets: IdentifiedArrayOf<Bracket> {
             get {
                 guard let bracketsData else { return [] }

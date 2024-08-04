@@ -11,6 +11,7 @@ public extension CFTarget {
         name: .allBracketsFeatureKit,
         internalDependencies: [
             .api,
+            .appStoragePersistenceKit,
         ],
         externalDependencies: [
             .composableArchitecture,

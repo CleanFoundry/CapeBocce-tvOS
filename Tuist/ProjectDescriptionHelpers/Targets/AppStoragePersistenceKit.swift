@@ -2,16 +2,15 @@ import CFTuist
 import ProjectDescription
 
 public extension CFTarget.Name {
-    static let pickCountryFeatureKit: Self = "PickCountryFeatureKit"
+    static let appStoragePersistenceKit: Self = "AppStoragePersistenceKit"
 }
 
 public extension CFTarget {
 
-    static let pickCountryFeatureKit = CFTarget.default.capeBocce.framework(
-        name: .pickCountryFeatureKit,
+    static let appStoragePersistenceKit = CFTarget.default.capeBocce.framework(
+        name: .appStoragePersistenceKit,
         internalDependencies: [
             .api,
-            .countryKit,
         ],
         externalDependencies: [
             .composableArchitecture,

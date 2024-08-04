@@ -9,7 +9,7 @@ public extension CFProject {
             .allBracketsFeatureKit,
             .allBracketsFeatureUI,
             .api,
-            .apiExtensions,
+            .appStoragePersistenceKit,
             .bracketFeatureKit,
             .bracketFeatureUI,
             .championFeatureKit,

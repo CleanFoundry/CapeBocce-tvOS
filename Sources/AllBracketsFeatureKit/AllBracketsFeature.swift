@@ -1,4 +1,5 @@
 import API
+import AppStoragePersistenceKit
 import ComposableArchitecture
 import Foundation
 
@@ -8,7 +9,7 @@ import Foundation
 
         @Presents public var alert: AlertState<Action.Alert>?
 
-        @Shared(.appStorage("brackets")) private var bracketsData: Data?
+        @Shared(.bracketsData) private var bracketsData: Data?
         public var brackets: IdentifiedArrayOf<Bracket> {
             get {
                 guard let bracketsData else { return [] }
