@@ -1,501 +1,501 @@
 ▿ 250 elements
   ▿ Country
-    - identifier: "AF"
+    - id: "AF"
   ▿ Country
-    - identifier: "AX"
+    - id: "AX"
   ▿ Country
-    - identifier: "AL"
+    - id: "AL"
   ▿ Country
-    - identifier: "DZ"
+    - id: "DZ"
   ▿ Country
-    - identifier: "AS"
+    - id: "AS"
   ▿ Country
-    - identifier: "AD"
+    - id: "AD"
   ▿ Country
-    - identifier: "AO"
+    - id: "AO"
   ▿ Country
-    - identifier: "AI"
+    - id: "AI"
   ▿ Country
-    - identifier: "AQ"
+    - id: "AQ"
   ▿ Country
-    - identifier: "AG"
+    - id: "AG"
   ▿ Country
-    - identifier: "AR"
+    - id: "AR"
   ▿ Country
-    - identifier: "AM"
+    - id: "AM"
   ▿ Country
-    - identifier: "AW"
+    - id: "AW"
   ▿ Country
-    - identifier: "AU"
+    - id: "AU"
   ▿ Country
-    - identifier: "AT"
+    - id: "AT"
   ▿ Country
-    - identifier: "AZ"
+    - id: "AZ"
   ▿ Country
-    - identifier: "BS"
+    - id: "BS"
   ▿ Country
-    - identifier: "BH"
+    - id: "BH"
   ▿ Country
-    - identifier: "BD"
+    - id: "BD"
   ▿ Country
-    - identifier: "BB"
+    - id: "BB"
   ▿ Country
-    - identifier: "BY"
+    - id: "BY"
   ▿ Country
-    - identifier: "BE"
+    - id: "BE"
   ▿ Country
-    - identifier: "BZ"
+    - id: "BZ"
   ▿ Country
-    - identifier: "BJ"
+    - id: "BJ"
   ▿ Country
-    - identifier: "BM"
+    - id: "BM"
   ▿ Country
-    - identifier: "BT"
+    - id: "BT"
   ▿ Country
-    - identifier: "BO"
+    - id: "BO"
   ▿ Country
-    - identifier: "BA"
+    - id: "BA"
   ▿ Country
-    - identifier: "BW"
+    - id: "BW"
   ▿ Country
-    - identifier: "BV"
+    - id: "BV"
   ▿ Country
-    - identifier: "BR"
+    - id: "BR"
   ▿ Country
-    - identifier: "VG"
+    - id: "VG"
   ▿ Country
-    - identifier: "BN"
+    - id: "BN"
   ▿ Country
-    - identifier: "BG"
+    - id: "BG"
   ▿ Country
-    - identifier: "BF"
+    - id: "BF"
   ▿ Country
-    - identifier: "BI"
+    - id: "BI"
   ▿ Country
-    - identifier: "KH"
+    - id: "KH"
   ▿ Country
-    - identifier: "CM"
+    - id: "CM"
   ▿ Country
-    - identifier: "CA"
+    - id: "CA"
   ▿ Country
-    - identifier: "CV"
+    - id: "CV"
   ▿ Country
-    - identifier: "BQ"
+    - id: "BQ"
   ▿ Country
-    - identifier: "KY"
+    - id: "KY"
   ▿ Country
-    - identifier: "CF"
+    - id: "CF"
   ▿ Country
-    - identifier: "TD"
+    - id: "TD"
   ▿ Country
-    - identifier: "IO"
+    - id: "IO"
   ▿ Country
-    - identifier: "CL"
+    - id: "CL"
   ▿ Country
-    - identifier: "CN"
+    - id: "CN"
   ▿ Country
-    - identifier: "CX"
+    - id: "CX"
   ▿ Country
-    - identifier: "CC"
+    - id: "CC"
   ▿ Country
-    - identifier: "CO"
+    - id: "CO"
   ▿ Country
-    - identifier: "KM"
+    - id: "KM"
   ▿ Country
-    - identifier: "CG"
+    - id: "CG"
   ▿ Country
-    - identifier: "CD"
+    - id: "CD"
   ▿ Country
-    - identifier: "CK"
+    - id: "CK"
   ▿ Country
-    - identifier: "CR"
+    - id: "CR"
   ▿ Country
-    - identifier: "CI"
+    - id: "CI"
   ▿ Country
-    - identifier: "HR"
+    - id: "HR"
   ▿ Country
-    - identifier: "CU"
+    - id: "CU"
   ▿ Country
-    - identifier: "CW"
+    - id: "CW"
   ▿ Country
-    - identifier: "CY"
+    - id: "CY"
   ▿ Country
-    - identifier: "CZ"
+    - id: "CZ"
   ▿ Country
-    - identifier: "DK"
+    - id: "DK"
   ▿ Country
-    - identifier: "DJ"
+    - id: "DJ"
   ▿ Country
-    - identifier: "DM"
+    - id: "DM"
   ▿ Country
-    - identifier: "DO"
+    - id: "DO"
   ▿ Country
-    - identifier: "EC"
+    - id: "EC"
   ▿ Country
-    - identifier: "EG"
+    - id: "EG"
   ▿ Country
-    - identifier: "SV"
+    - id: "SV"
   ▿ Country
-    - identifier: "GQ"
+    - id: "GQ"
   ▿ Country
-    - identifier: "ER"
+    - id: "ER"
   ▿ Country
-    - identifier: "EE"
+    - id: "EE"
   ▿ Country
-    - identifier: "SZ"
+    - id: "SZ"
   ▿ Country
-    - identifier: "ET"
+    - id: "ET"
   ▿ Country
-    - identifier: "FK"
+    - id: "FK"
   ▿ Country
-    - identifier: "FO"
+    - id: "FO"
   ▿ Country
-    - identifier: "FJ"
+    - id: "FJ"
   ▿ Country
-    - identifier: "FI"
+    - id: "FI"
   ▿ Country
-    - identifier: "FR"
+    - id: "FR"
   ▿ Country
-    - identifier: "GF"
+    - id: "GF"
   ▿ Country
-    - identifier: "PF"
+    - id: "PF"
   ▿ Country
-    - identifier: "TF"
+    - id: "TF"
   ▿ Country
-    - identifier: "GA"
+    - id: "GA"
   ▿ Country
-    - identifier: "GM"
+    - id: "GM"
   ▿ Country
-    - identifier: "GE"
+    - id: "GE"
   ▿ Country
-    - identifier: "DE"
+    - id: "DE"
   ▿ Country
-    - identifier: "GH"
+    - id: "GH"
   ▿ Country
-    - identifier: "GI"
+    - id: "GI"
   ▿ Country
-    - identifier: "GR"
+    - id: "GR"
   ▿ Country
-    - identifier: "GL"
+    - id: "GL"
   ▿ Country
-    - identifier: "GD"
+    - id: "GD"
   ▿ Country
-    - identifier: "GP"
+    - id: "GP"
   ▿ Country
-    - identifier: "GU"
+    - id: "GU"
   ▿ Country
-    - identifier: "GT"
+    - id: "GT"
   ▿ Country
-    - identifier: "GG"
+    - id: "GG"
   ▿ Country
-    - identifier: "GN"
+    - id: "GN"
   ▿ Country
-    - identifier: "GW"
+    - id: "GW"
   ▿ Country
-    - identifier: "GY"
+    - id: "GY"
   ▿ Country
-    - identifier: "HT"
+    - id: "HT"
   ▿ Country
-    - identifier: "HM"
+    - id: "HM"
   ▿ Country
-    - identifier: "HN"
+    - id: "HN"
   ▿ Country
-    - identifier: "HK"
+    - id: "HK"
   ▿ Country
-    - identifier: "HU"
+    - id: "HU"
   ▿ Country
-    - identifier: "IS"
+    - id: "IS"
   ▿ Country
-    - identifier: "IN"
+    - id: "IN"
   ▿ Country
-    - identifier: "ID"
+    - id: "ID"
   ▿ Country
-    - identifier: "IR"
+    - id: "IR"
   ▿ Country
-    - identifier: "IQ"
+    - id: "IQ"
   ▿ Country
-    - identifier: "IE"
+    - id: "IE"
   ▿ Country
-    - identifier: "IM"
+    - id: "IM"
   ▿ Country
-    - identifier: "IL"
+    - id: "IL"
   ▿ Country
-    - identifier: "IT"
+    - id: "IT"
   ▿ Country
-    - identifier: "JM"
+    - id: "JM"
   ▿ Country
-    - identifier: "JP"
+    - id: "JP"
   ▿ Country
-    - identifier: "JE"
+    - id: "JE"
   ▿ Country
-    - identifier: "JO"
+    - id: "JO"
   ▿ Country
-    - identifier: "KZ"
+    - id: "KZ"
   ▿ Country
-    - identifier: "KE"
+    - id: "KE"
   ▿ Country
-    - identifier: "KI"
+    - id: "KI"
   ▿ Country
-    - identifier: "XK"
+    - id: "XK"
   ▿ Country
-    - identifier: "KW"
+    - id: "KW"
   ▿ Country
-    - identifier: "KG"
+    - id: "KG"
   ▿ Country
-    - identifier: "LA"
+    - id: "LA"
   ▿ Country
-    - identifier: "LV"
+    - id: "LV"
   ▿ Country
-    - identifier: "LB"
+    - id: "LB"
   ▿ Country
-    - identifier: "LS"
+    - id: "LS"
   ▿ Country
-    - identifier: "LR"
+    - id: "LR"
   ▿ Country
-    - identifier: "LY"
+    - id: "LY"
   ▿ Country
-    - identifier: "LI"
+    - id: "LI"
   ▿ Country
-    - identifier: "LT"
+    - id: "LT"
   ▿ Country
-    - identifier: "LU"
+    - id: "LU"
   ▿ Country
-    - identifier: "MO"
+    - id: "MO"
   ▿ Country
-    - identifier: "MG"
+    - id: "MG"
   ▿ Country
-    - identifier: "MW"
+    - id: "MW"
   ▿ Country
-    - identifier: "MY"
+    - id: "MY"
   ▿ Country
-    - identifier: "MV"
+    - id: "MV"
   ▿ Country
-    - identifier: "ML"
+    - id: "ML"
   ▿ Country
-    - identifier: "MT"
+    - id: "MT"
   ▿ Country
-    - identifier: "MH"
+    - id: "MH"
   ▿ Country
-    - identifier: "MQ"
+    - id: "MQ"
   ▿ Country
-    - identifier: "MR"
+    - id: "MR"
   ▿ Country
-    - identifier: "MU"
+    - id: "MU"
   ▿ Country
-    - identifier: "YT"
+    - id: "YT"
   ▿ Country
-    - identifier: "MX"
+    - id: "MX"
   ▿ Country
-    - identifier: "FM"
+    - id: "FM"
   ▿ Country
-    - identifier: "MD"
+    - id: "MD"
   ▿ Country
-    - identifier: "MC"
+    - id: "MC"
   ▿ Country
-    - identifier: "MN"
+    - id: "MN"
   ▿ Country
-    - identifier: "ME"
+    - id: "ME"
   ▿ Country
-    - identifier: "MS"
+    - id: "MS"
   ▿ Country
-    - identifier: "MA"
+    - id: "MA"
   ▿ Country
-    - identifier: "MZ"
+    - id: "MZ"
   ▿ Country
-    - identifier: "MM"
+    - id: "MM"
   ▿ Country
-    - identifier: "NA"
+    - id: "NA"
   ▿ Country
-    - identifier: "NR"
+    - id: "NR"
   ▿ Country
-    - identifier: "NP"
+    - id: "NP"
   ▿ Country
-    - identifier: "NL"
+    - id: "NL"
   ▿ Country
-    - identifier: "NC"
+    - id: "NC"
   ▿ Country
-    - identifier: "NZ"
+    - id: "NZ"
   ▿ Country
-    - identifier: "NI"
+    - id: "NI"
   ▿ Country
-    - identifier: "NE"
+    - id: "NE"
   ▿ Country
-    - identifier: "NG"
+    - id: "NG"
   ▿ Country
-    - identifier: "NU"
+    - id: "NU"
   ▿ Country
-    - identifier: "NF"
+    - id: "NF"
   ▿ Country
-    - identifier: "KP"
+    - id: "KP"
   ▿ Country
-    - identifier: "MK"
+    - id: "MK"
   ▿ Country
-    - identifier: "MP"
+    - id: "MP"
   ▿ Country
-    - identifier: "NO"
+    - id: "NO"
   ▿ Country
-    - identifier: "OM"
+    - id: "OM"
   ▿ Country
-    - identifier: "PK"
+    - id: "PK"
   ▿ Country
-    - identifier: "PW"
+    - id: "PW"
   ▿ Country
-    - identifier: "PS"
+    - id: "PS"
   ▿ Country
-    - identifier: "PA"
+    - id: "PA"
   ▿ Country
-    - identifier: "PG"
+    - id: "PG"
   ▿ Country
-    - identifier: "PY"
+    - id: "PY"
   ▿ Country
-    - identifier: "PE"
+    - id: "PE"
   ▿ Country
-    - identifier: "PH"
+    - id: "PH"
   ▿ Country
-    - identifier: "PN"
+    - id: "PN"
   ▿ Country
-    - identifier: "PL"
+    - id: "PL"
   ▿ Country
-    - identifier: "PT"
+    - id: "PT"
   ▿ Country
-    - identifier: "PR"
+    - id: "PR"
   ▿ Country
-    - identifier: "QA"
+    - id: "QA"
   ▿ Country
-    - identifier: "RE"
+    - id: "RE"
   ▿ Country
-    - identifier: "RO"
+    - id: "RO"
   ▿ Country
-    - identifier: "RU"
+    - id: "RU"
   ▿ Country
-    - identifier: "RW"
+    - id: "RW"
   ▿ Country
-    - identifier: "WS"
+    - id: "WS"
   ▿ Country
-    - identifier: "SM"
+    - id: "SM"
   ▿ Country
-    - identifier: "ST"
+    - id: "ST"
   ▿ Country
-    - identifier: "SA"
+    - id: "SA"
   ▿ Country
-    - identifier: "SN"
+    - id: "SN"
   ▿ Country
-    - identifier: "RS"
+    - id: "RS"
   ▿ Country
-    - identifier: "SC"
+    - id: "SC"
   ▿ Country
-    - identifier: "SL"
+    - id: "SL"
   ▿ Country
-    - identifier: "SG"
+    - id: "SG"
   ▿ Country
-    - identifier: "SX"
+    - id: "SX"
   ▿ Country
-    - identifier: "SK"
+    - id: "SK"
   ▿ Country
-    - identifier: "SI"
+    - id: "SI"
   ▿ Country
-    - identifier: "GS"
+    - id: "GS"
   ▿ Country
-    - identifier: "SB"
+    - id: "SB"
   ▿ Country
-    - identifier: "SO"
+    - id: "SO"
   ▿ Country
-    - identifier: "ZA"
+    - id: "ZA"
   ▿ Country
-    - identifier: "KR"
+    - id: "KR"
   ▿ Country
-    - identifier: "SS"
+    - id: "SS"
   ▿ Country
-    - identifier: "ES"
+    - id: "ES"
   ▿ Country
-    - identifier: "LK"
+    - id: "LK"
   ▿ Country
-    - identifier: "BL"
+    - id: "BL"
   ▿ Country
-    - identifier: "SH"
+    - id: "SH"
   ▿ Country
-    - identifier: "KN"
+    - id: "KN"
   ▿ Country
-    - identifier: "LC"
+    - id: "LC"
   ▿ Country
-    - identifier: "MF"
+    - id: "MF"
   ▿ Country
-    - identifier: "PM"
+    - id: "PM"
   ▿ Country
-    - identifier: "VC"
+    - id: "VC"
   ▿ Country
-    - identifier: "SD"
+    - id: "SD"
   ▿ Country
-    - identifier: "SR"
+    - id: "SR"
   ▿ Country
-    - identifier: "SJ"
+    - id: "SJ"
   ▿ Country
-    - identifier: "SE"
+    - id: "SE"
   ▿ Country
-    - identifier: "CH"
+    - id: "CH"
   ▿ Country
-    - identifier: "SY"
+    - id: "SY"
   ▿ Country
-    - identifier: "TW"
+    - id: "TW"
   ▿ Country
-    - identifier: "TJ"
+    - id: "TJ"
   ▿ Country
-    - identifier: "TZ"
+    - id: "TZ"
   ▿ Country
-    - identifier: "TH"
+    - id: "TH"
   ▿ Country
-    - identifier: "TL"
+    - id: "TL"
   ▿ Country
-    - identifier: "TG"
+    - id: "TG"
   ▿ Country
-    - identifier: "TK"
+    - id: "TK"
   ▿ Country
-    - identifier: "TO"
+    - id: "TO"
   ▿ Country
-    - identifier: "TT"
+    - id: "TT"
   ▿ Country
-    - identifier: "TN"
+    - id: "TN"
   ▿ Country
-    - identifier: "TR"
+    - id: "TR"
   ▿ Country
-    - identifier: "TM"
+    - id: "TM"
   ▿ Country
-    - identifier: "TC"
+    - id: "TC"
   ▿ Country
-    - identifier: "TV"
+    - id: "TV"
   ▿ Country
-    - identifier: "UM"
+    - id: "UM"
   ▿ Country
-    - identifier: "VI"
+    - id: "VI"
   ▿ Country
-    - identifier: "UG"
+    - id: "UG"
   ▿ Country
-    - identifier: "UA"
+    - id: "UA"
   ▿ Country
-    - identifier: "AE"
+    - id: "AE"
   ▿ Country
-    - identifier: "GB"
+    - id: "GB"
   ▿ Country
-    - identifier: "US"
+    - id: "US"
   ▿ Country
-    - identifier: "UY"
+    - id: "UY"
   ▿ Country
-    - identifier: "UZ"
+    - id: "UZ"
   ▿ Country
-    - identifier: "VU"
+    - id: "VU"
   ▿ Country
-    - identifier: "VA"
+    - id: "VA"
   ▿ Country
-    - identifier: "VE"
+    - id: "VE"
   ▿ Country
-    - identifier: "VN"
+    - id: "VN"
   ▿ Country
-    - identifier: "WF"
+    - id: "WF"
   ▿ Country
-    - identifier: "EH"
+    - id: "EH"
   ▿ Country
-    - identifier: "YE"
+    - id: "YE"
   ▿ Country
-    - identifier: "ZM"
+    - id: "ZM"
   ▿ Country
-    - identifier: "ZW"
+    - id: "ZW"
