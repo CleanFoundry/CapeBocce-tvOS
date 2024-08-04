@@ -7,7 +7,7 @@ import PickCountryFeatureKit
 
 @Reducer public struct CreateBracketFormFeature {
 
-    @ObservableState public struct State {
+    @ObservableState public struct State: HasRecentParticipantsState {
 
         public var bracketName: String
         public var selectedParticipants: IdentifiedArrayOf<Participant> = []
@@ -16,16 +16,7 @@ import PickCountryFeatureKit
 
         @Presents public var pickCountry: PickCountryFeature.State?
 
-        @Shared(.recentParticipantsData) private var recentParticipantsData: Data?
-        public var recentParticipants: IdentifiedArrayOf<Participant> {
-            get {
-                guard let recentParticipantsData else { return [] }
-                return try! JSONDecoder.api
-                    .decode(IdentifiedArrayOf<Participant>.self, from: recentParticipantsData)
-            } set {
-                recentParticipantsData = try! JSONEncoder.api.encode(newValue)
-            }
-        }
+        @Shared(.recentParticipantsData) public var recentParticipantsData: Data?
 
         public var focusedParticipant: Participant?
 

@@ -8,20 +8,11 @@ import Foundation
 
 @Reducer public struct RootFeature {
 
-    @ObservableState public struct State {
+    @ObservableState public struct State: HasRecentParticipantsState {
 
         @Presents public var destination: DestinationFeature.State?
 
-        @Shared(.recentParticipantsData) private var recentParticipantsData: Data?
-        public var recentParticipants: IdentifiedArrayOf<Participant> {
-            get {
-                guard let recentParticipantsData else { return [] }
-                return try! JSONDecoder.api
-                    .decode(IdentifiedArrayOf<Participant>.self, from: recentParticipantsData)
-            } set {
-                recentParticipantsData = try! JSONEncoder.api.encode(newValue)
-            }
-        }
+        @Shared(.recentParticipantsData) public var recentParticipantsData: Data?
         @Shared(.bracketsData) private var bracketsData: Data?
         public var brackets: IdentifiedArrayOf<Bracket> {
             get {
@@ -55,9 +46,7 @@ import Foundation
     public init() { }
 
     public var body: some ReducerOf<Self> {
-        Reduce {
-            state,
-            action in
+        Reduce { state, action in
             switch action {
             case .tappedCreateBracket:
                 state.destination = .createBracket(.init(
