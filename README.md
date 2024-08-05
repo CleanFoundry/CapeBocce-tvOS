@@ -1,3 +1,3 @@
-# `cb-frontend`
+# `CapeBocce-tvOS`
 
 tvOS frontend for CapeBocce.
